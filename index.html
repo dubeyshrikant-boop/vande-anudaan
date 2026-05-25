@@ -85,7 +85,7 @@
     import { MapPin, Building2, Briefcase, Zap, Printer, Sparkles, AlertCircle, ArrowRight, Award, GitBranch } from 'lucide-react';
 
     // ════════ VERSION TRACKING ════════
-    const TOOL_VERSION = "v3.0.0";
+    const TOOL_VERSION = "v3.1.0";
     const POLICY_VERSION = "MIISP 2025";
     const POLICY_GR_NUMBER = "M/Ind-2023/P.No.187/Udyog-2";
     const POLICY_DATE = "31 December 2025";
@@ -93,6 +93,7 @@
     const VERIFICATION_SOURCE = "Grant Thornton Bharat analysis (Jan 2026); detailed implementing circulars pending";
 
     const UPDATE_LOG = [
+      { version: 'v3.1.0', date: 'May 2026', changes: 'Added WhatsApp lead capture. Visitors can click "Discuss with CA Shrikant" after calculating to send pre-filled message with their estimated subsidy, CA fee, and project details. Plus floating WhatsApp button persistently visible.' },
       { version: 'v3.0.0', date: 'May 2026', changes: 'Added Service sector calculations (rental lease subsidy, salary-bracket EPF, 5-yr ED). Externalized policy config for ease of future updates. Added version display in UI.' },
       { version: 'v2.0.0', date: 'May 2026', changes: 'Verified MIISP 2025 quantum from official GR via Grant Thornton analysis. Identified Vidarbha as special regional category with blanket 80% MSME IPS rate. Added EPF reimbursement (new in MIISP 2025) and 100%/120% FCI overall cap.' },
       { version: 'v1.0.0', date: 'May 2026', changes: 'Initial release with PSI 2019-based estimates and 5-zone classification.' },
@@ -334,6 +335,37 @@
       };
       const handlePrint = () => window.print();
 
+      // WhatsApp URLs — auto-fills the chat with calc context for instant lead capture
+      const WHATSAPP_PHONE = '919175233969';
+      const whatsappResultsUrl = useMemo(() => {
+        if (!result) return '#';
+        const lines = [
+          'नमस्कार CA Shrikant सर 🙏',
+          '',
+          'मैंने MIISP 2025 Calculator से अपनी subsidy potential check की:',
+          '',
+          '📊 *Results*',
+          `• Total Subsidy: ${fmtCr(result.totalLifetimeSubsidy)}`,
+          `• Suggested CA Fee: ${fmtCr(result.suggestedCAFee)}`,
+          `• Eligibility Period: ${result.eligibilityYears} years`,
+          '',
+          '🏭 *Project Details*',
+          `• Activity: ${activityType}`,
+          `• Sub-sector: ${sector}`,
+          `• Unit Size: ${unitType}`,
+          `• Owner: ${ownerCategory}`,
+          `• Location: ${district} · ${taluka} (${result.zone.short})`,
+          `• FCI: ${fmtCr(result.fci)}`,
+          '',
+          'मुझे consultation चाहिए। कृपया reply करें।',
+          '',
+          '— Vande Anudaan Calculator',
+        ];
+        return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(lines.join('\n'))}`;
+      }, [result, activityType, sector, unitType, ownerCategory, district, taluka]);
+
+      const whatsappGeneralUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent('नमस्कार CA Shrikant सर 🙏\n\nमुझे MIISP 2025 / Maharashtra subsidies के बारे में consultation चाहिए।\n\n— via Vande Anudaan')}`;
+
       return (
         <div style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", background: '#FBF7F0', color: '#1F2937', minHeight: '100vh' }}>
           <style>{`
@@ -347,10 +379,15 @@
             .deco-line { height: 1px; background: linear-gradient(to right, transparent, #C9A96B, transparent); margin: 1.5rem 0; }
             .btn-primary { background: #2D5F5D; color: #FBF7F0; padding: 0.9rem 2.2rem; font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
             .btn-primary:hover { background: #1F4543; transform: translateY(-1px); }
+            .btn-whatsapp { background: #25D366; color: white; padding: 0.9rem 1.8rem; font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 0.55rem; box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25); }
+            .btn-whatsapp:hover { background: #128C7E; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4); }
+            .whatsapp-float { position: fixed; bottom: 22px; right: 22px; width: 58px; height: 58px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45); cursor: pointer; z-index: 9000; text-decoration: none; transition: all 0.25s; animation: wa-pulse 2.4s infinite; }
+            .whatsapp-float:hover { transform: scale(1.08); box-shadow: 0 6px 22px rgba(37, 211, 102, 0.6); animation: none; }
+            @keyframes wa-pulse { 0% { box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45), 0 0 0 14px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0); } }
             .btn-toggle { padding: 0.7rem 1.4rem; font-size: 0.92rem; font-weight: 600; border: 1px solid #E5DCC9; background: white; color: #6B5D4F; cursor: pointer; transition: all 0.2s; font-family: inherit; }
             .btn-toggle.active { background: #2D5F5D; color: white; border-color: #2D5F5D; }
             .zone-badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; }
-            @media print { .no-print { display: none !important; } .card { box-shadow: none !important; border: 1px solid #ddd !important; page-break-inside: avoid; } body { background: white !important; } }
+            @media print { .no-print { display: none !important; } .whatsapp-float { display: none !important; } .card { box-shadow: none !important; border: 1px solid #ddd !important; page-break-inside: avoid; } body { background: white !important; } }
           `}</style>
 
           <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
@@ -505,9 +542,18 @@
                 )}
 
                 <div className="card no-print" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign: 'center', padding: '1.8rem' }}>
-                  <div className="serif" style={{ fontSize: '1.15rem', fontWeight: 600, marginBottom: '0.5rem', color: '#1A2E35' }}>Ready to file the Eligibility Certificate?</div>
-                  <div style={{ fontSize: '0.88rem', color: '#5C5040', marginBottom: '1.2rem' }}>EC must be filed on invest.maharashtra.gov.in <strong>before commencement of commercial production</strong>.</div>
-                  <button className="btn-primary" onClick={handlePrint}><Printer size={16} style={{ marginRight: '0.4rem', display: 'inline', verticalAlign: 'middle' }} />Print Client Report</button>
+                  <div className="serif" style={{ fontSize: '1.15rem', fontWeight: 600, marginBottom: '0.5rem', color: '#1A2E35' }}>Ready to claim this subsidy?</div>
+                  <div style={{ fontSize: '0.88rem', color: '#5C5040', marginBottom: '1.2rem' }}>EC must be filed on invest.maharashtra.gov.in <strong>before commencement of commercial production</strong>. Talk to CA Shrikant for end-to-end handling.</div>
+                  <div style={{ display: 'flex', gap: '0.7rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <a href={whatsappResultsUrl} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style={{ flexShrink: 0 }}>
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                      </svg>
+                      Discuss with CA Shrikant
+                    </a>
+                    <button className="btn-primary" onClick={handlePrint}><Printer size={16} style={{ marginRight: '0.4rem', display: 'inline', verticalAlign: 'middle' }} />Print Report</button>
+                  </div>
+                  <div style={{ fontSize: '0.74rem', color: '#8B7E6B', marginTop: '0.9rem', fontStyle: 'italic' }}>WhatsApp will open with your calculation pre-filled — just tap Send.</div>
                 </div>
 
                 <div className="card" style={{ background: '#FFF8E6', border: '1px solid #E5C687' }}>
@@ -526,6 +572,13 @@
               <div style={{ marginTop: '0.6rem', fontSize: '0.72rem', color: '#A89880' }}>{TOOL_VERSION} · {POLICY_VERSION} · Last verified {LAST_VERIFIED}</div>
             </footer>
           </div>
+
+          {/* Floating WhatsApp button — always visible */}
+          <a href={whatsappGeneralUrl} target="_blank" rel="noopener noreferrer" className="whatsapp-float" aria-label="Chat with CA Shrikant on WhatsApp" title="Discuss with CA Shrikant">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+          </a>
         </div>
       );
     }
