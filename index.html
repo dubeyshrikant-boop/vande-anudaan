@@ -1,601 +1,1186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2D5F5D">
-  
-  <title>MIISP 2025 Calculator — Vidarbha Edition | CA Shrikant Dubey & Co.</title>
-  <meta name="description" content="Maharashtra Industries, Investment & Services Policy 2025 — Eligibility & Quantum Calculator for Vidarbha MSMEs (Manufacturing + Service). By CA Shrikant Dubey & Co., Nagpur. Vande Anudaan Initiative.">
-  <meta name="author" content="CA Shrikant Dubey & Co.">
-  <meta name="keywords" content="MIISP 2025, Maharashtra subsidy calculator, Vidarbha, MSME, Industrial Promotion Subsidy, IPS, SGST refund, Nagpur CA, Vande Anudaan">
-  
-  <!-- Open Graph / WhatsApp / LinkedIn preview -->
-  <meta property="og:title" content="MIISP 2025 Calculator — Vidarbha Edition">
-  <meta property="og:description" content="Calculate your eligibility and subsidy quantum under Maharashtra Industries, Investment & Services Policy 2025. Vidarbha — 121+ talukas — Manufacturing + Service.">
-  <meta property="og:url" content="https://dubeyshrikant-boop.github.io/vande-anudaan/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Vande Anudaan — CA Shrikant Dubey & Co.">
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232D5F5D'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='52' font-weight='600' fill='%23E5C687' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
-
-  <!-- Module imports via Import Maps (modern browsers) -->
-  <script type="importmap">
-  {
-    "imports": {
-      "react": "https://esm.sh/react@18.3.1",
-      "react/": "https://esm.sh/react@18.3.1/",
-      "react-dom": "https://esm.sh/react-dom@18.3.1",
-      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
-      "lucide-react": "https://esm.sh/lucide-react@0.383.0?deps=react@18.3.1"
-    }
-  }
-  </script>
-
-  <!-- Babel Standalone for JSX transformation in browser -->
-  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
-
-  <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body { background: #FBF7F0; font-family: system-ui, -apple-system, sans-serif; }
-    
-    #loading {
-      position: fixed; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: #FBF7F0; color: #2D5F5D;
-      font-family: Georgia, 'Times New Roman', serif;
-      z-index: 9999;
-      transition: opacity 0.4s;
-    }
-    #loading.fade { opacity: 0; pointer-events: none; }
-    #loading .spinner {
-      width: 48px; height: 48px;
-      border: 3px solid #E5DCC9;
-      border-top-color: #2D5F5D;
-      border-radius: 50%;
-      animation: spin 0.9s linear infinite;
-      margin-bottom: 1.2rem;
-    }
-    #loading h1 { font-size: 1.4rem; font-weight: 600; margin: 0 0 0.3rem; letter-spacing: -0.01em; }
-    #loading p { font-size: 0.85rem; color: #8B7E6B; margin: 0; font-style: italic; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    
-    @media print {
-      #loading { display: none !important; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2D5F5D">
+<title>Vande Anudaan — Multi-Scheme Subsidy Portal | CA Shrikant Dubey & Co.</title>
+<meta name="description" content="Vande Anudaan — 43 Central + Maharashtra subsidy schemes. Free calculators for MIISP 2025, PMEGP, CMEGP, CLCSS, PM-FME. By CA Shrikant Dubey & Co., Nagpur.">
+<meta name="author" content="CA Shrikant Dubey & Co.">
+<meta property="og:title" content="Vande Anudaan — 43 Central + MH Subsidy Schemes">
+<meta property="og:description" content="Free calculators + advisory for every major government subsidy scheme available to Indian businesses. By CA Shrikant Dubey & Co., Nagpur.">
+<meta property="og:url" content="https://dubeyshrikant-boop.github.io/vande-anudaan/">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232D5F5D'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='52' font-weight='600' fill='%23E5C687' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+<script type="importmap">{"imports":{"react":"https://esm.sh/react@18.3.1","react/":"https://esm.sh/react@18.3.1/","react-dom":"https://esm.sh/react-dom@18.3.1","react-dom/client":"https://esm.sh/react-dom@18.3.1/client","lucide-react":"https://esm.sh/lucide-react@0.383.0?deps=react@18.3.1"}}</script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+<style>
+*{box-sizing:border-box}html,body{margin:0;padding:0}body{background:#FBF7F0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1F2937}
+#loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#FBF7F0;color:#2D5F5D;font-family:Georgia,serif;z-index:9999;transition:opacity .4s}
+#loading.fade{opacity:0;pointer-events:none}
+#loading .spinner{width:48px;height:48px;border:3px solid #E5DCC9;border-top-color:#2D5F5D;border-radius:50%;animation:spin .9s linear infinite;margin-bottom:1.2rem}
+#loading h1{font-size:1.4rem;font-weight:600;margin:0 0 .3rem;letter-spacing:-.01em}
+#loading p{font-size:.85rem;color:#8B7E6B;margin:0;font-style:italic}
+@keyframes spin{to{transform:rotate(360deg)}}
+.serif{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto}
+.mono{font-family:'JetBrains Mono',monospace}
+.input-field{width:100%;padding:.7rem .9rem;background:#fff;border:1px solid #E5DCC9;border-radius:6px;font-size:.95rem;font-family:inherit;color:#1F2937;transition:all .18s}
+.input-field:focus{outline:none;border-color:#7C9885;box-shadow:0 0 0 3px rgba(124,152,133,.15)}
+.label-text{font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#6B5D4F;margin-bottom:.4rem;display:block}
+.card{background:#fff;border-radius:12px;padding:1.5rem;border:1px solid #EDE3CF;box-shadow:0 1px 3px rgba(124,95,60,.04)}
+.deco-line{height:1px;background:linear-gradient(to right,transparent,#C9A96B,transparent);margin:1.4rem 0}
+.btn-primary{background:#2D5F5D;color:#FBF7F0;padding:.9rem 2.2rem;font-size:1rem;font-weight:600;letter-spacing:.02em;border:none;border-radius:8px;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-primary:hover{background:#1F4543;transform:translateY(-1px)}
+.btn-toggle{padding:.65rem 1.3rem;font-size:.9rem;font-weight:600;border:1px solid #E5DCC9;background:#fff;color:#6B5D4F;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-toggle.active{background:#2D5F5D;color:#fff;border-color:#2D5F5D}
+.btn-whatsapp{background:#25D366;color:#fff;padding:.85rem 1.6rem;font-size:.95rem;font-weight:700;border:none;border-radius:8px;cursor:pointer;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:.55rem;box-shadow:0 2px 8px rgba(37,211,102,.25)}
+.btn-whatsapp:hover{background:#128C7E;transform:translateY(-1px);box-shadow:0 4px 14px rgba(37,211,102,.4)}
+.whatsapp-float{position:fixed;bottom:22px;right:22px;width:58px;height:58px;background:#25D366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.45);cursor:pointer;z-index:9000;text-decoration:none;transition:all .25s;animation:wa-pulse 2.4s infinite}
+.whatsapp-float:hover{transform:scale(1.08);animation:none}
+@keyframes wa-pulse{0%{box-shadow:0 4px 16px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.4)}70%{box-shadow:0 4px 16px rgba(37,211,102,.45),0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 4px 16px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,0)}}
+.filter-pill{padding:.5rem 1rem;font-size:.85rem;font-weight:600;border:1px solid #E5DCC9;background:#fff;color:#6B5D4F;cursor:pointer;border-radius:999px;transition:all .2s;font-family:inherit}
+.filter-pill.active{background:#2D5F5D;color:#fff;border-color:#2D5F5D}
+.search-input{width:100%;padding:.6rem .9rem .6rem 2.3rem;background:#FBF7F0;border:1px solid #E5DCC9;border-radius:999px;font-size:.85rem;font-family:inherit;color:#1F2937}
+.search-input:focus{outline:none;border-color:#7C9885;box-shadow:0 0 0 3px rgba(124,152,133,.12)}
+.scheme-card{background:#fff;border-radius:10px;padding:1.2rem 1.2rem 1rem;border:1px solid #EDE3CF;cursor:pointer;transition:all .25s;box-shadow:0 1px 3px rgba(124,95,60,.04)}
+.scheme-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(124,95,60,.1)}
+.back-btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:none;color:#6B5D4F;font-size:.88rem;font-weight:600;cursor:pointer;padding:.5rem 0;margin-bottom:1rem;font-family:inherit;transition:color .2s}
+.back-btn:hover{color:#2D5F5D}
+@media print{.no-print{display:none!important}.whatsapp-float{display:none!important}.card{box-shadow:none!important;border:1px solid #ddd!important;page-break-inside:avoid}body{background:#fff!important}}
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+</style>
 </head>
 <body>
+<div id="loading"><div class="spinner"></div><h1>Vande Anudaan</h1><p>43 Schemes · CA Shrikant Dubey & Co. · Nagpur</p></div>
+<div id="root"></div>
 
-  <!-- Loading splash (hidden once React mounts) -->
-  <div id="loading">
-    <div class="spinner"></div>
-    <h1>MIISP 2025 Calculator</h1>
-    <p>Vande Anudaan · CA Shrikant Dubey & Co.</p>
-  </div>
+<script type="text/babel" data-type="module" data-presets="react">
+import React, { useState, useMemo, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+import { MapPin, Building2, Briefcase, Zap, Printer, Sparkles, AlertCircle, ArrowRight, ArrowLeft, Search, Factory, Info } from 'lucide-react';
 
-  <!-- App mount point -->
-  <div id="root"></div>
+const TOOL_VERSION = "v4.1.0";
+const POLICY_VERSION = "Vande Anudaan Multi-Scheme Portal + Eligibility Wizard";
+const LAST_VERIFIED = "May 2026";
+const WHATSAPP_PHONE = '919175233969';
+const OFFICE_PHONE = '+91 9403 586 900';
 
-  <!-- React App (JSX transformed by Babel at runtime) -->
-  <script type="text/babel" data-type="module" data-presets="react">
-    import React, { useState, useMemo, useEffect } from 'react';
-    import { createRoot } from 'react-dom/client';
-    import { MapPin, Building2, Briefcase, Zap, Printer, Sparkles, AlertCircle, ArrowRight, Award, GitBranch } from 'lucide-react';
+// ════ MIISP 2025 POLICY DATA ════
+const POLICY_DATA = {
+  zones: {
+    VidarbhaStandard: { label: 'Vidarbha — Regional Special', short: 'V-Std', msmeIPSPercent: 0.80, msmeYears: 10, lsiIPSPercent: 0.90, lsiYears: 9, stampDutyExempt: 1.00, electricityDutyMfgFullTenure: true, electricityDutyServiceYears: 5, interestSubsidyPercent: 0.05, powerTariffRsPerUnit: 1, rentalSubsidyCap: 10000000, epfReimbursement: true, epfMfgRate: 0.50, epfServiceSalaryThreshold: 50000, accent: '#2D5F5D' },
+    VidarbhaNID: { label: 'Vidarbha — NID / Naxal / Aspirational', short: 'V-NID', msmeIPSPercent: 1.00, msmeYears: 10, lsiIPSPercent: 1.00, lsiYears: 9, stampDutyExempt: 1.00, electricityDutyMfgFullTenure: true, electricityDutyServiceYears: 5, interestSubsidyPercent: 0.05, powerTariffRsPerUnit: 1, rentalSubsidyCap: 10000000, epfReimbursement: true, epfMfgRate: 0.50, epfServiceSalaryThreshold: 50000, accent: '#1A2E35' },
+  },
+  bonuses: { thrustSectors: ['Food Processing', 'Green Energy', 'Industry 4.0', 'EV', 'Aerospace'], thrustIPSBonus: 0.20, thrustYearsBonus: 2, specialCategories: ['Women', 'SC', 'ST'], specialCatIPSBonus: 0.20, overallCapStandard: 1.00, overallCapSpecialCat: 1.20 },
+  caps: { interestSubsidyAnnualCap: 10000000, powerTariffMSMECap: 10000000, powerTariffLSICap: 15000000, epfMfgMSMECap: 50000000, epfMfgLSICap: 100000000, epfServiceCap: 100000000, capitalSubsidyOverallCap: 250000000, rentalSubsidyDurationYears: 5 },
+  assumptions: { stampDutyRate: 0.06, electricityDutyRate: 0.15, powerTariffPerUnit: 9, employerPFRate: 0.13, interestSubsidyYears: 5, powerTariffSubsidyYears: 3, capitalSubsidyPercentFCI: 0.20 },
+};
 
-    // ════════ VERSION TRACKING ════════
-    const TOOL_VERSION = "v3.1.0";
-    const POLICY_VERSION = "MIISP 2025";
-    const POLICY_GR_NUMBER = "M/Ind-2023/P.No.187/Udyog-2";
-    const POLICY_DATE = "31 December 2025";
-    const LAST_VERIFIED = "May 2026";
-    const VERIFICATION_SOURCE = "Grant Thornton Bharat analysis (Jan 2026); detailed implementing circulars pending";
+const VIDARBHA = {
+  'Nagpur': [{name:'Nagpur Urban',zone:'VidarbhaStandard'},{name:'Kamptee',zone:'VidarbhaStandard'},{name:'Hingna',zone:'VidarbhaStandard'},{name:'Mauda',zone:'VidarbhaStandard'},{name:'Saoner',zone:'VidarbhaStandard'},{name:'Parseoni',zone:'VidarbhaStandard'},{name:'Ramtek',zone:'VidarbhaStandard'},{name:'Kalmeshwar',zone:'VidarbhaStandard'},{name:'Katol',zone:'VidarbhaStandard'},{name:'Narkhed',zone:'VidarbhaStandard'},{name:'Kuhi',zone:'VidarbhaStandard'},{name:'Umred',zone:'VidarbhaStandard'},{name:'Bhiwapur',zone:'VidarbhaStandard'}],
+  'Wardha': [{name:'Wardha',zone:'VidarbhaStandard'},{name:'Deoli',zone:'VidarbhaStandard'},{name:'Hinganghat',zone:'VidarbhaStandard'},{name:'Samudrapur',zone:'VidarbhaStandard'},{name:'Karanja (Ghadge)',zone:'VidarbhaStandard'},{name:'Arvi',zone:'VidarbhaStandard'},{name:'Ashti',zone:'VidarbhaStandard'},{name:'Seloo',zone:'VidarbhaStandard'}],
+  'Bhandara': [{name:'Bhandara',zone:'VidarbhaStandard'},{name:'Tumsar',zone:'VidarbhaStandard'},{name:'Mohadi',zone:'VidarbhaStandard'},{name:'Sakoli',zone:'VidarbhaStandard'},{name:'Lakhandur',zone:'VidarbhaStandard'},{name:'Lakhani',zone:'VidarbhaStandard'},{name:'Pauni',zone:'VidarbhaStandard'}],
+  'Gondia': [{name:'Gondia',zone:'VidarbhaStandard'},{name:'Tirora',zone:'VidarbhaStandard'},{name:'Goregaon',zone:'VidarbhaStandard'},{name:'Amgaon',zone:'VidarbhaStandard'},{name:'Salekasa',zone:'VidarbhaNID'},{name:'Sadak Arjuni',zone:'VidarbhaNID'},{name:'Deori',zone:'VidarbhaStandard'},{name:'Arjuni Morgaon',zone:'VidarbhaStandard'}],
+  'Chandrapur': [{name:'Chandrapur',zone:'VidarbhaStandard'},{name:'Ballarpur',zone:'VidarbhaStandard'},{name:'Bhadravati',zone:'VidarbhaStandard'},{name:'Warora',zone:'VidarbhaStandard'},{name:'Chimur',zone:'VidarbhaNID'},{name:'Nagbhid',zone:'VidarbhaNID'},{name:'Bramhapuri',zone:'VidarbhaStandard'},{name:'Sindewahi',zone:'VidarbhaNID'},{name:'Mul',zone:'VidarbhaStandard'},{name:'Pombhurna',zone:'VidarbhaNID'},{name:'Gondpipri',zone:'VidarbhaNID'},{name:'Rajura',zone:'VidarbhaStandard'},{name:'Korpana',zone:'VidarbhaStandard'},{name:'Jiwati',zone:'VidarbhaNID'},{name:'Saoli',zone:'VidarbhaNID'}],
+  'Gadchiroli': [{name:'Gadchiroli',zone:'VidarbhaNID'},{name:'Chamorshi',zone:'VidarbhaNID'},{name:'Mulchera',zone:'VidarbhaNID'},{name:'Dhanora',zone:'VidarbhaNID'},{name:'Etapalli',zone:'VidarbhaNID'},{name:'Aheri',zone:'VidarbhaNID'},{name:'Bhamragad',zone:'VidarbhaNID'},{name:'Sironcha',zone:'VidarbhaNID'},{name:'Korchi',zone:'VidarbhaNID'},{name:'Kurkheda',zone:'VidarbhaNID'},{name:'Armori',zone:'VidarbhaNID'},{name:'Wadsa (Desaiganj)',zone:'VidarbhaNID'}],
+  'Amravati': [{name:'Amravati Urban',zone:'VidarbhaStandard'},{name:'Bhatkuli',zone:'VidarbhaStandard'},{name:'Daryapur',zone:'VidarbhaStandard'},{name:'Anjangaon Surji',zone:'VidarbhaStandard'},{name:'Achalpur',zone:'VidarbhaStandard'},{name:'Chandur Bazar',zone:'VidarbhaStandard'},{name:'Morshi',zone:'VidarbhaStandard'},{name:'Warud',zone:'VidarbhaStandard'},{name:'Teosa',zone:'VidarbhaStandard'},{name:'Nandgaon Khandeshwar',zone:'VidarbhaStandard'},{name:'Dhamangaon Railway',zone:'VidarbhaStandard'},{name:'Chandur Railway',zone:'VidarbhaStandard'},{name:'Dharni',zone:'VidarbhaNID'},{name:'Chikhaldara',zone:'VidarbhaNID'}],
+  'Akola': [{name:'Akola',zone:'VidarbhaStandard'},{name:'Akot',zone:'VidarbhaStandard'},{name:'Telhara',zone:'VidarbhaStandard'},{name:'Balapur',zone:'VidarbhaStandard'},{name:'Patur',zone:'VidarbhaStandard'},{name:'Murtizapur',zone:'VidarbhaStandard'},{name:'Barshitakli',zone:'VidarbhaStandard'}],
+  'Buldhana': [{name:'Buldhana',zone:'VidarbhaStandard'},{name:'Chikhli',zone:'VidarbhaStandard'},{name:'Deulgaon Raja',zone:'VidarbhaStandard'},{name:'Sindkhed Raja',zone:'VidarbhaStandard'},{name:'Lonar',zone:'VidarbhaStandard'},{name:'Mehkar',zone:'VidarbhaStandard'},{name:'Khamgaon',zone:'VidarbhaStandard'},{name:'Shegaon',zone:'VidarbhaStandard'},{name:'Jalgaon Jamod',zone:'VidarbhaStandard'},{name:'Sangrampur',zone:'VidarbhaStandard'},{name:'Nandura',zone:'VidarbhaStandard'},{name:'Malkapur',zone:'VidarbhaStandard'},{name:'Motala',zone:'VidarbhaStandard'}],
+  'Washim': [{name:'Washim',zone:'VidarbhaNID'},{name:'Mangrulpir',zone:'VidarbhaNID'},{name:'Karanja',zone:'VidarbhaNID'},{name:'Manora',zone:'VidarbhaNID'},{name:'Risod',zone:'VidarbhaNID'},{name:'Malegaon',zone:'VidarbhaNID'}],
+  'Yavatmal': [{name:'Yavatmal',zone:'VidarbhaStandard'},{name:'Babhulgaon',zone:'VidarbhaStandard'},{name:'Kalamb',zone:'VidarbhaStandard'},{name:'Darwha',zone:'VidarbhaStandard'},{name:'Digras',zone:'VidarbhaStandard'},{name:'Arni',zone:'VidarbhaStandard'},{name:'Ner',zone:'VidarbhaStandard'},{name:'Pusad',zone:'VidarbhaStandard'},{name:'Mahagaon',zone:'VidarbhaStandard'},{name:'Umarkhed',zone:'VidarbhaStandard'},{name:'Ralegaon',zone:'VidarbhaStandard'},{name:'Wani',zone:'VidarbhaStandard'},{name:'Maregaon',zone:'VidarbhaStandard'},{name:'Zari Jamani',zone:'VidarbhaNID'},{name:'Kelapur (Pandharkawda)',zone:'VidarbhaNID'},{name:'Ghatanji',zone:'VidarbhaStandard'}],
+};
 
-    const UPDATE_LOG = [
-      { version: 'v3.1.0', date: 'May 2026', changes: 'Added WhatsApp lead capture. Visitors can click "Discuss with CA Shrikant" after calculating to send pre-filled message with their estimated subsidy, CA fee, and project details. Plus floating WhatsApp button persistently visible.' },
-      { version: 'v3.0.0', date: 'May 2026', changes: 'Added Service sector calculations (rental lease subsidy, salary-bracket EPF, 5-yr ED). Externalized policy config for ease of future updates. Added version display in UI.' },
-      { version: 'v2.0.0', date: 'May 2026', changes: 'Verified MIISP 2025 quantum from official GR via Grant Thornton analysis. Identified Vidarbha as special regional category with blanket 80% MSME IPS rate. Added EPF reimbursement (new in MIISP 2025) and 100%/120% FCI overall cap.' },
-      { version: 'v1.0.0', date: 'May 2026', changes: 'Initial release with PSI 2019-based estimates and 5-zone classification.' },
-    ];
+// ════ 43 SCHEMES REGISTRY ════
+const SCHEMES = [
+  // === MH STATE — INDUSTRIAL (CALCULATOR) ===
+  { id:'miisp-2025', name:'MIISP 2025', fullName:'Maharashtra Industries, Investment & Services Policy 2025', type:'MH State', category:'Industrial Policy', headline:'30-100% Capital Subsidy + IPS + EPF + Stamp Duty', color:'#2D5F5D', hasCalc:true, eligibility:['New + Expansion units in Maharashtra','Manufacturing + Service (पहली बार)','All unit sizes — Micro to Mega'], benefits:['Capital Subsidy by Zone: A&B 30-40% · C 50% · D 60% · D+ 70% · Vidarbha-Marathwada 80% · NID/Naxal 100%','Gross SGST Reimbursement: 100% (capped at zone % of FCI), 5-10 yrs','Stamp Duty: 100% exemption','Electricity Duty: Full tenure exemption (Mfg) / 5 yrs (Service)','EPF Reimbursement: 50% × 5 yrs (NEW)','Interest Subsidy: 5% p.a. (cap ₹1 Cr/yr)','Service Sector Rental Subsidy: 50%','Stacking: Women/SC/ST + Thrust = 120% FCI cap'], grRef:'GR No. M/Ind-2023/P.No.187/Udyog-2 · 31 Dec 2025 · Valid till 2030', authority:'DIC / MIDC · invest.maharashtra.gov.in' },
+  { id:'cmegp', name:'CMEGP', fullName:"Chief Minister's Employment Generation Programme", type:'MH State', category:'Margin Money', headline:'15-35% margin money (MH state)', color:'#7C9885', hasCalc:true, eligibility:['MH residents only','Age 18-45 (relaxation for special cat.)','New units only — no existing PMEGP/CMEGP beneficiary'], benefits:['Manufacturing: project cost up to ₹50 lakh','Service/Business: project cost up to ₹10 lakh','General urban: 15% margin money, rural: 25%','Special cat. (SC/ST/OBC/Women/Ex-Servicemen/PwD/Minority) urban: 25%, rural: 35%','Own contribution: 5% (special) / 10% (general)'], grRef:'MH MSME / Industries Dept', authority:'DIC / KVIB Maharashtra' },
 
-    // ════════ POLICY DATA ════════
-    const POLICY_DATA = {
-      zones: {
-        VidarbhaStandard: {
-          label: 'Vidarbha — Regional Special', short: 'V-Std',
-          description: 'Vidarbha blanket regional rate (overrides Group A/B/C/D/D+)',
-          msmeIPSPercent: 0.80, msmeYears: 10, lsiIPSPercent: 0.90, lsiYears: 9,
-          stampDutyExempt: 1.00, electricityDutyMfgFullTenure: true, electricityDutyServiceYears: 5,
-          interestSubsidyPercent: 0.05, powerTariffRsPerUnit: 1,
-          rentalSubsidyCap: 10000000, epfReimbursement: true, epfMfgRate: 0.50, epfServiceSalaryThreshold: 50000,
-          accent: '#2D5F5D',
-        },
-        VidarbhaNID: {
-          label: 'Vidarbha — NID / Naxal / Aspirational', short: 'V-NID',
-          description: 'Maximum tier — Gadchiroli, Washim, aspirational/Naxal pockets',
-          msmeIPSPercent: 1.00, msmeYears: 10, lsiIPSPercent: 1.00, lsiYears: 9,
-          stampDutyExempt: 1.00, electricityDutyMfgFullTenure: true, electricityDutyServiceYears: 5,
-          interestSubsidyPercent: 0.05, powerTariffRsPerUnit: 1,
-          rentalSubsidyCap: 10000000, epfReimbursement: true, epfMfgRate: 0.50, epfServiceSalaryThreshold: 50000,
-          accent: '#1A2E35',
-        },
-      },
-      bonuses: {
-        thrustSectors: ['Food Processing', 'Green Energy', 'Industry 4.0', 'EV', 'Aerospace'],
-        thrustIPSBonus: 0.20, thrustYearsBonus: 2,
-        specialCategories: ['Women', 'SC', 'ST'],
-        specialCatIPSBonus: 0.20,
-        overallCapStandard: 1.00, overallCapSpecialCat: 1.20,
-      },
-      caps: {
-        interestSubsidyAnnualCap: 10000000, powerTariffMSMECap: 10000000, powerTariffLSICap: 15000000,
-        epfMfgMSMECap: 50000000, epfMfgLSICap: 100000000, epfServiceCap: 100000000,
-        capitalSubsidyOverallCap: 250000000, capitalSubsidyAnnualCap: 50000000,
-        rentalSubsidyDurationYears: 5,
-      },
-      assumptions: {
-        stampDutyRate: 0.06, electricityDutyRate: 0.15, powerTariffPerUnit: 9,
-        employerPFRate: 0.13, interestSubsidyYears: 5, powerTariffSubsidyYears: 3,
-        annualSGSTAsTurnoverRatio: 0.09, capitalSubsidyPercentFCI: 0.20,
-      },
-    };
+  // === CENTRAL — HIGH VOLUME (CALCULATORS) ===
+  { id:'pmegp', name:'PMEGP', fullName:"Prime Minister's Employment Generation Programme", type:'Central', category:'Margin Money', headline:'15-35% margin money on project cost', color:'#C97064', hasCalc:true, eligibility:['Age 18+, no income ceiling','New enterprise only','Above 8th class for projects > ₹10 L','One person per family'], benefits:['Manufacturing: up to ₹50 lakh project cost','Service: up to ₹20 lakh project cost','General urban: 15% margin, rural: 25%','Special cat. urban: 25%, rural: 35%','Own contribution: 5-10%','Implementing: KVIC · KVIB · DIC'], grRef:'KVIC / MoMSME', authority:'KVIC · KVIB · DIC (online via Khadi portal)' },
+  { id:'clcss', name:'CLCSS', fullName:'Credit Linked Capital Subsidy Scheme', type:'Central', category:'Capital Subsidy', headline:'15% on P&M, max ₹15 L', color:'#B8956A', hasCalc:true, eligibility:['MSME with Udyam Registration','51 approved sub-sectors','For technology upgradation (new + existing)'], benefits:['15% upfront capital subsidy on institutional credit','Maximum eligible loan: ₹1 Cr','Maximum subsidy: ₹15 lakh','Credit-linked through approved banks/FIs','Direct disbursement to bank account','51 sub-sectors: Auto, Drugs, Electronics, Fans, Food, Furniture, Gems, Glass, Plastic, Steel, etc.'], grRef:'CLCSS scheme · MoMSME', authority:'Ministry of MSME · SIDBI · Nodal Banks' },
+  { id:'pm-fme', name:'PM-FME', fullName:'PM Formalisation of Micro Food Processing Enterprises', type:'Central', category:'Capital Subsidy', headline:'35% subsidy for food micro units (cap ₹10 L)', color:'#9C7C4A', hasCalc:true, eligibility:['Existing/new micro food processing units','Individual / FPO / SHG / Co-operative','ODOP (One District One Product) preferred'], benefits:['35% credit-linked grant on eligible project cost','Maximum subsidy: ₹10 lakh per unit','ODOP product priority','SHG seed capital: ₹40,000 per member','Branding & marketing support: 50% (max ₹50K)','Total scheme outlay: ₹10,000 Cr (2020-25)'], grRef:'MoFPI', authority:'Ministry of Food Processing · State Nodal Agency' },
 
-    // ════════ VIDARBHA MAPPING ════════
-    const VIDARBHA = {
-      'Nagpur': [
-        { name: 'Nagpur Urban', zone: 'VidarbhaStandard' }, { name: 'Kamptee', zone: 'VidarbhaStandard' }, { name: 'Hingna', zone: 'VidarbhaStandard' }, { name: 'Mauda', zone: 'VidarbhaStandard' }, { name: 'Saoner', zone: 'VidarbhaStandard' }, { name: 'Parseoni', zone: 'VidarbhaStandard' }, { name: 'Ramtek', zone: 'VidarbhaStandard' }, { name: 'Kalmeshwar', zone: 'VidarbhaStandard' }, { name: 'Katol', zone: 'VidarbhaStandard' }, { name: 'Narkhed', zone: 'VidarbhaStandard' }, { name: 'Kuhi', zone: 'VidarbhaStandard' }, { name: 'Umred', zone: 'VidarbhaStandard' }, { name: 'Bhiwapur', zone: 'VidarbhaStandard' },
-      ],
-      'Wardha': [
-        { name: 'Wardha', zone: 'VidarbhaStandard' }, { name: 'Deoli', zone: 'VidarbhaStandard' }, { name: 'Hinganghat', zone: 'VidarbhaStandard' }, { name: 'Samudrapur', zone: 'VidarbhaStandard' }, { name: 'Karanja (Ghadge)', zone: 'VidarbhaStandard' }, { name: 'Arvi', zone: 'VidarbhaStandard' }, { name: 'Ashti', zone: 'VidarbhaStandard' }, { name: 'Seloo', zone: 'VidarbhaStandard' },
-      ],
-      'Bhandara': [
-        { name: 'Bhandara', zone: 'VidarbhaStandard' }, { name: 'Tumsar', zone: 'VidarbhaStandard' }, { name: 'Mohadi', zone: 'VidarbhaStandard' }, { name: 'Sakoli', zone: 'VidarbhaStandard' }, { name: 'Lakhandur', zone: 'VidarbhaStandard' }, { name: 'Lakhani', zone: 'VidarbhaStandard' }, { name: 'Pauni', zone: 'VidarbhaStandard' },
-      ],
-      'Gondia': [
-        { name: 'Gondia', zone: 'VidarbhaStandard' }, { name: 'Tirora', zone: 'VidarbhaStandard' }, { name: 'Goregaon', zone: 'VidarbhaStandard' }, { name: 'Amgaon', zone: 'VidarbhaStandard' }, { name: 'Salekasa', zone: 'VidarbhaNID' }, { name: 'Sadak Arjuni', zone: 'VidarbhaNID' }, { name: 'Deori', zone: 'VidarbhaStandard' }, { name: 'Arjuni Morgaon', zone: 'VidarbhaStandard' },
-      ],
-      'Chandrapur': [
-        { name: 'Chandrapur', zone: 'VidarbhaStandard' }, { name: 'Ballarpur', zone: 'VidarbhaStandard' }, { name: 'Bhadravati', zone: 'VidarbhaStandard' }, { name: 'Warora', zone: 'VidarbhaStandard' }, { name: 'Chimur', zone: 'VidarbhaNID' }, { name: 'Nagbhid', zone: 'VidarbhaNID' }, { name: 'Bramhapuri', zone: 'VidarbhaStandard' }, { name: 'Sindewahi', zone: 'VidarbhaNID' }, { name: 'Mul', zone: 'VidarbhaStandard' }, { name: 'Pombhurna', zone: 'VidarbhaNID' }, { name: 'Gondpipri', zone: 'VidarbhaNID' }, { name: 'Rajura', zone: 'VidarbhaStandard' }, { name: 'Korpana', zone: 'VidarbhaStandard' }, { name: 'Jiwati', zone: 'VidarbhaNID' }, { name: 'Saoli', zone: 'VidarbhaNID' },
-      ],
-      'Gadchiroli': [
-        { name: 'Gadchiroli', zone: 'VidarbhaNID' }, { name: 'Chamorshi', zone: 'VidarbhaNID' }, { name: 'Mulchera', zone: 'VidarbhaNID' }, { name: 'Dhanora', zone: 'VidarbhaNID' }, { name: 'Etapalli', zone: 'VidarbhaNID' }, { name: 'Aheri', zone: 'VidarbhaNID' }, { name: 'Bhamragad', zone: 'VidarbhaNID' }, { name: 'Sironcha', zone: 'VidarbhaNID' }, { name: 'Korchi', zone: 'VidarbhaNID' }, { name: 'Kurkheda', zone: 'VidarbhaNID' }, { name: 'Armori', zone: 'VidarbhaNID' }, { name: 'Wadsa (Desaiganj)', zone: 'VidarbhaNID' },
-      ],
-      'Amravati': [
-        { name: 'Amravati Urban', zone: 'VidarbhaStandard' }, { name: 'Bhatkuli', zone: 'VidarbhaStandard' }, { name: 'Daryapur', zone: 'VidarbhaStandard' }, { name: 'Anjangaon Surji', zone: 'VidarbhaStandard' }, { name: 'Achalpur', zone: 'VidarbhaStandard' }, { name: 'Chandur Bazar', zone: 'VidarbhaStandard' }, { name: 'Morshi', zone: 'VidarbhaStandard' }, { name: 'Warud', zone: 'VidarbhaStandard' }, { name: 'Teosa', zone: 'VidarbhaStandard' }, { name: 'Nandgaon Khandeshwar', zone: 'VidarbhaStandard' }, { name: 'Dhamangaon Railway', zone: 'VidarbhaStandard' }, { name: 'Chandur Railway', zone: 'VidarbhaStandard' }, { name: 'Dharni', zone: 'VidarbhaNID' }, { name: 'Chikhaldara', zone: 'VidarbhaNID' },
-      ],
-      'Akola': [
-        { name: 'Akola', zone: 'VidarbhaStandard' }, { name: 'Akot', zone: 'VidarbhaStandard' }, { name: 'Telhara', zone: 'VidarbhaStandard' }, { name: 'Balapur', zone: 'VidarbhaStandard' }, { name: 'Patur', zone: 'VidarbhaStandard' }, { name: 'Murtizapur', zone: 'VidarbhaStandard' }, { name: 'Barshitakli', zone: 'VidarbhaStandard' },
-      ],
-      'Buldhana': [
-        { name: 'Buldhana', zone: 'VidarbhaStandard' }, { name: 'Chikhli', zone: 'VidarbhaStandard' }, { name: 'Deulgaon Raja', zone: 'VidarbhaStandard' }, { name: 'Sindkhed Raja', zone: 'VidarbhaStandard' }, { name: 'Lonar', zone: 'VidarbhaStandard' }, { name: 'Mehkar', zone: 'VidarbhaStandard' }, { name: 'Khamgaon', zone: 'VidarbhaStandard' }, { name: 'Shegaon', zone: 'VidarbhaStandard' }, { name: 'Jalgaon Jamod', zone: 'VidarbhaStandard' }, { name: 'Sangrampur', zone: 'VidarbhaStandard' }, { name: 'Nandura', zone: 'VidarbhaStandard' }, { name: 'Malkapur', zone: 'VidarbhaStandard' }, { name: 'Motala', zone: 'VidarbhaStandard' },
-      ],
-      'Washim': [
-        { name: 'Washim', zone: 'VidarbhaNID' }, { name: 'Mangrulpir', zone: 'VidarbhaNID' }, { name: 'Karanja', zone: 'VidarbhaNID' }, { name: 'Manora', zone: 'VidarbhaNID' }, { name: 'Risod', zone: 'VidarbhaNID' }, { name: 'Malegaon', zone: 'VidarbhaNID' },
-      ],
-      'Yavatmal': [
-        { name: 'Yavatmal', zone: 'VidarbhaStandard' }, { name: 'Babhulgaon', zone: 'VidarbhaStandard' }, { name: 'Kalamb', zone: 'VidarbhaStandard' }, { name: 'Darwha', zone: 'VidarbhaStandard' }, { name: 'Digras', zone: 'VidarbhaStandard' }, { name: 'Arni', zone: 'VidarbhaStandard' }, { name: 'Ner', zone: 'VidarbhaStandard' }, { name: 'Pusad', zone: 'VidarbhaStandard' }, { name: 'Mahagaon', zone: 'VidarbhaStandard' }, { name: 'Umarkhed', zone: 'VidarbhaStandard' }, { name: 'Ralegaon', zone: 'VidarbhaStandard' }, { name: 'Wani', zone: 'VidarbhaStandard' }, { name: 'Maregaon', zone: 'VidarbhaStandard' }, { name: 'Zari Jamani', zone: 'VidarbhaNID' }, { name: 'Kelapur (Pandharkawda)', zone: 'VidarbhaNID' }, { name: 'Ghatanji', zone: 'VidarbhaStandard' },
-      ],
-    };
+  // === CENTRAL — CAPITAL SUBSIDY (INFO CARDS) ===
+  { id:'sclcss', name:'SCLCSS', fullName:'Special Credit Linked Capital Subsidy Scheme (for SC/ST Hub)', type:'Central', category:'Capital Subsidy', headline:'25% on P&M for SC/ST entrepreneurs (cap ₹25 L)', color:'#A6504E', eligibility:['SC / ST entrepreneur (sole owner / majority partner)','MSME with Udyam Registration','For purchase of new P&M and equipment'], benefits:['25% capital subsidy on plant, machinery & equipment','Maximum subsidy: ₹25 lakh','Higher rate than general CLCSS (15%)','Both new + existing SC/ST MSMEs eligible','Direct benefit via Lending Institution','Under National SC/ST Hub Scheme'], grRef:'MoMSME · National SC/ST Hub', authority:'NSIC · MoMSME · Nodal Banks' },
+  { id:'tequp', name:'TEQUP', fullName:'Technology and Quality Upgradation Support', type:'Central', category:'Capital Subsidy', headline:'25% capital subsidy for energy-efficient tech', color:'#7C9885', eligibility:['MSMEs (Mfg sector primarily)','For adopting energy-efficient technologies','Bureau of Energy Efficiency (BEE) approved equipment'], benefits:['25% capital subsidy on energy-efficient P&M','Reduces operational energy costs 15-30%','Carbon credit eligibility (additional revenue)','Energy audit cost reimbursement','Bundled with CLCSS or standalone','Implementing through nodal banks'], grRef:'MoMSME', authority:'BEE · MoMSME · SIDBI' },
+  { id:'aif', name:'AIF', fullName:'Agriculture Infrastructure Fund', type:'Central', category:'Interest Subvention', headline:'3% interest subvention up to ₹2 Cr, 7 yrs', color:'#8FA48B', eligibility:['Farmers / FPOs / PACS / Agri-entrepreneurs','For post-harvest infrastructure & community farming assets','Cold storage, warehouse, ripening units, processing, primary processing'], benefits:['3% interest subvention p.a. on bank loans up to ₹2 Cr','Maximum subvention period: 7 years','Credit guarantee under CGTMSE (fee paid by govt)','₹1 Lakh Cr total fund corpus','Convergence with state schemes possible','Implementing through scheduled commercial banks'], grRef:'Ministry of Agriculture & Farmers Welfare', authority:'Dept of Agriculture · NABARD · Banks' },
+  { id:'isec', name:'ISEC', fullName:'Interest Subsidy Eligibility Certificate (for Khadi & Village Industries)', type:'Central', category:'Interest Subvention', headline:'Flat 4% interest rate (govt subsidizes rest)', color:'#9C7C4A', eligibility:['Khadi / Village Industries institutions','Registered under KVIC','Working capital + term loan requirements'], benefits:['Flat 4% interest rate to borrower','Difference between 4% and bank rate fully subsidized by Central Govt','No cap on loan amount (subject to bank assessment)','Both working capital + capital expenditure','Implementing via KVIC nodal banks'], grRef:'KVIC', authority:'KVIC · Nodal Banks' },
 
-    // ════════ HELPERS ════════
-    const fmtCr = (n) => {
-      if (!isFinite(n) || n === 0) return '₹0';
-      const cr = n / 10000000;
-      if (cr >= 1) return `₹${cr.toFixed(2)} Cr`;
-      const lakh = n / 100000;
-      if (lakh >= 1) return `₹${lakh.toFixed(2)} L`;
-      return `₹${Math.round(n).toLocaleString('en-IN')}`;
-    };
+  // === CENTRAL — LOANS & GUARANTEES (INFO) ===
+  { id:'mudra', name:'MUDRA / PMMY', fullName:'Pradhan Mantri MUDRA Yojana', type:'Central', category:'Loan', headline:'Collateral-free loan up to ₹20 L', color:'#6B8B95', eligibility:['Non-corporate, non-farm micro/small enterprises','Manufacturing / Trading / Service / Allied Agri','Indian citizens, business plan-based'], benefits:['Shishu: up to ₹50,000','Kishor: ₹50,000 - ₹5 L','Tarun: ₹5 L - ₹10 L','Tarun Plus: ₹10 L - ₹20 L (for repeat borrowers)','No collateral required','Through Banks, NBFCs, MFIs, RRBs'], grRef:'PMMY', authority:'MUDRA Bank · Scheduled Banks · NBFCs / MFIs' },
+  { id:'stand-up-india', name:'Stand-Up India', fullName:'Stand-Up India Scheme', type:'Central', category:'Loan', headline:'₹10 L - ₹1 Cr loan for SC/ST/Women', color:'#A6504E', eligibility:['SC / ST / Women entrepreneur (sole/51% partner)','Age 18+','Greenfield enterprise (first-time)','Mfg / Service / Trading sector'], benefits:['Composite loan ₹10 L to ₹1 Cr','75% of project cost as bank loan','25% own contribution (10% margin from beneficiary)','Tenure: 7 years (18 months moratorium)','Interest: MCLR + 3% + tenor premium','Credit guarantee through CGFSI available'], grRef:'Stand-Up India Mission', authority:'Scheduled Banks · Lead District Manager' },
+  { id:'cgtmse', name:'CGTMSE', fullName:'Credit Guarantee Fund Trust for Micro & Small Enterprises', type:'Central', category:'Credit Guarantee', headline:'Collateral-free loan up to ₹5 Cr (75-85% guarantee)', color:'#5C7A7C', eligibility:['MSE with Udyam Registration','Manufacturing or Service','Excluding agriculture, retail trade, education'], benefits:['Collateral-free credit up to ₹5 Cr','75-85% credit guarantee cover','Higher cover for Women / NER / SC-ST (85%)','Annual guarantee fee: 0.37%-1.35%','Term loan + Working capital both covered','Approved by Member Lending Institutions (MLIs)'], grRef:'CGTMSE Trust', authority:'CGTMSE · Banks' },
+  { id:'cgss', name:'CGSS', fullName:'Credit Guarantee Scheme for Startups', type:'Central', category:'Credit Guarantee', headline:'Up to 75% guarantee on loans up to ₹10 Cr for DPIIT startups', color:'#6B8B95', eligibility:['DPIIT-recognized startup','Operational stage with revenue','Loans from scheduled commercial banks / NBFC / SEBI-registered AIFs'], benefits:['Credit guarantee cover up to ₹10 Cr per case','Guarantee % up to 75% (varies by loan amount)','Reduces collateral burden on startups','Annual guarantee fee charged','Implementing through NCGTC'], grRef:'DPIIT · NCGTC', authority:'National Credit Guarantee Trustee Co. (NCGTC)' },
 
-    // ════════ CALCULATION ENGINE ════════
-    function calculate(input) {
-      const zone = POLICY_DATA.zones[input.zoneKey];
-      if (!zone) return null;
-      const isService = input.activityType === 'Service';
-      const isMSME = ['Micro', 'Small', 'Medium'].includes(input.unitType);
-      const fci = (input.landValue || 0) + (input.buildingValue || 0) + (input.plantMachinery || 0);
-      const baseIPSPercent = isMSME ? zone.msmeIPSPercent : zone.lsiIPSPercent;
-      const baseYears = isMSME ? zone.msmeYears : zone.lsiYears;
-      const isThrustSector = POLICY_DATA.bonuses.thrustSectors.includes(input.sector);
-      const thrustBonusCap = isThrustSector ? POLICY_DATA.bonuses.thrustIPSBonus : 0;
-      const thrustBonusYears = isThrustSector ? POLICY_DATA.bonuses.thrustYearsBonus : 0;
-      const isSpecialCat = POLICY_DATA.bonuses.specialCategories.includes(input.ownerCategory);
-      const specialBonusCap = isSpecialCat ? POLICY_DATA.bonuses.specialCatIPSBonus : 0;
-      const effectiveIPSPercent = Math.min(baseIPSPercent + thrustBonusCap + specialBonusCap, 1.20);
-      const ipsLifetimeCap = fci * effectiveIPSPercent;
-      const eligibilityYears = baseYears + thrustBonusYears;
-      const lifetimeIPSRealizable = Math.min(ipsLifetimeCap, (input.annualSGST || 0) * eligibilityYears);
-      const landAndBuilding = (input.landValue || 0) + (input.buildingValue || 0);
-      const stampDutySaving = landAndBuilding * POLICY_DATA.assumptions.stampDutyRate * zone.stampDutyExempt;
-      const annualElectricityCost = (input.electricityUnits || 0) * POLICY_DATA.assumptions.powerTariffPerUnit;
-      const annualEDLiability = annualElectricityCost * POLICY_DATA.assumptions.electricityDutyRate;
-      let edYears = 0;
-      if (isService) edYears = zone.electricityDutyServiceYears;
-      else if (zone.electricityDutyMfgFullTenure) edYears = Math.min(eligibilityYears, 10);
-      const electricityDutySaving = annualEDLiability * edYears;
-      const annualInterestSubsidy = Math.min((input.termLoan || 0) * zone.interestSubsidyPercent, POLICY_DATA.caps.interestSubsidyAnnualCap);
-      const interestSubsidy = annualInterestSubsidy * POLICY_DATA.assumptions.interestSubsidyYears;
-      let powerTariffSubsidy = 0;
-      if (!isService) {
-        const cap = isMSME ? POLICY_DATA.caps.powerTariffMSMECap : POLICY_DATA.caps.powerTariffLSICap;
-        powerTariffSubsidy = Math.min((input.electricityUnits || 0) * zone.powerTariffRsPerUnit * POLICY_DATA.assumptions.powerTariffSubsidyYears, cap);
-      }
-      let epfReimbursement = 0;
-      if (zone.epfReimbursement) {
-        const employees = input.employees || 0;
-        const avgBasic = input.avgBasicSalary || 0;
-        const annualEmployerPF = employees * avgBasic * 12 * POLICY_DATA.assumptions.employerPFRate;
-        if (isService) {
-          if (avgBasic >= zone.epfServiceSalaryThreshold) epfReimbursement = Math.min(annualEmployerPF * 0.50 * 5, POLICY_DATA.caps.epfServiceCap);
-        } else {
-          const cap = isMSME ? POLICY_DATA.caps.epfMfgMSMECap : POLICY_DATA.caps.epfMfgLSICap;
-          epfReimbursement = Math.min(annualEmployerPF * zone.epfMfgRate * 5, cap);
-        }
-      }
-      let rentalLeaseSubsidy = 0;
-      if (isService) {
-        const annualRental = input.annualRental || 0;
-        const totalRental = annualRental * POLICY_DATA.caps.rentalSubsidyDurationYears;
-        rentalLeaseSubsidy = Math.min(totalRental * 0.50, zone.rentalSubsidyCap);
-      }
-      let capitalSubsidy = 0;
-      if (!isService && (isThrustSector || isMSME)) {
-        capitalSubsidy = Math.min(fci * POLICY_DATA.assumptions.capitalSubsidyPercentFCI, POLICY_DATA.caps.capitalSubsidyOverallCap);
-      }
-      const rawTotal = lifetimeIPSRealizable + stampDutySaving + electricityDutySaving + interestSubsidy + powerTariffSubsidy + epfReimbursement + rentalLeaseSubsidy + capitalSubsidy;
-      const overallCapPercent = isSpecialCat ? POLICY_DATA.bonuses.overallCapSpecialCat : POLICY_DATA.bonuses.overallCapStandard;
-      const overallCap = fci * overallCapPercent;
-      const totalLifetimeSubsidy = Math.min(rawTotal, overallCap);
-      const capApplied = rawTotal > overallCap;
-      const suggestedCAFee = totalLifetimeSubsidy * 0.05;
-      return { zone, zoneKey: input.zoneKey, isService, isMSME, fci, isThrustSector, isSpecialCat, effectiveIPSPercent, ipsLifetimeCap, eligibilityYears, lifetimeIPSRealizable, stampDutyFull: landAndBuilding * POLICY_DATA.assumptions.stampDutyRate, stampDutySaving, annualEDLiability, electricityDutySaving, edYears, interestSubsidy, annualInterestSubsidy, powerTariffSubsidy, epfReimbursement, rentalLeaseSubsidy, capitalSubsidy, rawTotal, overallCap, overallCapPercent, capApplied, totalLifetimeSubsidy, suggestedCAFee };
-    }
+  // === CENTRAL — SECTOR SPECIFIC (INFO) ===
+  { id:'pm-vishwakarma', name:'PM Vishwakarma', fullName:'Pradhan Mantri Vishwakarma Yojana', type:'Central', category:'Loan + Skill', headline:'For traditional artisans (18 trades)', color:'#A67C52', eligibility:['Self-employed artisan in 18 specified trades','Age 18+','Carpenter, blacksmith, goldsmith, potter, tailor, mason, cobbler, barber, washerman, etc.'], benefits:['Skill training: 5-7 days basic + 15 days advanced','Stipend ₹500/day during training','Toolkit incentive: ₹15,000','Credit support: ₹1 L (1st tranche) → ₹2 L (2nd tranche)','5% concessional interest rate','Digital transaction incentive + marketing support'], grRef:'MoMSME 2023', authority:'MoMSME · Lead Banks' },
+  { id:'ahidf', name:'AHIDF', fullName:'Animal Husbandry Infrastructure Development Fund', type:'Central', category:'Interest Subvention', headline:'3% interest subvention for dairy/poultry/meat', color:'#9C7C4A', eligibility:['Individual entrepreneurs','Pvt Companies / MSMEs / FPOs','Section 8 companies'], benefits:['3% interest subvention for 8 years','Term loan from Scheduled Banks','Project cost: ₹10 L to ₹50 Cr+','Dairy / Meat / Poultry processing units','Animal feed plants + breed multiplication','Credit Guarantee corpus: ₹750 Cr'], grRef:'DAHD', authority:'Dept of Animal Husbandry · NDDB / NABARD' },
+  { id:'nlm', name:'NLM', fullName:'National Livestock Mission', type:'Central', category:'Capital Subsidy', headline:'50% capital subsidy for livestock entrepreneurs', color:'#8FA48B', eligibility:['Individual entrepreneurs','FPOs / Co-operatives','Section 8 / JLG / SHG'], benefits:['50% capital subsidy (max ₹50 L)','Project cost: ₹4 L to ₹2 Cr (entrepreneur development)','Poultry / Sheep / Goat / Piggery / Feed','Up to ₹50 L for breed development','Up to ₹50 L for fodder development','Subsidy released in 2 installments'], grRef:'DAHD', authority:'Dept of AH · State Govt' },
+  { id:'tufs', name:'TUFS / ATUFS', fullName:'Amended Technology Upgradation Fund Scheme', type:'Central', category:'Capital Subsidy', headline:'10-15% capital subsidy for textile machinery', color:'#A6504E', eligibility:['Textile units (spinning, weaving, processing, garment)','MSMEs + Large units','With Udyam / IEM registration'], benefits:['15% Capital Investment Subsidy — garment/MMF segment','10% CIS — non-MMF segments','Cap: ₹30 Cr (garment) / ₹20 Cr (others)','Eligible: New + Replacement machinery','Power loom upgradation special focus','Outlay: ₹17,822 Cr'], grRef:'Ministry of Textiles', authority:'Office of Textile Commissioner' },
+  { id:'sfurti', name:'SFURTI', fullName:'Scheme of Fund for Regeneration of Traditional Industries', type:'Central', category:'Cluster Development', headline:'Cluster grants for traditional industries', color:'#9C7C4A', eligibility:['NGOs / Institutions / SPVs','For traditional industry clusters','Khadi, coir, village industries'], benefits:['Regular cluster: up to ₹2.5 Cr (500 artisans)','Major cluster: up to ₹5 Cr (1000+ artisans)','Hard intervention: workspace, M&E','Soft intervention: training, branding, design','Implementation through Implementing Agencies','KVIC + Coir Board nodal'], grRef:'MoMSME', authority:'KVIC · Coir Board · MoMSME' },
+  { id:'mse-cdp', name:'MSE-CDP', fullName:'MSE Cluster Development Programme', type:'Central', category:'Cluster Development', headline:'Up to ₹15 Cr for Common Facility Centre', color:'#6B8B95', eligibility:['MSE clusters with min 20 enterprises','SPV registered as Society/Trust/Sec 8','For Common Facility Centre (CFC) or Infrastructure Development Project (IDP)'], benefits:['CFC: up to ₹15 Cr (70-90% govt grant)','IDP: up to ₹10 Cr (60-80% govt grant)','Soft interventions: ₹25 L','Industry 4.0 / Green CFC: up to ₹20 Cr','State govt typically contributes 20-30%','SPV contributes balance'], grRef:'MoMSME', authority:'MoMSME · State Govt' },
+  { id:'aspire', name:'ASPIRE', fullName:'A Scheme for Promotion of Innovation, Rural Industry & Entrepreneurship', type:'Central', category:'Innovation', headline:'Rural innovation + Livelihood Business Incubators', color:'#7C9885', eligibility:['Institutions setting up LBIs / TBIs','Universities / R&D institutions','Industry associations'], benefits:['LBI grant: up to ₹1 Cr (one-time)','TBI grant: up to ₹50 L (one-time)','For agro-processing, rural industries','Skill development + livelihood focus','Idea2PoC support: ₹3 L','Implementing: KVIC + NSIC'], grRef:'MoMSME', authority:'MoMSME · KVIC · NSIC' },
+  { id:'pli-schemes', name:'PLI Schemes', fullName:'Production Linked Incentive Schemes (14 sectors)', type:'Central', category:'Production Incentive', headline:'4-6% incentive on incremental sales × 4-6 yrs', color:'#5C7A7C', eligibility:['Existing or new units in 14 PLI sectors','Meeting investment + incremental sales thresholds','DPIIT / sector-ministry registered'], benefits:['Pharma APIs: ₹6,940 Cr outlay','Textiles (MMF): ₹10,683 Cr outlay','Electronics (Mobile/IT HW): ₹76,000 Cr','Food Processing: ₹10,900 Cr','Auto + Auto Components: ₹25,938 Cr','Solar PV / EV / Specialty Steel / Telecom / Drones / Drugs / Medical Devices / White Goods / Adv Chemistry Cell'], grRef:'Various Ministries', authority:'Sector-specific Ministries · DPIIT' },
+  { id:'zed-cert', name:'ZED Certification', fullName:'Zero Defect Zero Effect Certification Scheme', type:'Central', category:'Certification', headline:'Free + subsidized quality certification for MSMEs', color:'#7C9885', eligibility:['MSME with Udyam Registration','Manufacturing or Service','Existing operations'], benefits:['Bronze: free, ₹10K subsidy on assessment','Silver: ₹40K subsidy','Gold: ₹90K subsidy','Additional 25% subsidy for Women/SC/ST owners','Better access to credit + buyers','MOU with various buyers (DRDO, Railways, etc.)'], grRef:'MoMSME', authority:'MoMSME · QCI (Quality Council of India)' },
 
-    function BreakdownRow({ label, detail, amount, primary }) {
-      return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '0.8rem 0', borderBottom: '1px dashed #EDE3CF', gap: '1rem' }}>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontWeight: primary ? 600 : 500, fontSize: '0.95rem', color: primary ? '#1A2E35' : '#3A4A52', marginBottom: '0.15rem' }}>{label}</div>
-            <div style={{ fontSize: '0.78rem', color: '#8B7E6B' }}>{detail}</div>
-          </div>
-          <div className="mono" style={{ fontSize: primary ? '1.15rem' : '1rem', fontWeight: primary ? 700 : 600, color: amount > 0 ? '#2D5F5D' : '#C9C0AE', whiteSpace: 'nowrap' }}>{fmtCr(amount)}</div>
+  // === CENTRAL — TAX & EXPORT (INFO) ===
+  { id:'startup-india', name:'Startup India', fullName:'Startup India Tax Benefits', type:'Central', category:'Tax Benefit', headline:'IT holiday 3/10 yrs + Angel Tax exempt', color:'#7C9885', eligibility:['DPIIT-recognized startup','Incorporated < 10 yrs ago','Turnover < ₹100 Cr in any year','Innovation / scalable business model'], benefits:['Income tax holiday: 3 consecutive years out of first 10 (Sec 80-IAC)','Angel tax exemption (Sec 56(2)(viib))','Capital gains exemption on long-term assets','Fast-track patent examination (80% rebate)','Self-certification on labor + environment','Public procurement preference'], grRef:'DPIIT', authority:'DPIIT · CBDT' },
+  { id:'sez', name:'SEZ Benefits', fullName:'Special Economic Zone Benefits', type:'Central', category:'Tax Benefit', headline:'IT holiday + duty exemption for SEZ units', color:'#5C7A7C', eligibility:['Units inside notified SEZ','Manufacturing or Service exports','NFE (Net Foreign Exchange) positive'], benefits:['Income tax: 100% first 5 yrs, 50% next 5, 50% reinvested next 5','Customs / Excise duty exemption on imports','GST exemption (zero-rated supplies)','External Commercial Borrowing route','Single window clearance','No license required for goods imports'], grRef:'SEZ Act 2005', authority:'Ministry of Commerce · SEZ Authority' },
+  { id:'rodtep', name:'RoDTEP', fullName:'Remission of Duties and Taxes on Exported Products', type:'Central', category:'Export Benefit', headline:'Export duty drawback (0.5-4.3% of FOB)', color:'#6B8B95', eligibility:['Exporters with IEC code','8,555+ products covered','Excluding SEZ + EOU units (currently)'], benefits:['Rate: 0.5% to 4.3% of FOB value (HS-code wise)','Transferable e-script via ICEGATE','Replaces MEIS for non-SEZ exports','Annual budget: ₹15,070 Cr (FY25)','Special rates for textile, marine, etc.','Filing through Customs port'], grRef:'Commerce Ministry', authority:'DGFT · Customs' },
+  { id:'epcg', name:'EPCG License', fullName:'Export Promotion Capital Goods Scheme', type:'Central', category:'Export Benefit', headline:'Capital goods duty-free import', color:'#5C7A7C', eligibility:['Manufacturer-exporter / Merchant-exporter','Service providers with export obligation','Common Service Provider (CSP) scheme available'], benefits:['Import capital goods at 0% customs duty','Export obligation: 6× duty saved in 6 years','For new + 2nd-hand capital goods','Spares + consumables also covered','Annual claim filing','Failure → duty + interest @ 15% p.a.'], grRef:'FTP 2023', authority:'DGFT' },
+  { id:'ecgc', name:'ECGC', fullName:'Export Credit Guarantee Corporation Insurance', type:'Central', category:'Export Benefit', headline:'Export credit insurance (60-90% cover)', color:'#6B8B95', eligibility:['Indian exporter with IEC code','Selling on credit terms to overseas buyers','Bank requires ECGC cover for export credit'], benefits:['Insurance against buyer default + political risk','Premium: 0.20% - 0.50% of export value','Cover: 60% - 90% of invoice value','Policies: Shipment Comprehensive, Buyer Exposure, Specific Shipment','Mandatory for bank export credit in many cases','Pre-shipment + Post-shipment cover'], grRef:'ECGC Ltd', authority:'ECGC Ltd (Govt of India)' },
+  { id:'dgft', name:'DGFT Schemes', fullName:'DGFT Foreign Trade Policy Benefits', type:'Central', category:'Export Benefit', headline:'IEC, Star House, Advance Auth, FTP benefits', color:'#5C7A7C', eligibility:['All Indian exporters/importers','IEC code holders','Specific schemes have sector/turnover criteria'], benefits:['IEC issuance (mandatory for exports)','Star Export House: 1-Star ($0.5M) → 5-Star ($200M+)','Advance Authorization: duty-free raw material import for exports','DFIA (Duty Free Import Authorization)','RoDTEP / MEIS scrip management','Status Holder benefits: priority customs, reduced documentation'], grRef:'FTP 2023', authority:'DGFT (Directorate General of Foreign Trade)' },
+
+  // === MH STATE — COMMUNITY (INFO) ===
+  { id:'annasaheb-patil', name:'Annasaheb Patil ML', fullName:'Annasaheb Patil Aarthik Magas Vikas Mahamandal', type:'MH State', category:'Community Loan', headline:'Maratha entrepreneurs — interest subvention', color:'#A6504E', eligibility:['Maratha community (Maharashtra resident)','Age 18-60','Family income < ₹8 L p.a.'], benefits:['IR-1 Individual Loan: Interest Subvention up to ₹3 L over loan tenure','Project cost up to ₹10 L','Tenure: 5 years','IR-2 Group Loan: up to ₹50 L for 2-10 members','IR-3 Project Loan: up to ₹50 L','Marketing & training support'], grRef:'MH Marathi Min Welfare Dept', authority:'Annasaheb Patil Mahamandal' },
+  { id:'sarthi', name:'SARTHI', fullName:'Chhatrapati Shahu Maharaj Research, Training & Human Development Institute', type:'MH State', category:'Community Support', headline:'Maratha — training + research scholarships', color:'#A6504E', eligibility:['Maratha community','Educational / skill development / research focus'], benefits:['Research fellowships for Ph.D / M.Phil','Competitive exam coaching (UPSC/MPSC)','Skill training programs','Foreign education scholarships','Hostels + study centers','Through accredited institutions'], grRef:'MH Social Welfare', authority:'SARTHI Pune' },
+  { id:'mahajyoti', name:'MAHAJYOTI', fullName:'Mahatma Jyotiba Phule Research & Training Institute', type:'MH State', category:'Community Support', headline:'OBC — training, scholarships, fellowships', color:'#9C7C4A', eligibility:['OBC / VJNT / SBC community','For research, skills, competitive exam prep'], benefits:['Doctoral fellowships','UPSC / MPSC coaching','Foreign education scholarships','Skill development training','IT / CA / CS course support','OBC student hostels'], grRef:'MH Social Welfare', authority:'MAHAJYOTI Nagpur' },
+  { id:'barti', name:'BARTI', fullName:'Dr. Babasaheb Ambedkar Research & Training Institute', type:'MH State', category:'Community Support', headline:'SC — training, scholarships, fellowships', color:'#5C7A7C', eligibility:['SC community','Competitive exam prep + skill + research'], benefits:['Dr. Ambedkar fellowship','UPSC / MPSC coaching free','Skill development programs','Foreign education scholarships','Constitutional & social rights training','SC student hostels + study centers'], grRef:'MH Social Welfare', authority:'BARTI Pune' },
+  { id:'mavim', name:'MAVIM', fullName:'Mahila Arthik Vikas Mahamandal', type:'MH State', category:'Community Loan', headline:'Women — SHG credit + entrepreneurship', color:'#C97064', eligibility:['Women in Maharashtra','Individual entrepreneurs','Self Help Groups (SHGs)'], benefits:['Tejaswini Scheme: SHG credit linkage','Interest subsidy on loans up to ₹3 L','CMRC (Community Managed Resource Centres) network','Entrepreneurship training','Market linkage support','MAVIM-Tata Trust convergence programs'], grRef:'MH Women & Child Dev', authority:'MAVIM HQ Mumbai' },
+
+  // === MH STATE — MSME ANCILLARY SUBSIDIES (INFO) ===
+  { id:'mh-tech-upgrade', name:'Tech Upgradation Assistance', fullName:'Maharashtra Technology Upgradation Assistance (under MIISP)', type:'MH State', category:'Capital Subsidy', headline:'50% on additional equipment, cap ₹25 L', color:'#B8956A', eligibility:['Existing MH units doing tech upgradation','MSME + LSI both eligible','For additional capital equipment beyond original FCI'], benefits:['50% subsidy on additional capital equipment cost','Maximum subsidy: ₹25 lakh','Spread over 5 years','Bundled with MIISP 2025 benefits','For modernization / automation / quality improvement','Apply via MAITRI 2.0 portal'], grRef:'MIISP 2025 framework', authority:'DIC / MIDC · MAITRI 2.0' },
+  { id:'mh-energy-audit', name:'Energy & Water Audit', fullName:'Maharashtra Energy & Water Audit Subsidy', type:'MH State', category:'Audit Reimbursement', headline:'50% of audit cost (₹1L water / ₹2L energy)', color:'#7C9885', eligibility:['MH MSME units','Conducting energy audit (BEE accredited) / water audit (approved agency)','Existing operations'], benefits:['50% of audit cost reimbursed','Water Audit: cap ₹1 lakh','Energy Audit: cap ₹2 lakh','Identifies cost reduction opportunities (15-30% savings typical)','Required for several green certifications','Apply within 12 months of audit'], grRef:'MH Industries Dept', authority:'DIC / MAITRI' },
+  { id:'mh-energy-eff', name:'Energy Efficient Equipment', fullName:'Maharashtra Energy Efficient Equipment Subsidy', type:'MH State', category:'Capital Subsidy', headline:'50% on EE equipment, cap ₹5 L', color:'#7C9885', eligibility:['MH MSME (Mfg sector)','For BEE-rated star equipment installation','New capital expenditure'], benefits:['50% of cost of additional EE equipment','Maximum subsidy: ₹5 lakh','BEE 4-5 star equipment eligible','LED lighting, EE motors, VFDs, EE compressors etc.','Bundled with energy audit recommendations','Apply via MAITRI 2.0'], grRef:'MH Industries Dept', authority:'DIC / MAITRI' },
+  { id:'mh-quality-cert', name:'Quality Certification Subsidy', fullName:'Maharashtra Quality Certification Reimbursement', type:'MH State', category:'Certification', headline:'75% MSME certification cost (caps apply)', color:'#9C7C4A', eligibility:['MH MSMEs','For quality / IP certifications','Within 12 months of obtaining certificate'], benefits:['75% of certification cost reimbursed','GMP / Hallmark: cap ₹1 lakh','Patent / Geographical Indication (GI): cap ₹2 lakh','Other quality certs (ISO 9001, ISO 14001, HACCP, etc.) typically up to ₹1 L','Application + invoice + certificate proof needed','Single window via MAITRI 2.0'], grRef:'MH Industries Dept', authority:'DIC / MAITRI' },
+  { id:'mh-zed-cert', name:'MH ZED Reimbursement', fullName:'Maharashtra ZED Certification Reimbursement', type:'MH State', category:'Certification', headline:'50% ZED cert fees, cap ₹50K (over & above central)', color:'#7C9885', eligibility:['MH MSME with ZED certification (Bronze/Silver/Gold)','Stackable with Central ZED scheme subsidy','Within 12 months of certification'], benefits:['50% reimbursement of net ZED certification fees','Maximum reimbursement: ₹50,000','Stacks on top of Central ZED subsidy (Bronze ₹10K, Silver ₹40K, Gold ₹90K)','Total Bronze net cost can become ₹0','Encourages quality + sustainability adoption','Apply via MAITRI portal'], grRef:'MH Industries Dept', authority:'DIC / MAITRI' },
+  { id:'mh-sme-listing', name:'SME Stock Listing Reimbursement', fullName:'Maharashtra SME Stock Exchange Listing Subsidy', type:'MH State', category:'Capital Market', headline:'50% of listing expenses, cap ₹5 L', color:'#5C7A7C', eligibility:['MH-headquartered MSMEs/SMEs','Listing on BSE-SME or NSE-Emerge platforms','First-time listing'], benefits:['50% reimbursement of listing expenses','Maximum reimbursement: ₹5 lakh','Covers: Merchant banker fees, RTA fees, legal, exchange listing fees','Encourages capital raising via SME IPO route','Apply within 12 months of listing','Single window via MAITRI'], grRef:'MH Industries Dept', authority:'DIC / MAITRI · MahaIT' },
+
+  // === MH STATE — SECTORAL POLICIES (INFO) ===
+  { id:'mh-ev-policy', name:'MH EV Policy 2025', fullName:'Maharashtra Electric Vehicle Policy 2025', type:'MH State', category:'Sectoral', headline:'EV mfg + charging infra subsidies', color:'#7C9885', eligibility:['EV manufacturers / charging station operators','Setting up in Maharashtra','Component manufacturers + R&D'], benefits:['Capital subsidy for EV mfg units','Charging infra subsidy: ₹10K - ₹1 L per station','Demand incentive on EV purchase','Battery manufacturing focus','Special incentives in MIDC EV parks','Stamp duty + electricity duty exemption'], grRef:'MH Industries Dept', authority:'MIDC · MahaPreit' },
+  { id:'mh-textile-policy', name:'MH Textile Policy', fullName:'Maharashtra State Textile Policy 2023-28', type:'MH State', category:'Sectoral', headline:'Capital + interest subsidy for textiles', color:'#9C7C4A', eligibility:['Textile units in Maharashtra','Spinning, weaving, processing, garmenting, MMF','Power loom upgradation'], benefits:['Capital subsidy: 25% on machinery (Vidarbha-Marathwada)','Interest subsidy: 7% on term loans','Power tariff subsidy: ₹3/unit (5 yrs)','Stamp duty: 100% exemption','Special package for Vidarbha cotton mills','Margin money assistance for power loom'], grRef:'MH Textile Dept', authority:'Maharashtra Textile Department' },
+  { id:'mh-logistics-policy', name:'MH Logistics Policy', fullName:'Maharashtra Logistics Policy 2024', type:'MH State', category:'Sectoral', headline:'Warehousing, multimodal hubs, cold chains', color:'#6B8B95', eligibility:['Logistics parks / Warehousing / Cold chain','Multi-modal transport hubs','Inland Container Depots / CFS'], benefits:['Capital subsidy 25-40% for Vidarbha logistics parks','Stamp duty exemption','Electricity duty exemption','Land subsidy in designated zones','Interest subsidy on term loans','Single window clearance via MAITRI'], grRef:'MH Industries Dept', authority:'MIDC · MAITRI' },
+  { id:'mh-aerospace-policy', name:'MH Aerospace Policy', fullName:'Maharashtra Aerospace & Defence Policy', type:'MH State', category:'Sectoral', headline:'A&D mfg, MRO, design — premium incentives', color:'#5C7A7C', eligibility:['Aerospace / Defence manufacturers','MRO (Maintenance, Repair, Overhaul) facilities','Component & system suppliers'], benefits:['IPS up to 100% for premier projects','Capital subsidy enhanced rates','Stamp duty + ED full exemption','Special MIDC aerospace parks (Nagpur MIHAN)','Skill development partnerships','Anchor unit incentives'], grRef:'MH Industries Dept', authority:'MIDC · State Aerospace Cell' },
+  { id:'mh-it-policy', name:'MH IT Policy 2023', fullName:'Maharashtra IT/ITES Policy 2023', type:'MH State', category:'Sectoral', headline:'IT/ITES — rental, fiscal, employment incentives', color:'#7C9885', eligibility:['IT / ITES / BPO / KPO units','Setting up in MH (Tier-2/3 priority)','Data centers eligible'], benefits:['Rental subsidy: 25-50% in Tier-2/3','Stamp duty + registration full exemption','Electricity duty exemption: 7-10 yrs','Employment generation grant: ₹1 L per EPF employee','Power tariff subsidy','Data center mega-project incentives'], grRef:'MH IT/General Admin', authority:'MahaIT · MIDC' },
+];
+
+// ════ HELPERS ════
+const fmtCr = (n) => {
+  if (!isFinite(n) || n === 0) return '₹0';
+  const cr = n / 10000000;
+  if (cr >= 1) return `₹${cr.toFixed(2)} Cr`;
+  const lakh = n / 100000;
+  if (lakh >= 1) return `₹${lakh.toFixed(2)} L`;
+  return `₹${Math.round(n).toLocaleString('en-IN')}`;
+};
+const buildWa = (msg) => `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+
+// ════ CALCULATION ENGINES ════
+function calcMIISP(input) {
+  const zone = POLICY_DATA.zones[input.zoneKey];
+  const isService = input.activityType === 'Service';
+  const isMSME = ['Micro', 'Small', 'Medium'].includes(input.unitType);
+  const fci = (input.landValue || 0) + (input.buildingValue || 0) + (input.plantMachinery || 0);
+  const baseIPS = isMSME ? zone.msmeIPSPercent : zone.lsiIPSPercent;
+  const baseYears = isMSME ? zone.msmeYears : zone.lsiYears;
+  const isThrust = POLICY_DATA.bonuses.thrustSectors.includes(input.sector);
+  const tBonus = isThrust ? POLICY_DATA.bonuses.thrustIPSBonus : 0;
+  const tYears = isThrust ? POLICY_DATA.bonuses.thrustYearsBonus : 0;
+  const isSpecial = POLICY_DATA.bonuses.specialCategories.includes(input.ownerCategory);
+  const sBonus = isSpecial ? POLICY_DATA.bonuses.specialCatIPSBonus : 0;
+  const effIPS = Math.min(baseIPS + tBonus + sBonus, 1.20);
+  const ipsCap = fci * effIPS;
+  const eligYears = baseYears + tYears;
+  const ipsRealizable = Math.min(ipsCap, (input.annualSGST || 0) * eligYears);
+  const landBld = (input.landValue || 0) + (input.buildingValue || 0);
+  const stampSaving = landBld * POLICY_DATA.assumptions.stampDutyRate * zone.stampDutyExempt;
+  const annualEC = (input.electricityUnits || 0) * POLICY_DATA.assumptions.powerTariffPerUnit;
+  const annualED = annualEC * POLICY_DATA.assumptions.electricityDutyRate;
+  let edYears = isService ? zone.electricityDutyServiceYears : (zone.electricityDutyMfgFullTenure ? Math.min(eligYears, 10) : 0);
+  const edSaving = annualED * edYears;
+  const annualInt = Math.min((input.termLoan || 0) * zone.interestSubsidyPercent, POLICY_DATA.caps.interestSubsidyAnnualCap);
+  const intSubsidy = annualInt * POLICY_DATA.assumptions.interestSubsidyYears;
+  let powerTariff = 0;
+  if (!isService) {
+    const cap = isMSME ? POLICY_DATA.caps.powerTariffMSMECap : POLICY_DATA.caps.powerTariffLSICap;
+    powerTariff = Math.min((input.electricityUnits || 0) * zone.powerTariffRsPerUnit * POLICY_DATA.assumptions.powerTariffSubsidyYears, cap);
+  }
+  let epf = 0;
+  if (zone.epfReimbursement) {
+    const annPF = (input.employees || 0) * (input.avgBasicSalary || 0) * 12 * POLICY_DATA.assumptions.employerPFRate;
+    if (isService) { if ((input.avgBasicSalary || 0) >= zone.epfServiceSalaryThreshold) epf = Math.min(annPF * 0.50 * 5, POLICY_DATA.caps.epfServiceCap); }
+    else { const cap = isMSME ? POLICY_DATA.caps.epfMfgMSMECap : POLICY_DATA.caps.epfMfgLSICap; epf = Math.min(annPF * zone.epfMfgRate * 5, cap); }
+  }
+  let rental = isService ? Math.min((input.annualRental || 0) * POLICY_DATA.caps.rentalSubsidyDurationYears * 0.50, zone.rentalSubsidyCap) : 0;
+  let capSub = (!isService && (isThrust || isMSME)) ? Math.min(fci * POLICY_DATA.assumptions.capitalSubsidyPercentFCI, POLICY_DATA.caps.capitalSubsidyOverallCap) : 0;
+  const raw = ipsRealizable + stampSaving + edSaving + intSubsidy + powerTariff + epf + rental + capSub;
+  const overallCap = fci * (isSpecial ? POLICY_DATA.bonuses.overallCapSpecialCat : POLICY_DATA.bonuses.overallCapStandard);
+  const total = Math.min(raw, overallCap);
+  return { zone, isService, isMSME, fci, isThrust, isSpecial, effIPS, eligYears, ipsRealizable, stampSaving, edSaving, edYears, intSubsidy, powerTariff, epf, rental, capSub, raw, overallCap, capApplied: raw > overallCap, total, fee: total * 0.05 };
+}
+
+function calcMargin(input, schemeName) {
+  const cost = input.projectCost || 0;
+  const isMfg = input.activity === 'Manufacturing';
+  const isPMEGP = schemeName === 'PMEGP';
+  const maxCost = isMfg ? 5000000 : (isPMEGP ? 2000000 : 1000000);
+  if (cost > maxCost) return { error: `Project cost ${fmtCr(cost)} exceeds ${isMfg ? 'Mfg' : (isPMEGP ? 'Service' : 'Service/Business')} cap of ${fmtCr(maxCost)}` };
+  const isSpecial = input.category !== 'General';
+  const isRural = input.location === 'Rural';
+  const marginPercent = (!isSpecial && !isRural) ? 0.15 : ((!isSpecial && isRural) || (isSpecial && !isRural)) ? 0.25 : 0.35;
+  const ownContribPercent = isSpecial ? 0.05 : 0.10;
+  const marginMoney = cost * marginPercent;
+  const ownContrib = cost * ownContribPercent;
+  const bankLoan = cost - marginMoney - ownContrib;
+  return { marginPercent, ownContribPercent, marginMoney, ownContrib, bankLoan, cost, isMfg, isSpecial, isRural, fee: Math.max(marginMoney * 0.08, 25000) };
+}
+
+function calcCLCSS(input) {
+  const pm = input.plantMachinery || 0;
+  const eligiblePM = Math.min(pm, 10000000);
+  const subsidy = Math.min(eligiblePM * 0.15, 1500000);
+  return { pm, eligiblePM, subsidy, capApplied: pm * 0.15 > 1500000, fee: Math.max(subsidy * 0.10, 25000) };
+}
+
+function calcPMFME(input) {
+  const cost = input.projectCost || 0;
+  const subsidy35 = cost * 0.35;
+  const subsidy = Math.min(subsidy35, 1000000);
+  const bankLoan = cost * 0.55;
+  const ownContrib = cost - subsidy - bankLoan;
+  return { cost, subsidy, capApplied: subsidy35 > 1000000, bankLoan, ownContrib, fee: Math.max(subsidy * 0.10, 25000) };
+}
+
+// ════ SHARED COMPONENTS ════
+function BreakdownRow({ label, detail, amount, primary }) {
+  return <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', padding:'0.8rem 0', borderBottom:'1px dashed #EDE3CF', gap:'1rem' }}>
+    <div style={{ flex:1 }}>
+      <div style={{ fontWeight: primary?600:500, fontSize:'0.95rem', color: primary?'#1A2E35':'#3A4A52', marginBottom:'0.15rem' }}>{label}</div>
+      <div style={{ fontSize:'0.78rem', color:'#8B7E6B' }}>{detail}</div>
+    </div>
+    <div className="mono" style={{ fontSize: primary?'1.15rem':'1rem', fontWeight: primary?700:600, color: amount>0?'#2D5F5D':'#C9C0AE', whiteSpace:'nowrap' }}>{fmtCr(amount)}</div>
+  </div>;
+}
+
+function WaButton({ url, label }) {
+  return <a href={url} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    {label || 'Discuss with CA Shrikant'}
+  </a>;
+}
+
+function TypeBadge({ type }) {
+  const c = type === 'MH State' ? { bg:'#E8F1ED', fg:'#2D5F5D' } : { bg:'#FEF3E2', fg:'#A6504E' };
+  return <span style={{ background:c.bg, color:c.fg, padding:'0.18rem 0.6rem', borderRadius:'999px', fontSize:'0.7rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase' }}>{type}</span>;
+}
+
+function BackToPortal({ onBack }) {
+  return <button onClick={onBack} className="back-btn no-print"><ArrowLeft size={16} /> सर्व योजना / All Schemes</button>;
+}
+
+function FloatingWa() {
+  const url = buildWa('नमस्कार CA Shrikant सर 🙏\n\nमुझे Central / Maharashtra subsidies के बारे में consultation चाहिए।\n\n— via Vande Anudaan Portal');
+  return <a href={url} target="_blank" rel="noopener noreferrer" className="whatsapp-float" aria-label="Chat" title="Discuss with CA Shrikant">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>;
+}
+
+function Footer() {
+  return <footer style={{ textAlign:'center', marginTop:'3.5rem', paddingTop:'2rem', borderTop:'1px solid #E5DCC9', color:'#8B7E6B', fontSize:'0.82rem' }}>
+    <div className="serif" style={{ fontSize:'1rem', fontWeight:600, color:'#1A2E35', marginBottom:'0.4rem' }}>CA Shrikant Dubey & Co.</div>
+    <div>Chartered Accountants · Nagpur · 30+ years of practice</div>
+    <div style={{ marginTop:'0.3rem' }}>Office: {OFFICE_PHONE} · WhatsApp: +91 9175 233 969</div>
+    <div style={{ marginTop:'0.6rem', fontSize:'0.72rem', color:'#A89880' }}>{TOOL_VERSION} · {POLICY_VERSION} · Last verified {LAST_VERIFIED}</div>
+  </footer>;
+}
+
+function SchemeCard({ scheme, onOpen }) {
+  return <div onClick={() => onOpen(scheme.id)} className="scheme-card" style={{ borderTop:`4px solid ${scheme.color}` }}>
+    <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:'0.5rem', marginBottom:'0.5rem' }}>
+      <h3 className="serif" style={{ fontSize:'1.05rem', fontWeight:600, color:'#1A2E35', lineHeight:1.2, margin:0 }}>{scheme.name}</h3>
+      <TypeBadge type={scheme.type} />
+    </div>
+    <div style={{ fontSize:'0.73rem', color:'#8B7E6B', marginBottom:'0.6rem', fontStyle:'italic', lineHeight:1.3 }}>{scheme.fullName}</div>
+    <div style={{ fontSize:'0.85rem', color:'#3A4A52', lineHeight:1.45, marginBottom:'0.8rem', minHeight:'2.4em' }}>{scheme.headline}</div>
+    <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', borderTop:'1px dashed #EDE3CF', paddingTop:'0.7rem' }}>
+      <span style={{ fontSize:'0.7rem', color:scheme.color, fontWeight:700, letterSpacing:'0.03em', textTransform:'uppercase' }}>{scheme.category}</span>
+      <span style={{ fontSize:'0.78rem', color:scheme.color, fontWeight:600, display:'inline-flex', alignItems:'center', gap:'0.25rem' }}>
+        {scheme.hasCalc ? '🧮 Calculator' : 'View'} <ArrowRight size={13} />
+      </span>
+    </div>
+  </div>;
+}
+
+function SchemeHeader({ scheme }) {
+  return <header style={{ textAlign:'center', marginBottom:'2rem', paddingBottom:'1.5rem', borderBottom:'1px solid #E5DCC9' }}>
+    <div style={{ display:'flex', justifyContent:'center', gap:'0.6rem', marginBottom:'0.8rem' }}>
+      <TypeBadge type={scheme.type} />
+      <span style={{ background:scheme.color, color:'#fff', padding:'0.18rem 0.6rem', borderRadius:'999px', fontSize:'0.7rem', fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase' }}>{scheme.category}</span>
+    </div>
+    <h1 className="serif" style={{ fontSize:'clamp(1.9rem, 4.5vw, 2.8rem)', fontWeight:600, lineHeight:1.05, marginBottom:'0.4rem', letterSpacing:'-0.02em', color:'#1A2E35' }}>{scheme.name}</h1>
+    <div className="serif" style={{ fontSize:'0.98rem', fontStyle:'italic', color:'#6B5D4F', marginBottom:'0.3rem' }}>{scheme.fullName}</div>
+    <div style={{ fontSize:'0.85rem', color:'#5C5040' }}>{scheme.headline}</div>
+  </header>;
+}
+
+// ════ LANDING ════
+function Landing({ onOpen, onWizard }) {
+  const [filter, setFilter] = useState('All');
+  const [search, setSearch] = useState('');
+  const filtered = useMemo(() => SCHEMES.filter(s => {
+    if (filter === 'Calculators' && !s.hasCalc) return false;
+    if (filter === 'Central' && s.type !== 'Central') return false;
+    if (filter === 'MH State' && s.type !== 'MH State') return false;
+    if (search && !(s.name + ' ' + s.fullName + ' ' + s.headline + ' ' + s.category).toLowerCase().includes(search.toLowerCase())) return false;
+    return true;
+  }), [filter, search]);
+  const calcCount = SCHEMES.filter(s => s.hasCalc).length;
+  const centralCount = SCHEMES.filter(s => s.type === 'Central').length;
+  const mhCount = SCHEMES.filter(s => s.type === 'MH State').length;
+
+  return <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'2.5rem 1.5rem' }}>
+    <header style={{ textAlign:'center', marginBottom:'2.5rem', paddingBottom:'2rem', borderBottom:'1px solid #E5DCC9' }}>
+      <div style={{ fontSize:'0.72rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#7C9885', marginBottom:'0.7rem', fontWeight:600 }}>CA Shrikant Dubey & Co. · Nagpur</div>
+      <h1 className="serif" style={{ fontSize:'clamp(2.4rem, 5vw, 3.8rem)', fontWeight:600, lineHeight:1.05, marginBottom:'0.7rem', letterSpacing:'-0.02em', color:'#1A2E35' }}>Vande Anudaan</h1>
+      <div className="serif" style={{ fontSize:'1.2rem', fontStyle:'italic', color:'#6B5D4F', marginBottom:'0.7rem' }}>Central + Maharashtra Subsidy Portal</div>
+      <div style={{ fontSize:'0.92rem', color:'#5C5040', maxWidth:'720px', margin:'0 auto 1rem' }}>एक ही जगह — सरकारी subsidies की complete जानकारी। MIISP 2025, PMEGP, CMEGP, CLCSS, PM-FME calculators + 38 more schemes with detailed eligibility & benefits.</div>
+      <div style={{ display:'flex', justifyContent:'center', alignItems:'center', gap:'2rem', flexWrap:'wrap', marginTop:'1.3rem' }}>
+        <div style={{ textAlign:'center' }}><div className="serif" style={{ fontSize:'2rem', fontWeight:600, color:'#2D5F5D', lineHeight:1 }}>{SCHEMES.length}</div><div style={{ fontSize:'0.7rem', color:'#8B7E6B', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:'0.2rem' }}>Total Schemes</div></div>
+        <div style={{ width:'1px', height:'40px', background:'#E5DCC9' }}></div>
+        <div style={{ textAlign:'center' }}><div className="serif" style={{ fontSize:'2rem', fontWeight:600, color:'#C97064', lineHeight:1 }}>{calcCount}</div><div style={{ fontSize:'0.7rem', color:'#8B7E6B', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:'0.2rem' }}>Live Calculators</div></div>
+        <div style={{ width:'1px', height:'40px', background:'#E5DCC9' }}></div>
+        <div style={{ textAlign:'center' }}><div className="serif" style={{ fontSize:'2rem', fontWeight:600, color:'#7C9885', lineHeight:1 }}>{centralCount}</div><div style={{ fontSize:'0.7rem', color:'#8B7E6B', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:'0.2rem' }}>Central</div></div>
+        <div style={{ width:'1px', height:'40px', background:'#E5DCC9' }}></div>
+        <div style={{ textAlign:'center' }}><div className="serif" style={{ fontSize:'2rem', fontWeight:600, color:'#B8956A', lineHeight:1 }}>{mhCount}</div><div style={{ fontSize:'0.7rem', color:'#8B7E6B', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:'0.2rem' }}>Maharashtra</div></div>
+      </div>
+    </header>
+
+    <div onClick={onWizard} className="no-print" style={{ background:'linear-gradient(135deg, #2D5F5D 0%, #1A2E35 100%)', color:'#FBF7F0', borderRadius:'14px', padding:'1.6rem 1.8rem', marginBottom:'1.8rem', cursor:'pointer', boxShadow:'0 4px 20px rgba(45, 95, 93, 0.25)', transition:'all .25s', display:'flex', alignItems:'center', justifyContent:'space-between', gap:'1.5rem', flexWrap:'wrap' }} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(45, 95, 93, 0.35)'; }} onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(45, 95, 93, 0.25)'; }}>
+      <div style={{ flex:1, minWidth:'250px' }}>
+        <div style={{ display:'inline-block', background:'rgba(229, 198, 135, 0.2)', color:'#E5C687', padding:'0.2rem 0.6rem', borderRadius:'999px', fontSize:'0.68rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'0.6rem' }}>🎯 New · Smart Matcher</div>
+        <div className="serif" style={{ fontSize:'1.5rem', fontWeight:600, lineHeight:1.2, marginBottom:'0.3rem' }}>आपण कोणत्या योजनांसाठी पात्र आहात?</div>
+        <div style={{ fontSize:'0.92rem', color:'#A8C5B5', marginBottom:'0.1rem' }}>10 simple questions भरा → सर्व 43 schemes मधून <strong style={{ color:'#E5C687' }}>आपल्या business साठी eligible</strong> असलेल्या सर्व योजना instantly check करा.</div>
+        <div style={{ fontSize:'0.82rem', color:'#A8C5B5', fontStyle:'italic', marginTop:'0.3rem' }}>With quantum (₹ amount) + rate (%) + reason — ranked by benefit size.</div>
+      </div>
+      <div style={{ background:'#E5C687', color:'#1A2E35', padding:'0.95rem 1.6rem', borderRadius:'8px', fontWeight:700, fontSize:'1rem', display:'inline-flex', alignItems:'center', gap:'0.5rem', whiteSpace:'nowrap', flexShrink:0 }}>
+        Find My Subsidies <ArrowRight size={18} />
+      </div>
+    </div>
+
+    <div className="card no-print" style={{ marginBottom:'1.8rem', padding:'1rem 1.3rem' }}>
+      <div style={{ display:'flex', gap:'1rem', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between' }}>
+        <div style={{ display:'flex', gap:'0.5rem', flexWrap:'wrap' }}>
+          {['All', 'Calculators', 'Central', 'MH State'].map(f => <button key={f} onClick={() => setFilter(f)} className={`filter-pill ${filter === f ? 'active' : ''}`}>{f}</button>)}
         </div>
-      );
-    }
-
-    // ════════ MAIN COMPONENT ════════
-    function MIISPCalculator() {
-      const [activityType, setActivityType] = useState('Manufacturing');
-      const [unitType, setUnitType] = useState('Small');
-      const [sector, setSector] = useState('General Manufacturing');
-      const [ownerCategory, setOwnerCategory] = useState('General');
-      const [projectType, setProjectType] = useState('New');
-      const [district, setDistrict] = useState('Nagpur');
-      const [taluka, setTaluka] = useState('Hingna');
-      const [landValue, setLandValue] = useState('');
-      const [buildingValue, setBuildingValue] = useState('');
-      const [plantMachinery, setPlantMachinery] = useState('');
-      const [annualTurnover, setAnnualTurnover] = useState('');
-      const [annualSGST, setAnnualSGST] = useState('');
-      const [termLoan, setTermLoan] = useState('');
-      const [electricityUnits, setElectricityUnits] = useState('');
-      const [employees, setEmployees] = useState('');
-      const [avgBasicSalary, setAvgBasicSalary] = useState('');
-      const [annualRental, setAnnualRental] = useState('');
-      const [showResults, setShowResults] = useState(false);
-      const [showUpdateLog, setShowUpdateLog] = useState(false);
-
-      const talukaList = VIDARBHA[district] || [];
-      const selectedTaluka = talukaList.find(t => t.name === taluka);
-      const zoneKey = selectedTaluka?.zone || 'VidarbhaStandard';
-      const zone = POLICY_DATA.zones[zoneKey];
-      const isService = activityType === 'Service';
-      const subSectorOptions = isService 
-        ? ['IT / Software', 'BPO / KPO', 'Healthcare', 'Logistics', 'Data Center', 'Education', 'Other Service']
-        : ['General Manufacturing', 'Food Processing', 'Green Energy', 'Industry 4.0', 'EV', 'Aerospace'];
-
-      useEffect(() => {
-        if (isService && !subSectorOptions.includes(sector)) setSector('IT / Software');
-        else if (!isService && !subSectorOptions.includes(sector)) setSector('General Manufacturing');
-      }, [activityType]); // eslint-disable-line
-
-      const result = useMemo(() => {
-        if (!showResults) return null;
-        return calculate({
-          zoneKey, activityType, unitType, sector, ownerCategory,
-          landValue: parseFloat(landValue) * 100000 || 0,
-          buildingValue: parseFloat(buildingValue) * 100000 || 0,
-          plantMachinery: parseFloat(plantMachinery) * 100000 || 0,
-          annualTurnover: parseFloat(annualTurnover) * 100000 || 0,
-          annualSGST: parseFloat(annualSGST) * 100000 || 0,
-          termLoan: parseFloat(termLoan) * 100000 || 0,
-          electricityUnits: parseFloat(electricityUnits) || 0,
-          employees: parseFloat(employees) || 0,
-          avgBasicSalary: parseFloat(avgBasicSalary) || 0,
-          annualRental: parseFloat(annualRental) * 100000 || 0,
-        });
-      }, [showResults, zoneKey, activityType, unitType, sector, ownerCategory, landValue, buildingValue, plantMachinery, annualTurnover, annualSGST, termLoan, electricityUnits, employees, avgBasicSalary, annualRental]);
-
-      const zoneComparison = useMemo(() => {
-        if (!result || zoneKey === 'VidarbhaNID') return null;
-        const altResult = calculate({
-          zoneKey: 'VidarbhaNID', activityType, unitType, sector, ownerCategory,
-          landValue: parseFloat(landValue) * 100000 || 0, buildingValue: parseFloat(buildingValue) * 100000 || 0, plantMachinery: parseFloat(plantMachinery) * 100000 || 0,
-          annualTurnover: parseFloat(annualTurnover) * 100000 || 0, annualSGST: parseFloat(annualSGST) * 100000 || 0,
-          termLoan: parseFloat(termLoan) * 100000 || 0, electricityUnits: parseFloat(electricityUnits) || 0,
-          employees: parseFloat(employees) || 0, avgBasicSalary: parseFloat(avgBasicSalary) || 0, annualRental: parseFloat(annualRental) * 100000 || 0,
-        });
-        return [{ zoneKey: 'VidarbhaNID', result: altResult }];
-      }, [result, zoneKey, activityType, unitType, sector, ownerCategory, landValue, buildingValue, plantMachinery, annualTurnover, annualSGST, termLoan, electricityUnits, employees, avgBasicSalary, annualRental]);
-
-      const handleCalculate = () => {
-        setShowResults(true);
-        setTimeout(() => { const el = document.getElementById('results'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 100);
-      };
-      const handlePrint = () => window.print();
-
-      // WhatsApp URLs — auto-fills the chat with calc context for instant lead capture
-      const WHATSAPP_PHONE = '919175233969';
-      const whatsappResultsUrl = useMemo(() => {
-        if (!result) return '#';
-        const lines = [
-          'नमस्कार CA Shrikant सर 🙏',
-          '',
-          'मैंने MIISP 2025 Calculator से अपनी subsidy potential check की:',
-          '',
-          '📊 *Results*',
-          `• Total Subsidy: ${fmtCr(result.totalLifetimeSubsidy)}`,
-          `• Suggested CA Fee: ${fmtCr(result.suggestedCAFee)}`,
-          `• Eligibility Period: ${result.eligibilityYears} years`,
-          '',
-          '🏭 *Project Details*',
-          `• Activity: ${activityType}`,
-          `• Sub-sector: ${sector}`,
-          `• Unit Size: ${unitType}`,
-          `• Owner: ${ownerCategory}`,
-          `• Location: ${district} · ${taluka} (${result.zone.short})`,
-          `• FCI: ${fmtCr(result.fci)}`,
-          '',
-          'मुझे consultation चाहिए। कृपया reply करें।',
-          '',
-          '— Vande Anudaan Calculator',
-        ];
-        return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(lines.join('\n'))}`;
-      }, [result, activityType, sector, unitType, ownerCategory, district, taluka]);
-
-      const whatsappGeneralUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent('नमस्कार CA Shrikant सर 🙏\n\nमुझे MIISP 2025 / Maharashtra subsidies के बारे में consultation चाहिए।\n\n— via Vande Anudaan')}`;
-
-      return (
-        <div style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", background: '#FBF7F0', color: '#1F2937', minHeight: '100vh' }}>
-          <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-            .serif { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; }
-            .mono { font-family: 'JetBrains Mono', monospace; }
-            .input-field { width: 100%; padding: 0.7rem 0.9rem; background: white; border: 1px solid #E5DCC9; border-radius: 6px; font-size: 0.95rem; font-family: inherit; color: #1F2937; transition: all 0.18s; }
-            .input-field:focus { outline: none; border-color: #7C9885; box-shadow: 0 0 0 3px rgba(124, 152, 133, 0.15); }
-            .label-text { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #6B5D4F; margin-bottom: 0.4rem; display: block; }
-            .card { background: white; border-radius: 12px; padding: 1.6rem; border: 1px solid #EDE3CF; box-shadow: 0 1px 3px rgba(124, 95, 60, 0.04); }
-            .deco-line { height: 1px; background: linear-gradient(to right, transparent, #C9A96B, transparent); margin: 1.5rem 0; }
-            .btn-primary { background: #2D5F5D; color: #FBF7F0; padding: 0.9rem 2.2rem; font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-            .btn-primary:hover { background: #1F4543; transform: translateY(-1px); }
-            .btn-whatsapp { background: #25D366; color: white; padding: 0.9rem 1.8rem; font-size: 1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 0.55rem; box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25); }
-            .btn-whatsapp:hover { background: #128C7E; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4); }
-            .whatsapp-float { position: fixed; bottom: 22px; right: 22px; width: 58px; height: 58px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45); cursor: pointer; z-index: 9000; text-decoration: none; transition: all 0.25s; animation: wa-pulse 2.4s infinite; }
-            .whatsapp-float:hover { transform: scale(1.08); box-shadow: 0 6px 22px rgba(37, 211, 102, 0.6); animation: none; }
-            @keyframes wa-pulse { 0% { box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45), 0 0 0 14px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0); } }
-            .btn-toggle { padding: 0.7rem 1.4rem; font-size: 0.92rem; font-weight: 600; border: 1px solid #E5DCC9; background: white; color: #6B5D4F; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-            .btn-toggle.active { background: #2D5F5D; color: white; border-color: #2D5F5D; }
-            .zone-badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; }
-            @media print { .no-print { display: none !important; } .whatsapp-float { display: none !important; } .card { box-shadow: none !important; border: 1px solid #ddd !important; page-break-inside: avoid; } body { background: white !important; } }
-          `}</style>
-
-          <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
-            <header style={{ textAlign: 'center', marginBottom: '2.5rem', paddingBottom: '2rem', borderBottom: '1px solid #E5DCC9' }}>
-              <div style={{ fontSize: '0.72rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#7C9885', marginBottom: '0.7rem', fontWeight: 600 }}>CA Shrikant Dubey & Co. · Nagpur · Vande Anudaan</div>
-              <h1 className="serif" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', fontWeight: 600, lineHeight: 1.05, marginBottom: '0.7rem', letterSpacing: '-0.02em', color: '#1A2E35' }}>MIISP 2025</h1>
-              <div className="serif" style={{ fontSize: '1.15rem', fontStyle: 'italic', color: '#6B5D4F', marginBottom: '0.4rem' }}>Eligibility & Quantum Calculator</div>
-              <div style={{ fontSize: '0.84rem', color: '#8B7E6B', fontWeight: 500, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
-                <span><strong>{TOOL_VERSION}</strong> · Manufacturing + Service</span><span>·</span>
-                <span>Vidarbha · 121+ Talukas</span><span>·</span>
-                <span>Last Verified: <strong>{LAST_VERIFIED}</strong></span>
-              </div>
-            </header>
-
-            <div className="card no-print" style={{ marginBottom: '2rem', background: 'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', border: '1px solid #E5C687' }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.9rem' }}>
-                <Sparkles size={20} style={{ color: '#C97064', marginTop: '2px', flexShrink: 0 }} />
-                <div style={{ flex: 1 }}>
-                  <div className="serif" style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.3rem', color: '#1A2E35' }}>{POLICY_VERSION} — Maharashtra Industries, Investment & Services Policy</div>
-                  <div style={{ fontSize: '0.85rem', color: '#5C5040', lineHeight: 1.55, marginBottom: '0.5rem' }}>GR No. <strong>{POLICY_GR_NUMBER}</strong> dated <strong>{POLICY_DATE}</strong> · Valid till 30 Dec 2030 · Portal: invest.maharashtra.gov.in</div>
-                  <div style={{ fontSize: '0.78rem', color: '#7C9885', fontWeight: 600, padding: '0.45rem 0.7rem', background: 'rgba(124, 152, 133, 0.1)', borderRadius: '4px', borderLeft: '3px solid #7C9885', marginBottom: '0.4rem' }}>⚡ Vidarbha is a SPECIAL REGIONAL CATEGORY: MSMEs get blanket 80% IPS / 10 yrs (LSI 90% / 9 yrs). NID/Naxal/Aspirational pockets: 100% IPS / 10 yrs.</div>
-                  <div style={{ fontSize: '0.75rem', color: '#8B7E6B', fontStyle: 'italic' }}>Verification source: {VERIFICATION_SOURCE}<button onClick={() => setShowUpdateLog(!showUpdateLog)} style={{ marginLeft: '0.5rem', background: 'transparent', border: 'none', color: '#7C9885', cursor: 'pointer', textDecoration: 'underline', fontSize: '0.75rem', fontFamily: 'inherit' }}>{showUpdateLog ? 'Hide' : 'View'} update log</button></div>
-                  {showUpdateLog && (
-                    <div style={{ marginTop: '0.8rem', padding: '0.8rem 1rem', background: 'white', borderRadius: '6px', border: '1px solid #EDE3CF' }}>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#1A2E35', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><GitBranch size={14} /> Version History</div>
-                      {UPDATE_LOG.map((entry, i) => (
-                        <div key={i} style={{ marginBottom: '0.6rem', paddingBottom: '0.5rem', borderBottom: i < UPDATE_LOG.length - 1 ? '1px dashed #EDE3CF' : 'none' }}>
-                          <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#2D5F5D' }}>{entry.version} <span style={{ color: '#8B7E6B', fontWeight: 400 }}>· {entry.date}</span></div>
-                          <div style={{ fontSize: '0.74rem', color: '#5C5040', marginTop: '0.2rem', lineHeight: 1.5 }}>{entry.changes}</div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="card no-print" style={{ marginBottom: '2rem' }}>
-              <div style={{ marginBottom: '1.8rem', textAlign: 'center' }}>
-                <label className="label-text" style={{ marginBottom: '0.8rem' }}>Activity Type</label>
-                <div style={{ display: 'inline-flex', gap: '0', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E5DCC9' }}>
-                  <button className={`btn-toggle ${activityType === 'Manufacturing' ? 'active' : ''}`} onClick={() => setActivityType('Manufacturing')} style={{ borderRight: '1px solid #E5DCC9' }}>🏭 Manufacturing</button>
-                  <button className={`btn-toggle ${activityType === 'Service' ? 'active' : ''}`} onClick={() => setActivityType('Service')}>💼 Service</button>
-                </div>
-              </div>
-
-              <div className="deco-line"></div>
-
-              <div style={{ marginBottom: '1.8rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem' }}><Briefcase size={18} style={{ color: '#7C9885' }} /><h3 className="serif" style={{ fontSize: '1.25rem', fontWeight: 600, color: '#1A2E35' }}>Unit Profile</h3></div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.1rem' }}>
-                  <div><label className="label-text">Unit Size</label><select className="input-field" value={unitType} onChange={e => setUnitType(e.target.value)}><option>Micro</option><option>Small</option><option>Medium</option><option>Large Scale (LSI)</option><option>Special LSI</option><option>Mega</option><option>Ultra-Mega</option></select></div>
-                  <div><label className="label-text">{isService ? 'Service Sub-Sector' : 'Manufacturing Sub-Sector'}</label><select className="input-field" value={sector} onChange={e => setSector(e.target.value)}>{subSectorOptions.map(opt => <option key={opt}>{opt}</option>)}</select></div>
-                  <div><label className="label-text">Owner Category</label><select className="input-field" value={ownerCategory} onChange={e => setOwnerCategory(e.target.value)}><option>General</option><option>Women</option><option>SC</option><option>ST</option><option>PwD</option></select></div>
-                  <div><label className="label-text">Project Type</label><select className="input-field" value={projectType} onChange={e => setProjectType(e.target.value)}><option>New</option><option>Expansion</option><option>Diversification</option></select></div>
-                </div>
-              </div>
-
-              <div className="deco-line"></div>
-
-              <div style={{ marginBottom: '1.8rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem' }}><MapPin size={18} style={{ color: '#C97064' }} /><h3 className="serif" style={{ fontSize: '1.25rem', fontWeight: 600, color: '#1A2E35' }}>Location</h3></div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.1rem', alignItems: 'end' }}>
-                  <div><label className="label-text">District</label><select className="input-field" value={district} onChange={e => { setDistrict(e.target.value); setTaluka(VIDARBHA[e.target.value][0].name); }}>{Object.keys(VIDARBHA).map(d => <option key={d}>{d}</option>)}</select></div>
-                  <div><label className="label-text">Taluka</label><select className="input-field" value={taluka} onChange={e => setTaluka(e.target.value)}>{talukaList.map(t => <option key={t.name}>{t.name}</option>)}</select></div>
-                  <div><label className="label-text">Auto-Classified Zone</label><div style={{ padding: '0.7rem 0.9rem', background: '#F5EFE0', border: '1px solid ' + zone.accent, borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}><span className="zone-badge" style={{ background: zone.accent, color: 'white' }}>{zone.short}</span><span style={{ fontSize: '0.82rem', color: '#5C5040' }}>{zone.label}</span></div></div>
-                </div>
-              </div>
-
-              <div className="deco-line"></div>
-
-              <div style={{ marginBottom: '1.8rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem' }}><Building2 size={18} style={{ color: '#B8956A' }} /><h3 className="serif" style={{ fontSize: '1.25rem', fontWeight: 600, color: '#1A2E35' }}>Fixed Capital Investment <span style={{ fontSize: '0.85rem', fontWeight: 400, color: '#8B7E6B' }}>(in ₹ Lakhs)</span></h3></div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.1rem' }}>
-                  <div><label className="label-text">Land Value (₹ L)</label><input className="input-field mono" type="number" value={landValue} onChange={e => setLandValue(e.target.value)} placeholder="e.g. 50" /></div>
-                  <div><label className="label-text">Building Value (₹ L)</label><input className="input-field mono" type="number" value={buildingValue} onChange={e => setBuildingValue(e.target.value)} placeholder="e.g. 150" /></div>
-                  <div><label className="label-text">{isService ? 'Equipment / IT (₹ L)' : 'Plant & Machinery (₹ L)'}</label><input className="input-field mono" type="number" value={plantMachinery} onChange={e => setPlantMachinery(e.target.value)} placeholder="e.g. 300" /></div>
-                  <div><label className="label-text">Total FCI (auto)</label><div className="mono" style={{ padding: '0.7rem 0.9rem', background: '#F5EFE0', borderRadius: '6px', fontSize: '0.95rem', color: '#2D5F5D', fontWeight: 600 }}>{fmtCr(((parseFloat(landValue) || 0) + (parseFloat(buildingValue) || 0) + (parseFloat(plantMachinery) || 0)) * 100000)}</div></div>
-                </div>
-              </div>
-
-              <div className="deco-line"></div>
-
-              <div style={{ marginBottom: '1.8rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem' }}><Zap size={18} style={{ color: '#4A7C7E' }} /><h3 className="serif" style={{ fontSize: '1.25rem', fontWeight: 600, color: '#1A2E35' }}>Operations <span style={{ fontSize: '0.85rem', fontWeight: 400, color: '#8B7E6B' }}>(annual estimates)</span></h3></div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.1rem' }}>
-                  <div><label className="label-text">Annual Turnover (₹ L)</label><input className="input-field mono" type="number" value={annualTurnover} onChange={e => { setAnnualTurnover(e.target.value); if (!annualSGST) setAnnualSGST((parseFloat(e.target.value) * POLICY_DATA.assumptions.annualSGSTAsTurnoverRatio).toFixed(2)); }} placeholder="e.g. 800" /></div>
-                  <div><label className="label-text">Annual SGST (₹ L)</label><input className="input-field mono" type="number" value={annualSGST} onChange={e => setAnnualSGST(e.target.value)} placeholder="e.g. 72" /></div>
-                  <div><label className="label-text">Term Loan (₹ L)</label><input className="input-field mono" type="number" value={termLoan} onChange={e => setTermLoan(e.target.value)} placeholder="e.g. 300" /></div>
-                  <div><label className="label-text">Annual Electricity (units)</label><input className="input-field mono" type="number" value={electricityUnits} onChange={e => setElectricityUnits(e.target.value)} placeholder="e.g. 200000" /></div>
-                  <div><label className="label-text">No. of Employees</label><input className="input-field mono" type="number" value={employees} onChange={e => setEmployees(e.target.value)} placeholder="e.g. 25" /></div>
-                  <div><label className="label-text">Avg Basic Salary (₹/month)</label><input className="input-field mono" type="number" value={avgBasicSalary} onChange={e => setAvgBasicSalary(e.target.value)} placeholder={isService ? "≥ ₹50,000 for service" : "e.g. 18000"} /></div>
-                  {isService && (<div><label className="label-text">Annual Rental Cost (₹ L)</label><input className="input-field mono" type="number" value={annualRental} onChange={e => setAnnualRental(e.target.value)} placeholder="e.g. 36" /></div>)}
-                </div>
-                {isService && (<div style={{ marginTop: '0.9rem', padding: '0.65rem 0.85rem', background: '#FFF8E6', borderRadius: '6px', fontSize: '0.78rem', color: '#5C5040', borderLeft: '3px solid #E5C687' }}>💼 <strong>Service-sector note:</strong> EPF reimbursement requires avg salary ≥ ₹50,000/month (Group D/below). Rental subsidy: 50% × annual rent × 5 yrs (capped at ₹1 Cr for Vidarbha, first 20 units/district basis).</div>)}
-              </div>
-
-              <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                <button className="btn-primary" onClick={handleCalculate}>Calculate Subsidy Potential<ArrowRight size={16} style={{ marginLeft: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /></button>
-              </div>
-            </div>
-
-            {result && (
-              <div id="results">
-                <div className="card" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, #1A2E35 0%, #2D5F5D 100%)', color: '#FBF7F0', border: 'none', textAlign: 'center', padding: '2.5rem 1.5rem' }}>
-                  <div style={{ fontSize: '0.72rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#A8C5B5', marginBottom: '0.8rem' }}>Total Lifetime Subsidy Potential</div>
-                  <div className="serif" style={{ fontSize: 'clamp(2.8rem, 7vw, 4.5rem)', fontWeight: 600, lineHeight: 1, letterSpacing: '-0.02em', marginBottom: '0.6rem' }}>{fmtCr(result.totalLifetimeSubsidy)}</div>
-                  <div style={{ fontSize: '0.95rem', color: '#A8C5B5', fontStyle: 'italic' }} className="serif">{result.isService ? 'Service' : 'Manufacturing'} · {result.eligibilityYears} years · Zone {result.zone.short} · FCI {fmtCr(result.fci)}</div>
-                  <div style={{ marginTop: '1.3rem', paddingTop: '1.3rem', borderTop: '1px solid rgba(255,255,255,0.15)', display: 'inline-block' }}>
-                    <div style={{ fontSize: '0.72rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#A8C5B5', marginBottom: '0.4rem' }}>Suggested CA Fee (5%)</div>
-                    <div className="serif mono" style={{ fontSize: '1.5rem', fontWeight: 600, color: '#E5C687' }}>{fmtCr(result.suggestedCAFee)}</div>
-                  </div>
-                </div>
-
-                <div className="card" style={{ marginBottom: '1.5rem' }}>
-                  <h3 className="serif" style={{ fontSize: '1.4rem', fontWeight: 600, marginBottom: '1.3rem', color: '#1A2E35' }}>Incentive Breakdown</h3>
-                  <div style={{ display: 'grid', gap: '0.9rem' }}>
-                    <BreakdownRow label="Industrial Promotion Subsidy (IPS)" detail={`${(result.effectiveIPSPercent * 100).toFixed(0)}% of FCI (${result.isMSME ? 'MSME' : 'LSI'}${result.isThrustSector ? ' + Thrust' : ''}${result.isSpecialCat ? ' + Special Cat' : ''}), via SGST refund over ${result.eligibilityYears} yrs`} amount={result.lifetimeIPSRealizable} primary />
-                    <BreakdownRow label="Stamp Duty Exemption" detail={`${(result.zone.stampDutyExempt * 100).toFixed(0)}% on first deed (Land + Building)`} amount={result.stampDutySaving} />
-                    <BreakdownRow label="Electricity Duty Exemption" detail={`Full exemption × ${result.edYears} yrs${result.isService ? ' (service: 5-yr cap)' : ' (mfg: full tenure)'}`} amount={result.electricityDutySaving} />
-                    <BreakdownRow label="Interest Subsidy" detail={`${(result.zone.interestSubsidyPercent * 100).toFixed(0)}% on term loan × 5 yrs (cap ₹1 Cr/yr)`} amount={result.interestSubsidy} />
-                    {!result.isService && <BreakdownRow label="Power Tariff Subsidy (Mfg only)" detail={`₹${result.zone.powerTariffRsPerUnit}/unit × 3 yrs (cap ₹${result.isMSME ? '1' : '1.5'} Cr)`} amount={result.powerTariffSubsidy} />}
-                    <BreakdownRow label="EPF Reimbursement" detail={result.isService ? `Service: 50% × Employer PF × 5 yrs (only if avg salary ≥ ₹50K; cap ₹10 Cr, first 500 units)` : `Mfg: 50% × Employer PF × 5 yrs (cap ₹${result.isMSME ? '5' : '10'} Cr)`} amount={result.epfReimbursement} />
-                    {result.isService && <BreakdownRow label="Rental Lease Subsidy (Service only)" detail={`50% × Annual Rental × 5 yrs (cap ₹1 Cr for Vidarbha; first 20 units/district basis)`} amount={result.rentalLeaseSubsidy} />}
-                    {!result.isService && <BreakdownRow label="Capital Subsidy (Mfg only)" detail={`20% of FCI (cap ₹25 Cr) — ${result.isThrustSector ? 'thrust sector' : (result.isMSME ? 'MSME eligible' : 'LSI: check thrust status')}`} amount={result.capitalSubsidy} />}
-                  </div>
-                  {result.capApplied && (<div style={{ marginTop: '1rem', padding: '0.9rem 1.1rem', background: '#FFF8E6', border: '1px solid #E5C687', borderRadius: '6px', fontSize: '0.85rem', color: '#5C5040' }}><strong>⚠ Overall Cap Applied:</strong> Raw incentives summed to {fmtCr(result.rawTotal)}, but MIISP 2025 caps total benefits at {(result.overallCapPercent * 100).toFixed(0)}% of FCI = {fmtCr(result.overallCap)}. Excess of {fmtCr(result.rawTotal - result.overallCap)} is forfeited.</div>)}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.4rem', paddingTop: '1.2rem', borderTop: '2px solid #2D5F5D' }}>
-                    <div className="serif" style={{ fontSize: '1.15rem', fontWeight: 600, color: '#1A2E35' }}>Total Realizable</div>
-                    <div className="serif mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: '#2D5F5D' }}>{fmtCr(result.totalLifetimeSubsidy)}</div>
-                  </div>
-                </div>
-
-                {zoneComparison && zoneComparison.length > 0 && (
-                  <div className="card" style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}><Award size={18} style={{ color: '#C97064' }} /><h3 className="serif" style={{ fontSize: '1.4rem', fontWeight: 600, color: '#1A2E35' }}>The "NID Belt" Opportunity</h3></div>
-                    <div style={{ fontSize: '0.88rem', color: '#6B5D4F', marginBottom: '1.3rem', fontStyle: 'italic' }} className="serif">If this same project were set up in a Naxal-affected / Aspirational District taluka (Gadchiroli, Washim, Dharni, etc.):</div>
-                    <div style={{ display: 'grid', gap: '0.7rem' }}>
-                      {zoneComparison.map(c => {
-                        const diff = c.result.totalLifetimeSubsidy - result.totalLifetimeSubsidy;
-                        const cfg = POLICY_DATA.zones[c.zoneKey];
-                        return (
-                          <div key={c.zoneKey} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.9rem 1.1rem', background: '#FBF7F0', borderRadius: '8px', border: '1px solid #EDE3CF' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}><span className="zone-badge" style={{ background: cfg.accent, color: 'white', minWidth: '70px', justifyContent: 'center' }}>{cfg.short}</span><div><div style={{ fontWeight: 600, fontSize: '0.92rem', color: '#1A2E35' }}>{cfg.label}</div><div style={{ fontSize: '0.78rem', color: '#8B7E6B' }}>{cfg.description}</div></div></div>
-                            <div style={{ textAlign: 'right' }}><div className="mono" style={{ fontSize: '1.05rem', fontWeight: 600, color: '#2D5F5D' }}>{fmtCr(c.result.totalLifetimeSubsidy)}</div><div className="mono" style={{ fontSize: '0.78rem', color: diff > 0 ? '#7C9885' : '#8B7E6B', fontWeight: 600 }}>{diff > 0 ? '+' : ''}{fmtCr(diff)} {diff > 0 ? 'extra' : 'same'}</div></div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div style={{ marginTop: '1rem', fontSize: '0.78rem', color: '#8B7E6B', fontStyle: 'italic' }}>Note: Both zones may yield the same total when the 100% FCI cap binds. NID's true edge: faster IPS realization timeline and headroom for low-SGST projects.</div>
-                  </div>
-                )}
-
-                <div className="card no-print" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign: 'center', padding: '1.8rem' }}>
-                  <div className="serif" style={{ fontSize: '1.15rem', fontWeight: 600, marginBottom: '0.5rem', color: '#1A2E35' }}>Ready to claim this subsidy?</div>
-                  <div style={{ fontSize: '0.88rem', color: '#5C5040', marginBottom: '1.2rem' }}>EC must be filed on invest.maharashtra.gov.in <strong>before commencement of commercial production</strong>. Talk to CA Shrikant for end-to-end handling.</div>
-                  <div style={{ display: 'flex', gap: '0.7rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <a href={whatsappResultsUrl} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style={{ flexShrink: 0 }}>
-                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                      </svg>
-                      Discuss with CA Shrikant
-                    </a>
-                    <button className="btn-primary" onClick={handlePrint}><Printer size={16} style={{ marginRight: '0.4rem', display: 'inline', verticalAlign: 'middle' }} />Print Report</button>
-                  </div>
-                  <div style={{ fontSize: '0.74rem', color: '#8B7E6B', marginTop: '0.9rem', fontStyle: 'italic' }}>WhatsApp will open with your calculation pre-filled — just tap Send.</div>
-                </div>
-
-                <div className="card" style={{ background: '#FFF8E6', border: '1px solid #E5C687' }}>
-                  <div style={{ display: 'flex', gap: '0.7rem' }}>
-                    <AlertCircle size={18} style={{ color: '#C97064', flexShrink: 0, marginTop: '2px' }} />
-                    <div style={{ fontSize: '0.82rem', color: '#5C5040', lineHeight: 1.6 }}><strong>Disclaimers:</strong> Quantum percentages verified from MIISP 2025 GR No. {POLICY_GR_NUMBER} dated {POLICY_DATE} (via Grant Thornton Bharat Jan 2026 analysis). NID-taluka classification within Vidarbha is best-estimate pending official Annexure-I. Stamp duty rate assumed {(POLICY_DATA.assumptions.stampDutyRate * 100).toFixed(0)}%, electricity duty {(POLICY_DATA.assumptions.electricityDutyRate * 100).toFixed(0)}%, power tariff ₹{POLICY_DATA.assumptions.powerTariffPerUnit}/unit, employer PF rate {(POLICY_DATA.assumptions.employerPFRate * 100).toFixed(0)}%. Service-sector calculations assume rental subsidy first-20-per-district eligibility holds. <strong>Internal estimation tool only — not a representation to any government department.</strong> Final claim quantum determined by Directorate of Industries based on actual MIISP 2025 provisions and compliance status.</div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <footer style={{ textAlign: 'center', marginTop: '3.5rem', paddingTop: '2rem', borderTop: '1px solid #E5DCC9', color: '#8B7E6B', fontSize: '0.82rem' }}>
-              <div className="serif" style={{ fontSize: '1rem', fontWeight: 600, color: '#1A2E35', marginBottom: '0.4rem' }}>CA Shrikant Dubey & Co.</div>
-              <div>Chartered Accountants · Nagpur · 30+ years of practice</div>
-              <div style={{ marginTop: '0.3rem' }}>+91 9403 586 900 · Vande Anudaan Initiative</div>
-              <div style={{ marginTop: '0.6rem', fontSize: '0.72rem', color: '#A89880' }}>{TOOL_VERSION} · {POLICY_VERSION} · Last verified {LAST_VERIFIED}</div>
-            </footer>
-          </div>
-
-          {/* Floating WhatsApp button — always visible */}
-          <a href={whatsappGeneralUrl} target="_blank" rel="noopener noreferrer" className="whatsapp-float" aria-label="Chat with CA Shrikant on WhatsApp" title="Discuss with CA Shrikant">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-            </svg>
-          </a>
+        <div style={{ position:'relative', flex:'1 1 220px', minWidth:'180px', maxWidth:'320px' }}>
+          <Search size={16} style={{ position:'absolute', left:'12px', top:'50%', transform:'translateY(-50%)', color:'#8B7E6B' }} />
+          <input type="text" placeholder="Search scheme name / category..." value={search} onChange={e => setSearch(e.target.value)} className="search-input" />
         </div>
-      );
+      </div>
+      <div style={{ marginTop:'0.6rem', fontSize:'0.78rem', color:'#8B7E6B' }}>{filtered.length} of {SCHEMES.length} schemes shown</div>
+    </div>
+
+    <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:'1.1rem', marginBottom:'2.5rem' }}>
+      {filtered.map(s => <SchemeCard key={s.id} scheme={s} onOpen={onOpen} />)}
+    </div>
+
+    <div className="card no-print" style={{ background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', marginBottom:'2rem' }}>
+      <div style={{ display:'flex', alignItems:'flex-start', gap:'0.9rem' }}>
+        <Sparkles size={20} style={{ color:'#C97064', marginTop:'2px', flexShrink:0 }} />
+        <div>
+          <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>एका जागी सर्व subsidies — Why Vande Anudaan?</div>
+          <div style={{ fontSize:'0.9rem', color:'#5C5040', lineHeight:1.6 }}>केंद्र (Central) + महाराष्ट्र राज्य (MH State) मधील <strong>{SCHEMES.length} subsidy schemes</strong> एका portal वर. प्रत्येक scheme साठी eligibility, benefits, calculator (जिथे लागू) आणि <strong>CA Shrikant Dubey ची direct consultation</strong>. 30+ years of CA practice, Vidarbha specialisation, BJP CA Cell Nagpur Mahamantri.</div>
+          <div style={{ marginTop:'0.9rem', fontSize:'0.82rem', color:'#5C5040' }}><strong>Free for all:</strong> कोणताही business owner — कुठल्याही scheme साठी eligibility चेक करा. Free consultation साठी थेट WhatsApp करा.</div>
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>;
+}
+
+// ════ INFO CARD VIEW ════
+function InfoCardView({ scheme, onBack }) {
+  const waUrl = buildWa(`नमस्कार CA Shrikant सर 🙏\n\nमुझे *${scheme.name}* (${scheme.fullName}) के बारे में consultation चाहिए।\n\nScheme: ${scheme.type} · ${scheme.category}\n\nMere business के लिए eligibility check करनी है। कृपया reply करें।\n\n— via Vande Anudaan`);
+  return <div style={{ maxWidth:'900px', margin:'0 auto', padding:'2.5rem 1.5rem' }}>
+    <BackToPortal onBack={onBack} />
+    <SchemeHeader scheme={scheme} />
+    <div className="card" style={{ marginBottom:'1.5rem', borderTop:`4px solid ${scheme.color}` }}>
+      <h3 className="serif" style={{ fontSize:'1.25rem', fontWeight:600, marginBottom:'1rem', color:'#1A2E35' }}>Eligibility · पात्रता</h3>
+      <ul style={{ paddingLeft:'1.2rem', margin:0 }}>
+        {scheme.eligibility.map((e, i) => <li key={i} style={{ fontSize:'0.92rem', color:'#3A4A52', lineHeight:1.7, marginBottom:'0.3rem' }}>{e}</li>)}
+      </ul>
+    </div>
+    <div className="card" style={{ marginBottom:'1.5rem' }}>
+      <h3 className="serif" style={{ fontSize:'1.25rem', fontWeight:600, marginBottom:'1rem', color:'#1A2E35' }}>Benefits · फायदे</h3>
+      <ul style={{ paddingLeft:'1.2rem', margin:0 }}>
+        {scheme.benefits.map((b, i) => <li key={i} style={{ fontSize:'0.92rem', color:'#3A4A52', lineHeight:1.7, marginBottom:'0.4rem' }}>{b}</li>)}
+      </ul>
+    </div>
+    <div className="card" style={{ marginBottom:'1.5rem', background:'#F5EFE0' }}>
+      <div style={{ display:'flex', gap:'1.5rem', flexWrap:'wrap' }}>
+        <div style={{ flex:'1 1 200px' }}>
+          <div style={{ fontSize:'0.72rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#8B7E6B', fontWeight:600, marginBottom:'0.3rem' }}>Reference</div>
+          <div style={{ fontSize:'0.92rem', color:'#1A2E35', fontWeight:500 }}>{scheme.grRef}</div>
+        </div>
+        <div style={{ flex:'1 1 200px' }}>
+          <div style={{ fontSize:'0.72rem', letterSpacing:'0.1em', textTransform:'uppercase', color:'#8B7E6B', fontWeight:600, marginBottom:'0.3rem' }}>Implementing Authority</div>
+          <div style={{ fontSize:'0.92rem', color:'#1A2E35', fontWeight:500 }}>{scheme.authority}</div>
+        </div>
+      </div>
+    </div>
+    <div className="card no-print" style={{ background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'2rem 1.5rem' }}>
+      <div className="serif" style={{ fontSize:'1.2rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>Get Expert Help for {scheme.name}</div>
+      <div style={{ fontSize:'0.9rem', color:'#5C5040', marginBottom:'1.3rem', maxWidth:'500px', margin:'0 auto 1.3rem' }}>हमारे CA team के साथ <strong>full eligibility audit + DPR + filing + claim recovery</strong> service। End-to-end handling।</div>
+      <WaButton url={waUrl} label={`Discuss ${scheme.name} on WhatsApp`} />
+    </div>
+    <Footer />
+  </div>;
+}
+
+// ════ MIISP CALCULATOR ════
+function MIISPCalc({ scheme, onBack }) {
+  const [activityType, setActivityType] = useState('Manufacturing');
+  const [unitType, setUnitType] = useState('Small');
+  const [sector, setSector] = useState('General Manufacturing');
+  const [ownerCategory, setOwnerCategory] = useState('General');
+  const [district, setDistrict] = useState('Nagpur');
+  const [taluka, setTaluka] = useState('Hingna');
+  const [landValue, setLandValue] = useState('');
+  const [buildingValue, setBuildingValue] = useState('');
+  const [plantMachinery, setPlantMachinery] = useState('');
+  const [annualTurnover, setAnnualTurnover] = useState('');
+  const [annualSGST, setAnnualSGST] = useState('');
+  const [termLoan, setTermLoan] = useState('');
+  const [electricityUnits, setElectricityUnits] = useState('');
+  const [employees, setEmployees] = useState('');
+  const [avgBasicSalary, setAvgBasicSalary] = useState('');
+  const [annualRental, setAnnualRental] = useState('');
+  const [showResults, setShowResults] = useState(false);
+  const talukaList = VIDARBHA[district] || [];
+  const selectedTaluka = talukaList.find(t => t.name === taluka);
+  const zoneKey = selectedTaluka?.zone || 'VidarbhaStandard';
+  const isService = activityType === 'Service';
+  const subSectorOptions = isService ? ['IT / Software', 'BPO / KPO', 'Healthcare', 'Logistics', 'Data Center', 'Education', 'Other Service'] : ['General Manufacturing', 'Food Processing', 'Green Energy', 'Industry 4.0', 'EV', 'Aerospace'];
+  useEffect(() => { if (isService && !subSectorOptions.includes(sector)) setSector('IT / Software'); else if (!isService && !subSectorOptions.includes(sector)) setSector('General Manufacturing'); }, [activityType]);
+
+  const result = useMemo(() => showResults ? calcMIISP({ zoneKey, activityType, unitType, sector, ownerCategory, landValue:parseFloat(landValue)*100000||0, buildingValue:parseFloat(buildingValue)*100000||0, plantMachinery:parseFloat(plantMachinery)*100000||0, annualSGST:parseFloat(annualSGST)*100000||0, termLoan:parseFloat(termLoan)*100000||0, electricityUnits:parseFloat(electricityUnits)||0, employees:parseFloat(employees)||0, avgBasicSalary:parseFloat(avgBasicSalary)||0, annualRental:parseFloat(annualRental)*100000||0 }) : null, [showResults, zoneKey, activityType, unitType, sector, ownerCategory, landValue, buildingValue, plantMachinery, annualSGST, termLoan, electricityUnits, employees, avgBasicSalary, annualRental]);
+
+  const waUrl = useMemo(() => {
+    if (!result) return '#';
+    const lines = ['नमस्कार CA Shrikant सर 🙏', '', 'मैंने *MIISP 2025 Calculator* से check किया:', '', '📊 *Results*', `• Total Subsidy: ${fmtCr(result.total)}`, `• Suggested CA Fee: ${fmtCr(result.fee)}`, `• Eligibility Period: ${result.eligYears} years`, '', '🏭 *Project Details*', `• Activity: ${activityType}`, `• Sub-sector: ${sector}`, `• Unit Size: ${unitType}`, `• Owner: ${ownerCategory}`, `• Location: ${district} · ${taluka} (${result.zone.short})`, `• FCI: ${fmtCr(result.fci)}`, '', 'मुझे consultation चाहिए।', '', '— Vande Anudaan'];
+    return buildWa(lines.join('\n'));
+  }, [result, activityType, sector, unitType, ownerCategory, district, taluka]);
+
+  return <div style={{ maxWidth:'1100px', margin:'0 auto', padding:'2.5rem 1.5rem' }}>
+    <BackToPortal onBack={onBack} />
+    <SchemeHeader scheme={scheme} />
+
+    <div className="card no-print" style={{ marginBottom:'2rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', border:'1px solid #E5C687' }}>
+      <div style={{ display:'flex', alignItems:'flex-start', gap:'0.9rem' }}>
+        <Sparkles size={20} style={{ color:'#C97064', marginTop:'2px', flexShrink:0 }} />
+        <div>
+          <div className="serif" style={{ fontSize:'1.05rem', fontWeight:600, marginBottom:'0.3rem', color:'#1A2E35' }}>MIISP 2025 — Industrial Capital Subsidy by Zone</div>
+          <div style={{ fontSize:'0.83rem', color:'#5C5040', lineHeight:1.55 }}>Zones: A&B 30-40% · C 50% · D 60% · D+ 70% · <strong>Vidarbha-Marathwada 80%</strong> · <strong>NID/Naxal 100%</strong>. Plus IPS, Stamp Duty, Electricity Duty, EPF, Capital Subsidy. GR 31 Dec 2025 · Valid till 2030.</div>
+        </div>
+      </div>
+    </div>
+
+    <div className="card no-print" style={{ marginBottom:'2rem' }}>
+      <div style={{ marginBottom:'1.5rem', textAlign:'center' }}>
+        <label className="label-text" style={{ marginBottom:'0.7rem' }}>Activity Type</label>
+        <div style={{ display:'inline-flex', borderRadius:'8px', overflow:'hidden', border:'1px solid #E5DCC9' }}>
+          <button className={`btn-toggle ${activityType === 'Manufacturing' ? 'active' : ''}`} onClick={() => setActivityType('Manufacturing')} style={{ borderRight:'1px solid #E5DCC9' }}>🏭 Manufacturing</button>
+          <button className={`btn-toggle ${activityType === 'Service' ? 'active' : ''}`} onClick={() => setActivityType('Service')}>💼 Service</button>
+        </div>
+      </div>
+      <div className="deco-line"></div>
+      <div style={{ display:'flex', alignItems:'center', gap:'0.6rem', marginBottom:'1rem' }}><Briefcase size={18} style={{ color:'#7C9885' }} /><h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, color:'#1A2E35', margin:0 }}>Unit Profile</h3></div>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:'1rem', marginBottom:'1.4rem' }}>
+        <div><label className="label-text">Unit Size</label><select className="input-field" value={unitType} onChange={e => setUnitType(e.target.value)}><option>Micro</option><option>Small</option><option>Medium</option><option>Large Scale (LSI)</option><option>Special LSI</option><option>Mega</option></select></div>
+        <div><label className="label-text">{isService ? 'Service Sub-Sector' : 'Manufacturing Sub-Sector'}</label><select className="input-field" value={sector} onChange={e => setSector(e.target.value)}>{subSectorOptions.map(opt => <option key={opt}>{opt}</option>)}</select></div>
+        <div><label className="label-text">Owner Category</label><select className="input-field" value={ownerCategory} onChange={e => setOwnerCategory(e.target.value)}><option>General</option><option>Women</option><option>SC</option><option>ST</option><option>PwD</option></select></div>
+      </div>
+      <div className="deco-line"></div>
+      <div style={{ display:'flex', alignItems:'center', gap:'0.6rem', marginBottom:'1rem' }}><MapPin size={18} style={{ color:'#C97064' }} /><h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, color:'#1A2E35', margin:0 }}>Location (Vidarbha)</h3></div>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:'1rem', alignItems:'end', marginBottom:'1.4rem' }}>
+        <div><label className="label-text">District</label><select className="input-field" value={district} onChange={e => { setDistrict(e.target.value); setTaluka(VIDARBHA[e.target.value][0].name); }}>{Object.keys(VIDARBHA).map(d => <option key={d}>{d}</option>)}</select></div>
+        <div><label className="label-text">Taluka</label><select className="input-field" value={taluka} onChange={e => setTaluka(e.target.value)}>{talukaList.map(t => <option key={t.name}>{t.name}</option>)}</select></div>
+        <div><label className="label-text">Auto Zone</label><div style={{ padding:'0.7rem 0.9rem', background:'#F5EFE0', borderRadius:'6px', fontSize:'0.82rem', color:'#5C5040' }}>{POLICY_DATA.zones[zoneKey].label}</div></div>
+      </div>
+      <div className="deco-line"></div>
+      <div style={{ display:'flex', alignItems:'center', gap:'0.6rem', marginBottom:'1rem' }}><Building2 size={18} style={{ color:'#B8956A' }} /><h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, color:'#1A2E35', margin:0 }}>Fixed Capital Investment <span style={{ fontSize:'0.8rem', fontWeight:400, color:'#8B7E6B' }}>(₹ Lakhs)</span></h3></div>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'1rem', marginBottom:'1.4rem' }}>
+        <div><label className="label-text">Land Value</label><input className="input-field mono" type="number" value={landValue} onChange={e => setLandValue(e.target.value)} placeholder="50" /></div>
+        <div><label className="label-text">Building Value</label><input className="input-field mono" type="number" value={buildingValue} onChange={e => setBuildingValue(e.target.value)} placeholder="150" /></div>
+        <div><label className="label-text">{isService ? 'Equipment / IT' : 'Plant & Machinery'}</label><input className="input-field mono" type="number" value={plantMachinery} onChange={e => setPlantMachinery(e.target.value)} placeholder="300" /></div>
+        <div><label className="label-text">Total FCI</label><div className="mono" style={{ padding:'0.7rem 0.9rem', background:'#F5EFE0', borderRadius:'6px', fontSize:'0.9rem', color:'#2D5F5D', fontWeight:600 }}>{fmtCr(((parseFloat(landValue) || 0) + (parseFloat(buildingValue) || 0) + (parseFloat(plantMachinery) || 0)) * 100000)}</div></div>
+      </div>
+      <div className="deco-line"></div>
+      <div style={{ display:'flex', alignItems:'center', gap:'0.6rem', marginBottom:'1rem' }}><Zap size={18} style={{ color:'#4A7C7E' }} /><h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, color:'#1A2E35', margin:0 }}>Operations <span style={{ fontSize:'0.8rem', fontWeight:400, color:'#8B7E6B' }}>(annual)</span></h3></div>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'1rem', marginBottom:'1.4rem' }}>
+        <div><label className="label-text">Turnover (₹ L)</label><input className="input-field mono" type="number" value={annualTurnover} onChange={e => { setAnnualTurnover(e.target.value); if (!annualSGST) setAnnualSGST((parseFloat(e.target.value) * 0.09).toFixed(2)); }} placeholder="800" /></div>
+        <div><label className="label-text">Annual SGST (₹ L)</label><input className="input-field mono" type="number" value={annualSGST} onChange={e => setAnnualSGST(e.target.value)} placeholder="72" /></div>
+        <div><label className="label-text">Term Loan (₹ L)</label><input className="input-field mono" type="number" value={termLoan} onChange={e => setTermLoan(e.target.value)} placeholder="300" /></div>
+        <div><label className="label-text">Electricity (units)</label><input className="input-field mono" type="number" value={electricityUnits} onChange={e => setElectricityUnits(e.target.value)} placeholder="200000" /></div>
+        <div><label className="label-text">Employees</label><input className="input-field mono" type="number" value={employees} onChange={e => setEmployees(e.target.value)} placeholder="25" /></div>
+        <div><label className="label-text">Avg Basic Salary (₹/mo)</label><input className="input-field mono" type="number" value={avgBasicSalary} onChange={e => setAvgBasicSalary(e.target.value)} placeholder="18000" /></div>
+        {isService && (<div><label className="label-text">Annual Rental (₹ L)</label><input className="input-field mono" type="number" value={annualRental} onChange={e => setAnnualRental(e.target.value)} placeholder="36" /></div>)}
+      </div>
+      <div style={{ textAlign:'center', marginTop:'1.5rem' }}>
+        <button className="btn-primary" onClick={() => { setShowResults(true); setTimeout(() => { const el = document.getElementById('results'); if (el) el.scrollIntoView({ behavior:'smooth' }); }, 100); }}>Calculate Subsidy <ArrowRight size={16} style={{ marginLeft:'0.4rem', display:'inline', verticalAlign:'middle' }} /></button>
+      </div>
+    </div>
+
+    {result && <div id="results">
+      <div className="card" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #1A2E35 0%, #2D5F5D 100%)', color:'#FBF7F0', border:'none', textAlign:'center', padding:'2.5rem 1.5rem' }}>
+        <div style={{ fontSize:'0.72rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#A8C5B5', marginBottom:'0.8rem' }}>Total Lifetime Subsidy</div>
+        <div className="serif" style={{ fontSize:'clamp(2.6rem, 7vw, 4.2rem)', fontWeight:600, lineHeight:1, letterSpacing:'-0.02em', marginBottom:'0.5rem' }}>{fmtCr(result.total)}</div>
+        <div style={{ fontSize:'0.9rem', color:'#A8C5B5', fontStyle:'italic' }} className="serif">{result.isService ? 'Service' : 'Manufacturing'} · {result.eligYears} years · {result.zone.short} · FCI {fmtCr(result.fci)}</div>
+        <div style={{ marginTop:'1.2rem', paddingTop:'1.2rem', borderTop:'1px solid rgba(255,255,255,0.15)', display:'inline-block' }}>
+          <div style={{ fontSize:'0.72rem', letterSpacing:'0.25em', textTransform:'uppercase', color:'#A8C5B5', marginBottom:'0.3rem' }}>CA Fee (5%)</div>
+          <div className="serif mono" style={{ fontSize:'1.4rem', fontWeight:600, color:'#E5C687' }}>{fmtCr(result.fee)}</div>
+        </div>
+      </div>
+
+      <div className="card" style={{ marginBottom:'1.5rem' }}>
+        <h3 className="serif" style={{ fontSize:'1.3rem', fontWeight:600, marginBottom:'1.1rem', color:'#1A2E35' }}>Incentive Breakdown</h3>
+        <BreakdownRow label="IPS (SGST Refund)" detail={`${(result.effIPS * 100).toFixed(0)}% of FCI × ${result.eligYears} yrs`} amount={result.ipsRealizable} primary />
+        <BreakdownRow label="Stamp Duty Exemption" detail="100% on first deed (Land + Building)" amount={result.stampSaving} />
+        <BreakdownRow label="Electricity Duty Exemption" detail={`Full exemption × ${result.edYears} yrs`} amount={result.edSaving} />
+        <BreakdownRow label="Interest Subsidy" detail="5% on term loan × 5 yrs (cap ₹1 Cr/yr)" amount={result.intSubsidy} />
+        {!result.isService && <BreakdownRow label="Power Tariff Subsidy" detail="₹1/unit × 3 yrs" amount={result.powerTariff} />}
+        <BreakdownRow label="EPF Reimbursement" detail={result.isService ? '50% × Employer PF × 5 yrs (salary ≥ ₹50K)' : '50% × Employer PF × 5 yrs'} amount={result.epf} />
+        {result.isService && <BreakdownRow label="Rental Lease Subsidy" detail="50% × Annual Rental × 5 yrs (cap ₹1 Cr)" amount={result.rental} />}
+        {!result.isService && <BreakdownRow label="Capital Subsidy" detail="20% of FCI (cap ₹25 Cr)" amount={result.capSub} />}
+        {result.capApplied && (<div style={{ marginTop:'1rem', padding:'0.85rem 1rem', background:'#FFF8E6', border:'1px solid #E5C687', borderRadius:'6px', fontSize:'0.85rem', color:'#5C5040' }}><strong>⚠ Overall Cap Applied:</strong> Raw {fmtCr(result.raw)} capped at {(result.overallCap === result.fci ? '100' : '120')}% of FCI = {fmtCr(result.overallCap)}.</div>)}
+      </div>
+
+      <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
+        <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>Ready to claim?</div>
+        <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>EC file कर के <strong>commercial production शुरू करने से पहले</strong> apply करें। हम end-to-end handle करते हैं।</div>
+        <div style={{ display:'flex', gap:'0.7rem', justifyContent:'center', flexWrap:'wrap' }}>
+          <WaButton url={waUrl} />
+          <button className="btn-primary" onClick={() => window.print()}><Printer size={16} style={{ marginRight:'0.4rem', display:'inline', verticalAlign:'middle' }} />Print</button>
+        </div>
+      </div>
+    </div>}
+    <Footer />
+  </div>;
+}
+
+// ════ MARGIN MONEY CALCULATOR (PMEGP / CMEGP shared) ════
+function MarginCalc({ scheme, onBack }) {
+  const [activity, setActivity] = useState('Manufacturing');
+  const [location, setLocation] = useState('Rural');
+  const [category, setCategory] = useState('General');
+  const [projectCost, setProjectCost] = useState('');
+  const [showResults, setShowResults] = useState(false);
+  const result = useMemo(() => showResults ? calcMargin({ activity, location, category, projectCost:parseFloat(projectCost)*100000||0 }, scheme.name) : null, [showResults, activity, location, category, projectCost, scheme.name]);
+
+  const waUrl = useMemo(() => {
+    if (!result || result.error) return '#';
+    const lines = ['नमस्कार CA Shrikant सर 🙏', '', `मैंने *${scheme.name} Calculator* से check किया:`, '', '📊 *Results*', `• Project Cost: ${fmtCr(result.cost)}`, `• Margin Money (Subsidy): ${fmtCr(result.marginMoney)} (${(result.marginPercent * 100).toFixed(0)}%)`, `• Bank Loan: ${fmtCr(result.bankLoan)}`, `• Own Contribution: ${fmtCr(result.ownContrib)} (${(result.ownContribPercent * 100).toFixed(0)}%)`, '', '🏭 *Details*', `• Activity: ${result.isMfg ? 'Manufacturing' : 'Service/Business'}`, `• Location: ${result.isRural ? 'Rural' : 'Urban'}`, `• Category: ${category}`, '', 'मुझे DPR + filing assistance चाहिए।', '', '— Vande Anudaan'];
+    return buildWa(lines.join('\n'));
+  }, [result, scheme.name, category]);
+
+  return <div style={{ maxWidth:'900px', margin:'0 auto', padding:'2.5rem 1.5rem' }}>
+    <BackToPortal onBack={onBack} />
+    <SchemeHeader scheme={scheme} />
+    <div className="card no-print" style={{ marginBottom:'2rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', border:'1px solid #E5C687' }}>
+      <div style={{ display:'flex', alignItems:'flex-start', gap:'0.9rem' }}>
+        <Info size={20} style={{ color:scheme.color, marginTop:'2px', flexShrink:0 }} />
+        <div style={{ fontSize:'0.88rem', color:'#5C5040', lineHeight:1.55 }}>
+          {scheme.name === 'PMEGP' ? <><strong>PMEGP</strong> Central scheme. Mfg up to ₹50 L, Service up to ₹20 L. Margin Money 15-35% as subsidy. Implementing: KVIC, KVIB, DIC.</> : <><strong>CMEGP</strong> Maharashtra state scheme (PMEGP का state version). Mfg up to ₹50 L, Service/Business up to ₹10 L. MH residents only, age 18-45.</>}
+        </div>
+      </div>
+    </div>
+    <div className="card no-print" style={{ marginBottom:'2rem' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'1rem', marginBottom:'1.4rem' }}>
+        <div><label className="label-text">Activity</label><select className="input-field" value={activity} onChange={e => setActivity(e.target.value)}><option>Manufacturing</option><option>{scheme.name === 'PMEGP' ? 'Service' : 'Service/Business'}</option></select></div>
+        <div><label className="label-text">Location</label><select className="input-field" value={location} onChange={e => setLocation(e.target.value)}><option>Rural</option><option>Urban</option></select></div>
+        <div><label className="label-text">Beneficiary Category</label><select className="input-field" value={category} onChange={e => setCategory(e.target.value)}><option>General</option><option>SC</option><option>ST</option><option>OBC</option><option>Women</option><option>Ex-Servicemen</option><option>PwD</option><option>Minority</option><option>NER / Hill</option></select></div>
+        <div><label className="label-text">Project Cost (₹ Lakhs)</label><input className="input-field mono" type="number" value={projectCost} onChange={e => setProjectCost(e.target.value)} placeholder={activity === 'Manufacturing' ? '25' : '10'} /></div>
+      </div>
+      <div style={{ textAlign:'center' }}><button className="btn-primary" onClick={() => setShowResults(true)}>Calculate {scheme.name} Subsidy <ArrowRight size={16} style={{ marginLeft:'0.4rem', display:'inline', verticalAlign:'middle' }} /></button></div>
+    </div>
+
+    {result && result.error && <div className="card" style={{ marginBottom:'1.5rem', background:'#FFF0E5', borderLeft:'4px solid #C97064' }}><div style={{ display:'flex', gap:'0.6rem' }}><AlertCircle size={20} style={{ color:'#C97064', flexShrink:0 }} /><div style={{ fontSize:'0.92rem', color:'#1A2E35', fontWeight:500 }}>{result.error}</div></div></div>}
+
+    {result && !result.error && <>
+      <div className="card" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #1A2E35 0%, #2D5F5D 100%)', color:'#FBF7F0', border:'none', textAlign:'center', padding:'2.3rem 1.5rem' }}>
+        <div style={{ fontSize:'0.72rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#A8C5B5', marginBottom:'0.7rem' }}>Margin Money Subsidy</div>
+        <div className="serif" style={{ fontSize:'clamp(2.4rem, 6vw, 3.6rem)', fontWeight:600, lineHeight:1, marginBottom:'0.5rem' }}>{fmtCr(result.marginMoney)}</div>
+        <div style={{ fontSize:'0.9rem', color:'#A8C5B5', fontStyle:'italic' }} className="serif">{(result.marginPercent * 100).toFixed(0)}% of Project Cost · {result.isRural ? 'Rural' : 'Urban'} · {category}</div>
+      </div>
+      <div className="card" style={{ marginBottom:'1.5rem' }}>
+        <h3 className="serif" style={{ fontSize:'1.3rem', fontWeight:600, marginBottom:'1.1rem', color:'#1A2E35' }}>Funding Structure</h3>
+        <BreakdownRow label="Margin Money (Govt Subsidy)" detail={`${(result.marginPercent * 100).toFixed(0)}% — credit-linked subsidy`} amount={result.marginMoney} primary />
+        <BreakdownRow label="Bank Term Loan" detail="PSU / RRB / Co-op bank" amount={result.bankLoan} />
+        <BreakdownRow label="Own Contribution" detail={`${(result.ownContribPercent * 100).toFixed(0)}% promoter equity`} amount={result.ownContrib} />
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'1.2rem', paddingTop:'1rem', borderTop:'2px solid #2D5F5D' }}>
+          <div className="serif" style={{ fontSize:'1.1rem', fontWeight:600, color:'#1A2E35' }}>Total Project Cost</div>
+          <div className="serif mono" style={{ fontSize:'1.4rem', fontWeight:700, color:'#2D5F5D' }}>{fmtCr(result.cost)}</div>
+        </div>
+      </div>
+      <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
+        <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>DPR + Filing Help</div>
+        <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>{scheme.name} application: <strong>Bankable DPR + EDP Training + Bank Liaison + Subsidy Filing</strong>. End-to-end handle करते हैं।</div>
+        <div style={{ display:'flex', gap:'0.7rem', justifyContent:'center', flexWrap:'wrap' }}><WaButton url={waUrl} /><button className="btn-primary" onClick={() => window.print()}><Printer size={16} style={{ marginRight:'0.4rem', display:'inline', verticalAlign:'middle' }} />Print</button></div>
+      </div>
+    </>}
+    <Footer />
+  </div>;
+}
+
+// ════ CLCSS CALCULATOR ════
+function CLCSSCalc({ scheme, onBack }) {
+  const [pm, setPM] = useState('');
+  const [showResults, setShowResults] = useState(false);
+  const result = useMemo(() => showResults ? calcCLCSS({ plantMachinery:parseFloat(pm)*100000||0 }) : null, [showResults, pm]);
+  const waUrl = useMemo(() => {
+    if (!result) return '#';
+    const lines = ['नमस्कार CA Shrikant सर 🙏', '', 'मैंने *CLCSS Calculator* से check किया:', '', '📊 *Results*', `• Plant & Machinery: ${fmtCr(result.pm)}`, `• Eligible P&M: ${fmtCr(result.eligiblePM)}`, `• Capital Subsidy (15%): ${fmtCr(result.subsidy)}`, '', 'मुझे CLCSS application + Udyam registration assistance चाहिए।', '', '— Vande Anudaan'];
+    return buildWa(lines.join('\n'));
+  }, [result]);
+
+  return <div style={{ maxWidth:'900px', margin:'0 auto', padding:'2.5rem 1.5rem' }}>
+    <BackToPortal onBack={onBack} />
+    <SchemeHeader scheme={scheme} />
+    <div className="card no-print" style={{ marginBottom:'2rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', border:'1px solid #E5C687' }}>
+      <div style={{ display:'flex', gap:'0.9rem' }}><Info size={20} style={{ color:scheme.color, marginTop:'2px', flexShrink:0 }} /><div style={{ fontSize:'0.88rem', color:'#5C5040', lineHeight:1.55 }}><strong>CLCSS</strong> = 15% capital subsidy on Plant & Machinery for MSMEs upgrading technology. Max P&M eligible: ₹1 Cr. Max subsidy: ₹15 L. Required: <strong>Udyam Registration</strong> + one of 51 approved sub-sectors.</div></div>
+    </div>
+    <div className="card no-print" style={{ marginBottom:'2rem' }}>
+      <div style={{ marginBottom:'1.4rem' }}>
+        <label className="label-text">Plant & Machinery Cost (₹ Lakhs)</label>
+        <input className="input-field mono" type="number" value={pm} onChange={e => setPM(e.target.value)} placeholder="80" />
+        <div style={{ fontSize:'0.78rem', color:'#8B7E6B', marginTop:'0.3rem' }}>Maximum eligible: ₹100 L. Above this, subsidy capped at ₹15 L.</div>
+      </div>
+      <div style={{ textAlign:'center' }}><button className="btn-primary" onClick={() => setShowResults(true)}>Calculate CLCSS Subsidy <ArrowRight size={16} style={{ marginLeft:'0.4rem', display:'inline', verticalAlign:'middle' }} /></button></div>
+    </div>
+    {result && <>
+      <div className="card" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #1A2E35 0%, #2D5F5D 100%)', color:'#FBF7F0', border:'none', textAlign:'center', padding:'2.3rem 1.5rem' }}>
+        <div style={{ fontSize:'0.72rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#A8C5B5', marginBottom:'0.7rem' }}>CLCSS Capital Subsidy</div>
+        <div className="serif" style={{ fontSize:'clamp(2.4rem, 6vw, 3.6rem)', fontWeight:600, lineHeight:1, marginBottom:'0.5rem' }}>{fmtCr(result.subsidy)}</div>
+        <div style={{ fontSize:'0.9rem', color:'#A8C5B5', fontStyle:'italic' }} className="serif">15% on P&M of {fmtCr(result.eligiblePM)} {result.capApplied && '(capped at ₹15 L)'}</div>
+      </div>
+      <div className="card" style={{ marginBottom:'1.5rem' }}>
+        <h3 className="serif" style={{ fontSize:'1.3rem', fontWeight:600, marginBottom:'1.1rem', color:'#1A2E35' }}>Breakdown</h3>
+        <BreakdownRow label="Plant & Machinery Cost" detail="Total invoiced (excl. land & building)" amount={result.pm} />
+        <BreakdownRow label="Eligible P&M (capped at ₹1 Cr)" detail="Subsidy calculation base" amount={result.eligiblePM} />
+        <BreakdownRow label="Capital Subsidy @ 15%" detail="Credit-linked, via bank" amount={result.subsidy} primary />
+        {result.capApplied && <div style={{ marginTop:'0.8rem', padding:'0.7rem 1rem', background:'#FFF8E6', borderRadius:'6px', fontSize:'0.82rem', color:'#5C5040', borderLeft:'3px solid #E5C687' }}>⚠ P&M cost exceeds ₹1 Cr — subsidy capped at max ₹15 L.</div>}
+      </div>
+      <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
+        <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>CLCSS Claim Filing</div>
+        <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>Bank → SIDBI → MoMSME portal. Sub-sector verify + technology approval + claim filing — हम help करते हैं।</div>
+        <div style={{ display:'flex', gap:'0.7rem', justifyContent:'center', flexWrap:'wrap' }}><WaButton url={waUrl} /><button className="btn-primary" onClick={() => window.print()}><Printer size={16} style={{ marginRight:'0.4rem', display:'inline', verticalAlign:'middle' }} />Print</button></div>
+      </div>
+    </>}
+    <Footer />
+  </div>;
+}
+
+// ════ PM-FME CALCULATOR ════
+function PMFMECalc({ scheme, onBack }) {
+  const [projectCost, setProjectCost] = useState('');
+  const [unitType, setUnitType] = useState('Individual');
+  const [showResults, setShowResults] = useState(false);
+  const result = useMemo(() => showResults ? calcPMFME({ projectCost:parseFloat(projectCost)*100000||0 }) : null, [showResults, projectCost]);
+  const waUrl = useMemo(() => {
+    if (!result) return '#';
+    const lines = ['नमस्कार CA Shrikant सर 🙏', '', 'मैंने *PM-FME Calculator* से check किया:', '', '📊 *Results*', `• Project Cost: ${fmtCr(result.cost)}`, `• PM-FME Subsidy (35%): ${fmtCr(result.subsidy)}`, `• Bank Loan: ${fmtCr(result.bankLoan)}`, `• Own Contribution: ${fmtCr(result.ownContrib)}`, '', `• Unit Type: ${unitType}`, '', 'मुझे PM-FME application + DPR + ODOP eligibility चाहिए।', '', '— Vande Anudaan'];
+    return buildWa(lines.join('\n'));
+  }, [result, unitType]);
+
+  return <div style={{ maxWidth:'900px', margin:'0 auto', padding:'2.5rem 1.5rem' }}>
+    <BackToPortal onBack={onBack} />
+    <SchemeHeader scheme={scheme} />
+    <div className="card no-print" style={{ marginBottom:'2rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', border:'1px solid #E5C687' }}>
+      <div style={{ display:'flex', gap:'0.9rem' }}><Info size={20} style={{ color:scheme.color, marginTop:'2px', flexShrink:0 }} /><div style={{ fontSize:'0.88rem', color:'#5C5040', lineHeight:1.55 }}><strong>PM-FME</strong> = 35% credit-linked grant for micro food processing enterprises. Max subsidy ₹10 L. ODOP (One District One Product) priority. Individual/SHG/FPO/Co-op eligible.</div></div>
+    </div>
+    <div className="card no-print" style={{ marginBottom:'2rem' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:'1rem', marginBottom:'1.4rem' }}>
+        <div><label className="label-text">Unit Type</label><select className="input-field" value={unitType} onChange={e => setUnitType(e.target.value)}><option>Individual</option><option>SHG (Self Help Group)</option><option>FPO (Farmer Producer Org.)</option><option>Co-operative</option></select></div>
+        <div><label className="label-text">Project Cost (₹ Lakhs)</label><input className="input-field mono" type="number" value={projectCost} onChange={e => setProjectCost(e.target.value)} placeholder="28" /><div style={{ fontSize:'0.74rem', color:'#8B7E6B', marginTop:'0.3rem' }}>Max subsidy ₹10 L (i.e., project ≥ ₹28.6 L)</div></div>
+      </div>
+      <div style={{ textAlign:'center' }}><button className="btn-primary" onClick={() => setShowResults(true)}>Calculate PM-FME Subsidy <ArrowRight size={16} style={{ marginLeft:'0.4rem', display:'inline', verticalAlign:'middle' }} /></button></div>
+    </div>
+    {result && <>
+      <div className="card" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #1A2E35 0%, #2D5F5D 100%)', color:'#FBF7F0', border:'none', textAlign:'center', padding:'2.3rem 1.5rem' }}>
+        <div style={{ fontSize:'0.72rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#A8C5B5', marginBottom:'0.7rem' }}>PM-FME Subsidy</div>
+        <div className="serif" style={{ fontSize:'clamp(2.4rem, 6vw, 3.6rem)', fontWeight:600, lineHeight:1, marginBottom:'0.5rem' }}>{fmtCr(result.subsidy)}</div>
+        <div style={{ fontSize:'0.9rem', color:'#A8C5B5', fontStyle:'italic' }} className="serif">35% of Project Cost {result.capApplied && '(capped at ₹10 L)'}</div>
+      </div>
+      <div className="card" style={{ marginBottom:'1.5rem' }}>
+        <h3 className="serif" style={{ fontSize:'1.3rem', fontWeight:600, marginBottom:'1.1rem', color:'#1A2E35' }}>Funding Structure</h3>
+        <BreakdownRow label="PM-FME Subsidy" detail="35% (cap ₹10 L)" amount={result.subsidy} primary />
+        <BreakdownRow label="Bank Term Loan" detail="55% of project (PSU/Co-op bank)" amount={result.bankLoan} />
+        <BreakdownRow label="Own Contribution" detail="Balance promoter equity" amount={result.ownContrib} />
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'1.2rem', paddingTop:'1rem', borderTop:'2px solid #2D5F5D' }}>
+          <div className="serif" style={{ fontSize:'1.1rem', fontWeight:600, color:'#1A2E35' }}>Total Project Cost</div>
+          <div className="serif mono" style={{ fontSize:'1.4rem', fontWeight:700, color:'#2D5F5D' }}>{fmtCr(result.cost)}</div>
+        </div>
+      </div>
+      <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
+        <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>ODOP + DPR Help</div>
+        <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>आपके district का ODOP product confirm + Bankable DPR + state nodal agency filing — हम handle करते हैं।</div>
+        <div style={{ display:'flex', gap:'0.7rem', justifyContent:'center', flexWrap:'wrap' }}><WaButton url={waUrl} /><button className="btn-primary" onClick={() => window.print()}><Printer size={16} style={{ marginRight:'0.4rem', display:'inline', verticalAlign:'middle' }} />Print</button></div>
+      </div>
+    </>}
+    <Footer />
+  </div>;
+}
+
+// ════ ELIGIBILITY ENGINE — evaluates profile against all 43 schemes ════
+function evaluateSchemes(p) {
+  const fci = (parseFloat(p.projectCost) || 0) * 100000;
+  const pm = (parseFloat(p.plantMachinery) || 0) * 100000;
+  const mhResident = p.state === 'Maharashtra';
+  const isSpecial = ['SC','ST','OBC','Women','Minority','PwD','Ex-Servicemen'].includes(p.ownerCategory);
+  const isSCST = p.ownerCategory === 'SC' || p.ownerCategory === 'ST';
+  const isMfg = p.activity === 'Manufacturing';
+  const isService = p.activity === 'Service';
+  const isFood = p.activity === 'Food Processing';
+  const isAgri = p.activity === 'Agriculture/Dairy';
+  const isTextile = p.activity === 'Textile';
+  const isKhadi = p.activity === 'Khadi/Village';
+  const isIT = p.activity === 'IT/ITES';
+  const isMSME = ['Micro','Small','Medium'].includes(p.unitSize);
+  const isMicro = p.unitSize === 'Micro';
+  const isRural = p.location === 'Rural';
+  const isVidarbha = p.zone === 'Vidarbha-Std' || p.zone === 'Vidarbha-NID';
+  const isNID = p.zone === 'Vidarbha-NID';
+  const ageOk = !p.age || p.age === '18-45';
+  const E = (id, q, rate, reason, extra = {}) => ({ id, quantum: q || 0, ratePct: rate || 0, reason, ...extra });
+  const out = [];
+
+  // ── MIISP 2025 (MH industrial — flagship) ──
+  if (mhResident && (isMfg || isService) && p.stage !== 'Existing') {
+    const ipsPct = isNID ? 1.00 : (isVidarbha ? 0.80 : 0.50);
+    let bonus = 0;
+    if (['Food Processing','EV','Aerospace','Green Energy','Industry 4.0'].some(s => p.subSector === s || p.activity === s)) bonus += 0.20;
+    if (['Women','SC','ST'].includes(p.ownerCategory)) bonus += 0.20;
+    const effIPS = Math.min(ipsPct + bonus, 1.20);
+    const ipsBenefit = fci * effIPS;
+    const stamp = fci * 0.4 * 0.06;
+    const ed = fci * 0.05;
+    const epf = fci * 0.04;
+    const capSub = !isService && isMSME ? Math.min(fci * 0.20, 250000000) : 0;
+    const total = ipsBenefit + stamp + ed + epf + capSub;
+    out.push(E('miisp-2025', total, effIPS * 100, `${(effIPS*100).toFixed(0)}% IPS + Stamp Duty + ED + EPF + Capital Subsidy (stacked, ${isNID ? 'NID' : isVidarbha ? 'Vidarbha 80%' : 'Other zone 50%'})`, { hasCalc: true }));
+  }
+
+  // ── CMEGP (MH margin money) ──
+  if (mhResident && p.stage === 'New' && ageOk) {
+    const maxPC = isMfg ? 5000000 : 1000000;
+    if (fci > 0 && fci <= maxPC) {
+      const m = isRural ? (isSpecial ? 0.35 : 0.25) : (isSpecial ? 0.25 : 0.15);
+      out.push(E('cmegp', fci * m, m * 100, `${(m*100).toFixed(0)}% margin money (${isRural?'Rural':'Urban'}, ${isSpecial?'Special':'General'} cat.)`, { hasCalc: true }));
     }
+  }
 
-    // ════════ MOUNT ════════
-    const root = createRoot(document.getElementById('root'));
-    root.render(<MIISPCalculator />);
-    
-    // Hide loading splash
-    setTimeout(() => {
-      const loading = document.getElementById('loading');
-      if (loading) {
-        loading.classList.add('fade');
-        setTimeout(() => loading.remove(), 400);
-      }
-    }, 300);
-  </script>
+  // ── PMEGP (Central margin money) ──
+  if (p.stage === 'New') {
+    const maxPC = isMfg ? 5000000 : 2000000;
+    if (fci > 0 && fci <= maxPC) {
+      const m = isRural ? (isSpecial ? 0.35 : 0.25) : (isSpecial ? 0.25 : 0.15);
+      out.push(E('pmegp', fci * m, m * 100, `${(m*100).toFixed(0)}% margin money (${isRural?'Rural':'Urban'}, ${isSpecial?'Special':'General'} cat.)`, { hasCalc: true }));
+    }
+  }
 
+  // ── CLCSS (Central 15% on P&M) ──
+  if (isMSME && isMfg && pm > 0) {
+    const elig = Math.min(pm, 10000000);
+    out.push(E('clcss', Math.min(elig * 0.15, 1500000), 15, '15% on P&M for tech upgradation (51 sub-sectors, cap ₹15L)', { hasCalc: true }));
+  }
+
+  // ── SCLCSS (Central 25% for SC/ST) ──
+  if (isMSME && isMfg && isSCST && pm > 0) {
+    out.push(E('sclcss', Math.min(pm * 0.25, 2500000), 25, `25% on P&M (${p.ownerCategory} entrepreneur, cap ₹25L) — higher than CLCSS`));
+  }
+
+  // ── PM-FME ──
+  if (isFood && (isMicro || p.shgFpo)) {
+    out.push(E('pm-fme', Math.min(fci * 0.35, 1000000), 35, '35% credit-linked grant for micro food processing (cap ₹10L)', { hasCalc: true }));
+  }
+
+  // ── TEQUP ──
+  if (isMSME && isMfg && p.energyEfficient) {
+    out.push(E('tequp', pm * 0.25, 25, '25% on energy-efficient P&M (BEE-approved)'));
+  }
+
+  // ── AIF ──
+  if (isAgri || isFood) {
+    out.push(E('aif', 20000000 * 0.03 * 7, 3, '3% interest subv on loans up to ₹2 Cr × 7 yr (post-harvest infra, cold storage, processing)'));
+  }
+
+  // ── ISEC ──
+  if (isKhadi) {
+    out.push(E('isec', 0, 4, 'Flat 4% interest — Centre subsidizes difference from bank rate'));
+  }
+
+  // ── MUDRA ──
+  if ((isMicro || p.unitSize === 'Small') && !p.dpiitStartup && fci > 0) {
+    out.push(E('mudra', Math.min(fci, 2000000), 0, 'Collateral-free loan up to ₹20L (Shishu/Kishor/Tarun/Tarun-Plus)'));
+  }
+
+  // ── Stand-Up India ──
+  if ((isSCST || p.ownerCategory === 'Women') && p.stage === 'New' && fci >= 1000000 && fci <= 10000000) {
+    out.push(E('stand-up-india', fci * 0.75, 75, `Greenfield ₹10L-1Cr (75% loan + CGFSI guarantee, ${p.ownerCategory})`));
+  }
+
+  // ── CGTMSE ──
+  if (isMSME && (isMfg || isService) && !isAgri) {
+    out.push(E('cgtmse', 50000000, 0, 'Collateral-free credit up to ₹5 Cr (75-85% guarantee, no cash subsidy)', { isGuarantee: true }));
+  }
+
+  // ── CGSS ──
+  if (p.dpiitStartup) {
+    out.push(E('cgss', 100000000, 0, 'Up to 75% guarantee on loans up to ₹10 Cr (DPIIT startup)', { isGuarantee: true }));
+    out.push(E('startup-india', 0, 0, 'IT holiday 3/10 yrs (Sec 80-IAC) + Angel tax exempt + LTCG exempt + Fast-track patent', { isTax: true }));
+  }
+
+  // ── SEZ ──
+  if (p.insideSEZ) {
+    out.push(E('sez', 0, 0, '100% IT holiday (5 yrs) + 50% (next 5) + GST/Customs/Excise exemption', { isTax: true }));
+  }
+
+  // ── Exporter benefits ──
+  if (p.exporter) {
+    out.push(E('rodtep', fci * 0.02, 2, '0.5-4.3% of FOB (8,555+ products, transferable e-script)', { isExport: true }));
+    out.push(E('epcg', 0, 0, '0% customs duty on capital goods (vs 6× export obligation in 6 yrs)', { isExport: true }));
+    out.push(E('ecgc', 0, 0, 'Export credit insurance 60-90% cover (default + political risk)', { isExport: true }));
+    out.push(E('dgft', 0, 0, 'IEC + Advance Authorization + Star House (1-5 Star) + DFIA', { isExport: true }));
+  }
+
+  // ── Community schemes (MH) ──
+  if (mhResident && p.community === 'Maratha') {
+    out.push(E('annasaheb-patil', 300000, 0, 'Interest subvention up to ₹3L (Maratha · IR-1 individual loan up to ₹10L)'));
+    out.push(E('sarthi', 0, 0, 'Maratha — Ph.D fellowships, UPSC/MPSC coaching, foreign edu scholarships'));
+  }
+  if (mhResident && (p.ownerCategory === 'OBC' || p.community === 'OBC' || p.community === 'VJNT')) {
+    out.push(E('mahajyoti', 0, 0, 'OBC/VJNT/SBC — Fellowships, free coaching, IT/CA/CS course support'));
+  }
+  if (mhResident && p.ownerCategory === 'SC') {
+    out.push(E('barti', 0, 0, 'SC — Dr. Ambedkar fellowship, free UPSC/MPSC coaching, scholarships'));
+  }
+  if (mhResident && p.ownerCategory === 'Women') {
+    out.push(E('mavim', 300000, 0, 'Women — SHG credit + interest subv up to ₹3L (Tejaswini Scheme)'));
+  }
+
+  // ── MH MSME Ancillary (all eligible if MH MSME) ──
+  if (mhResident && isMSME) {
+    out.push(E('mh-tech-upgrade', 2500000, 50, '50% on additional equipment for tech upgradation (cap ₹25L over 5 yrs)'));
+    out.push(E('mh-energy-audit', 200000, 50, '50% audit cost (cap ₹1L water / ₹2L energy)'));
+    if (isMfg) out.push(E('mh-energy-eff', 500000, 50, '50% on BEE-rated EE equipment (cap ₹5L)'));
+    out.push(E('mh-quality-cert', 200000, 75, '75% certification cost (GMP/Hallmark ₹1L · Patent/GI ₹2L)'));
+    out.push(E('mh-zed-cert', 50000, 50, '50% ZED fees (cap ₹50K, stacks with Central ZED)'));
+    if (p.smeListing) out.push(E('mh-sme-listing', 500000, 50, '50% SME IPO listing expenses (cap ₹5L)'));
+  }
+
+  // ── ZED Central ──
+  if (isMSME) {
+    out.push(E('zed-cert', 90000, 0, 'Free certification + Bronze ₹10K → Silver ₹40K → Gold ₹90K subsidy'));
+  }
+
+  // ── PM Vishwakarma ──
+  if (p.traditionalArtisan) {
+    out.push(E('pm-vishwakarma', 315000, 0, '₹15K toolkit + ₹1-3L loan @ 5% + skill training + ₹500/day stipend'));
+  }
+
+  // ── AHIDF (dairy/poultry/meat) ──
+  if (isAgri || (p.subSector && ['Dairy','Meat','Poultry'].some(s => p.subSector === s))) {
+    out.push(E('ahidf', 12000000, 3, '3% interest subv × 8 yrs (Dairy/Meat/Poultry processing, project up to ₹50 Cr)'));
+  }
+
+  // ── NLM ──
+  if (isAgri) {
+    out.push(E('nlm', 5000000, 50, '50% capital subsidy (max ₹50L) for Poultry/Sheep/Goat/Piggery/Feed'));
+  }
+
+  // ── TUFS (textile) ──
+  if (isTextile) {
+    out.push(E('tufs', pm * 0.10, 10, '10-15% Capital Investment Subsidy (cap ₹20-30 Cr for textile machinery)'));
+  }
+
+  // ── MH Textile Policy ──
+  if (mhResident && isTextile) {
+    out.push(E('mh-textile-policy', pm * 0.25, 25, '25% capital subsidy + 7% interest subv + Power tariff ₹3/unit (Vidarbha-Marathwada)'));
+  }
+
+  // ── MH EV Policy ──
+  if (mhResident && p.subSector === 'EV') {
+    out.push(E('mh-ev-policy', fci * 0.20, 20, 'Capital subsidy + Charging infra grants + Demand incentive + EV park benefits'));
+  }
+
+  // ── MH IT Policy ──
+  if (mhResident && isIT) {
+    out.push(E('mh-it-policy', fci * 0.30, 30, 'Rental 25-50% (Tier-2/3) + Stamp/ED exemption 7-10 yrs + ₹1L/EPF employee grant'));
+  }
+
+  // ── MH Logistics Policy ──
+  if (mhResident && p.subSector === 'Logistics') {
+    out.push(E('mh-logistics-policy', fci * 0.30, 30, '25-40% capital subsidy (Vidarbha) + Stamp/ED exemption + Land subsidy'));
+  }
+
+  // ── MH Aerospace Policy ──
+  if (mhResident && p.subSector === 'Aerospace') {
+    out.push(E('mh-aerospace-policy', fci * 0.50, 50, 'IPS up to 100% + Enhanced capital subsidy + MIHAN aerospace park (Nagpur)'));
+  }
+
+  // Sort by quantum descending
+  out.sort((a, b) => b.quantum - a.quantum);
+  return out;
+}
+
+// ════ ELIGIBILITY WIZARD UI ════
+function EligibilityWizard({ onBack, onOpen }) {
+  const [p, setP] = useState({
+    activity: 'Manufacturing', stage: 'New', unitSize: 'Small', subSector: 'General',
+    projectCost: '', plantMachinery: '',
+    ownerCategory: 'General', community: 'None', age: '18-45',
+    state: 'Maharashtra', district: 'Nagpur', location: 'Urban',
+    dpiitStartup: false, exporter: false, energyEfficient: false,
+    smeListing: false, traditionalArtisan: false, shgFpo: false, insideSEZ: false,
+  });
+  const [showResults, setShowResults] = useState(false);
+
+  const upd = (k, v) => setP(prev => ({ ...prev, [k]: v }));
+  const tog = (k) => setP(prev => ({ ...prev, [k]: !prev[k] }));
+
+  // Determine zone from district
+  const zone = useMemo(() => {
+    if (p.state !== 'Maharashtra') return 'Other';
+    const tals = VIDARBHA[p.district];
+    if (!tals) return 'MH-Other';
+    const nidCount = tals.filter(t => t.zone === 'VidarbhaNID').length;
+    return nidCount > tals.length / 2 ? 'Vidarbha-NID' : 'Vidarbha-Std';
+  }, [p.district, p.state]);
+
+  const results = useMemo(() => showResults ? evaluateSchemes({ ...p, zone }) : null, [showResults, p, zone]);
+  const totalQuantum = results ? results.reduce((s, r) => s + r.quantum, 0) : 0;
+  const eligibleCount = results ? results.length : 0;
+
+  const waUrl = useMemo(() => {
+    if (!results || !results.length) return '#';
+    const top5 = results.slice(0, 5).map(r => {
+      const sch = SCHEMES.find(s => s.id === r.id);
+      return `• *${sch?.name}*: ${r.quantum > 0 ? fmtCr(r.quantum) : 'Eligible'} ${r.ratePct > 0 ? `(${r.ratePct.toFixed(0)}%)` : ''}`;
+    }).join('\n');
+    const lines = ['नमस्कार CA Shrikant सर 🙏', '', 'मैंने *Vande Anudaan Wizard* से check किया:', '', `📊 *${eligibleCount} schemes eligible · Total ~${fmtCr(totalQuantum)}*`, '', '🏆 *Top eligible schemes*', top5, '', '🏢 *My Profile*', `• Activity: ${p.activity} (${p.subSector})`, `• Stage: ${p.stage} · Size: ${p.unitSize}`, `• Owner: ${p.ownerCategory}${p.community !== 'None' ? ' · ' + p.community : ''}`, `• Location: ${p.district}, ${p.state} (${p.location})`, `• Project Cost: ${p.projectCost ? '₹'+p.projectCost+' L' : 'Not specified'}`, '', 'मुझे complete eligibility audit + DPR + filing chahiye.', '', '— via Vande Anudaan Wizard'];
+    return buildWa(lines.join('\n'));
+  }, [results, eligibleCount, totalQuantum, p]);
+
+  return <div style={{ maxWidth:'1000px', margin:'0 auto', padding:'2.5rem 1.5rem' }}>
+    <BackToPortal onBack={onBack} />
+
+    <header style={{ textAlign:'center', marginBottom:'2rem', paddingBottom:'1.5rem', borderBottom:'1px solid #E5DCC9' }}>
+      <div style={{ display:'inline-block', background:'#2D5F5D', color:'#fff', padding:'0.25rem 0.8rem', borderRadius:'999px', fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'0.8rem' }}>🎯 Smart Matcher</div>
+      <h1 className="serif" style={{ fontSize:'clamp(2rem, 5vw, 2.9rem)', fontWeight:600, lineHeight:1.05, marginBottom:'0.5rem', letterSpacing:'-0.02em', color:'#1A2E35' }}>Subsidy Eligibility Wizard</h1>
+      <div className="serif" style={{ fontSize:'1.05rem', fontStyle:'italic', color:'#6B5D4F' }}>मला कोणत्या योजना मिळू शकतात? — Find every subsidy you qualify for</div>
+      <div style={{ marginTop:'0.6rem', fontSize:'0.85rem', color:'#5C5040' }}>10 simple questions · Instant evaluation across all 43 Central + MH schemes</div>
+    </header>
+
+    {!showResults && <>
+    <div className="card no-print" style={{ marginBottom:'1.5rem' }}>
+      <h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'1rem', color:'#1A2E35' }}>1. व्यवसायाची मूलभूत माहिती · Business Basics</h3>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'1rem' }}>
+        <div><label className="label-text">Activity Type</label>
+          <select className="input-field" value={p.activity} onChange={e => upd('activity', e.target.value)}>
+            <option>Manufacturing</option><option>Service</option><option>Food Processing</option>
+            <option>Agriculture/Dairy</option><option>Textile</option><option>IT/ITES</option><option>Khadi/Village</option>
+          </select>
+        </div>
+        <div><label className="label-text">Stage</label>
+          <select className="input-field" value={p.stage} onChange={e => upd('stage', e.target.value)}>
+            <option>New</option><option>Expansion</option><option>Existing</option>
+          </select>
+        </div>
+        <div><label className="label-text">Unit Size</label>
+          <select className="input-field" value={p.unitSize} onChange={e => upd('unitSize', e.target.value)}>
+            <option>Micro</option><option>Small</option><option>Medium</option><option>Large</option>
+          </select>
+        </div>
+        <div><label className="label-text">Sub-sector (Optional)</label>
+          <select className="input-field" value={p.subSector} onChange={e => upd('subSector', e.target.value)}>
+            <option>General</option><option>Food Processing</option><option>EV</option><option>Aerospace</option>
+            <option>Green Energy</option><option>Industry 4.0</option><option>Dairy</option><option>Meat</option>
+            <option>Poultry</option><option>Textile</option><option>Logistics</option><option>IT</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div className="card no-print" style={{ marginBottom:'1.5rem' }}>
+      <h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'1rem', color:'#1A2E35' }}>2. आर्थिक तपशील · Financial Details (₹ Lakhs)</h3>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'1rem' }}>
+        <div><label className="label-text">Project Cost / FCI</label>
+          <input className="input-field mono" type="number" value={p.projectCost} onChange={e => upd('projectCost', e.target.value)} placeholder="100" />
+        </div>
+        <div><label className="label-text">Plant & Machinery</label>
+          <input className="input-field mono" type="number" value={p.plantMachinery} onChange={e => upd('plantMachinery', e.target.value)} placeholder="60" />
+          <div style={{ fontSize:'0.72rem', color:'#8B7E6B', marginTop:'0.2rem' }}>For CLCSS/SCLCSS/TEQUP calculation</div>
+        </div>
+      </div>
+    </div>
+
+    <div className="card no-print" style={{ marginBottom:'1.5rem' }}>
+      <h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'1rem', color:'#1A2E35' }}>3. मालकाचा प्रोफाइल · Owner Profile</h3>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'1rem' }}>
+        <div><label className="label-text">Reservation Category</label>
+          <select className="input-field" value={p.ownerCategory} onChange={e => upd('ownerCategory', e.target.value)}>
+            <option>General</option><option>SC</option><option>ST</option><option>OBC</option>
+            <option>Women</option><option>Minority</option><option>PwD</option><option>Ex-Servicemen</option>
+          </select>
+        </div>
+        <div><label className="label-text">Community (for state schemes)</label>
+          <select className="input-field" value={p.community} onChange={e => upd('community', e.target.value)}>
+            <option>None</option><option>Maratha</option><option>OBC</option><option>VJNT</option>
+          </select>
+        </div>
+        <div><label className="label-text">Age Group</label>
+          <select className="input-field" value={p.age} onChange={e => upd('age', e.target.value)}>
+            <option>18-45</option><option>45+</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div className="card no-print" style={{ marginBottom:'1.5rem' }}>
+      <h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'1rem', color:'#1A2E35' }}>4. ठिकाण · Location</h3>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'1rem' }}>
+        <div><label className="label-text">State</label>
+          <select className="input-field" value={p.state} onChange={e => upd('state', e.target.value)}>
+            <option>Maharashtra</option><option>Other</option>
+          </select>
+        </div>
+        {p.state === 'Maharashtra' && <div><label className="label-text">District (Vidarbha)</label>
+          <select className="input-field" value={p.district} onChange={e => upd('district', e.target.value)}>
+            {Object.keys(VIDARBHA).map(d => <option key={d}>{d}</option>)}
+            <option>Other MH District</option>
+          </select>
+        </div>}
+        <div><label className="label-text">Area</label>
+          <select className="input-field" value={p.location} onChange={e => upd('location', e.target.value)}>
+            <option>Urban</option><option>Rural</option>
+          </select>
+        </div>
+        {p.state === 'Maharashtra' && <div><label className="label-text">Auto-Zone</label>
+          <div style={{ padding:'0.7rem 0.9rem', background:'#F5EFE0', borderRadius:'6px', fontSize:'0.85rem', color:'#5C5040', fontWeight:500 }}>
+            {zone === 'Vidarbha-NID' ? '🎯 Vidarbha NID/Naxal (100% IPS)' : zone === 'Vidarbha-Std' ? '✅ Vidarbha Standard (80% IPS)' : '📍 Other MH zone (50% IPS est.)'}
+          </div>
+        </div>}
+      </div>
+    </div>
+
+    <div className="card no-print" style={{ marginBottom:'1.5rem' }}>
+      <h3 className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'1rem', color:'#1A2E35' }}>5. विशेष माहिती · Special Attributes (check all that apply)</h3>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:'0.7rem' }}>
+        {[
+          { k:'dpiitStartup', label:'DPIIT-recognized Startup', help:'Unlocks Startup India + CGSS' },
+          { k:'exporter', label:'Exporter (with IEC)', help:'Unlocks RoDTEP + EPCG + ECGC + DGFT' },
+          { k:'insideSEZ', label:'Inside SEZ', help:'Unlocks SEZ tax holiday' },
+          { k:'energyEfficient', label:'Energy-efficient tech adoption', help:'Unlocks TEQUP + MH EE Equipment' },
+          { k:'shgFpo', label:'SHG / FPO / Co-operative', help:'Unlocks PM-FME group benefit' },
+          { k:'smeListing', label:'Planning SME IPO listing', help:'Unlocks MH SME Listing subsidy' },
+          { k:'traditionalArtisan', label:'Traditional artisan (18 trades)', help:'Unlocks PM Vishwakarma' },
+        ].map(({ k, label, help }) => (
+          <label key={k} style={{ display:'flex', alignItems:'flex-start', gap:'0.6rem', padding:'0.7rem 0.9rem', background:p[k]?'#E8F1ED':'#FBF7F0', border:`1px solid ${p[k]?'#7C9885':'#E5DCC9'}`, borderRadius:'6px', cursor:'pointer', transition:'all .2s' }}>
+            <input type="checkbox" checked={p[k]} onChange={() => tog(k)} style={{ marginTop:'2px', cursor:'pointer', accentColor:'#2D5F5D' }} />
+            <div>
+              <div style={{ fontSize:'0.88rem', fontWeight:600, color:'#1A2E35' }}>{label}</div>
+              <div style={{ fontSize:'0.72rem', color:'#8B7E6B', marginTop:'0.15rem' }}>{help}</div>
+            </div>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <div style={{ textAlign:'center', marginTop:'2rem', marginBottom:'2rem' }}>
+      <button className="btn-primary" style={{ padding:'1.05rem 2.8rem', fontSize:'1.05rem' }} onClick={() => { setShowResults(true); setTimeout(() => { const el = document.getElementById('results'); if (el) el.scrollIntoView({ behavior:'smooth' }); }, 100); }}>
+        🎯 Check All Eligible Subsidies <ArrowRight size={16} style={{ marginLeft:'0.5rem', display:'inline', verticalAlign:'middle' }} />
+      </button>
+    </div>
+    </>}
+
+    {results && <div id="results">
+      <div className="card" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #1A2E35 0%, #2D5F5D 100%)', color:'#FBF7F0', border:'none', textAlign:'center', padding:'2.5rem 1.5rem' }}>
+        <div style={{ fontSize:'0.72rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#A8C5B5', marginBottom:'0.6rem' }}>आपण पात्र आहात · You're Eligible For</div>
+        <div className="serif" style={{ fontSize:'clamp(3rem, 8vw, 4.5rem)', fontWeight:600, lineHeight:1, marginBottom:'0.3rem' }}>{eligibleCount}</div>
+        <div className="serif" style={{ fontSize:'1.1rem', color:'#A8C5B5', fontStyle:'italic', marginBottom:'1.4rem' }}>government subsidy schemes</div>
+        <div style={{ paddingTop:'1.4rem', borderTop:'1px solid rgba(255,255,255,0.15)', display:'inline-block' }}>
+          <div style={{ fontSize:'0.72rem', letterSpacing:'0.25em', textTransform:'uppercase', color:'#A8C5B5', marginBottom:'0.4rem' }}>Total Potential Subsidy</div>
+          <div className="serif mono" style={{ fontSize:'clamp(1.6rem, 4vw, 2.4rem)', fontWeight:700, color:'#E5C687' }}>~{fmtCr(totalQuantum)}</div>
+          <div style={{ fontSize:'0.78rem', color:'#A8C5B5', marginTop:'0.4rem', fontStyle:'italic' }}>(rough lifetime estimate, exact figures vary)</div>
+        </div>
+      </div>
+
+      <div className="card" style={{ marginBottom:'1.5rem' }}>
+        <h3 className="serif" style={{ fontSize:'1.3rem', fontWeight:600, marginBottom:'0.4rem', color:'#1A2E35' }}>Eligible Schemes — Ranked by Quantum</h3>
+        <div style={{ fontSize:'0.82rem', color:'#8B7E6B', marginBottom:'1.2rem', fontStyle:'italic' }}>Click any scheme to open detailed info / calculator</div>
+        {results.map((r, i) => {
+          const sch = SCHEMES.find(s => s.id === r.id);
+          if (!sch) return null;
+          return <div key={r.id} onClick={() => onOpen(r.id)} style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', gap:'1rem', padding:'1rem 1.1rem', marginBottom:'0.6rem', background:i===0?'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)':'#FBF7F0', borderRadius:'8px', borderLeft:`4px solid ${sch.color}`, cursor:'pointer', transition:'all .2s' }} onMouseEnter={e => e.currentTarget.style.transform='translateX(3px)'} onMouseLeave={e => e.currentTarget.style.transform='translateX(0)'}>
+            <div style={{ flex:1, minWidth:0 }}>
+              <div style={{ display:'flex', alignItems:'center', gap:'0.5rem', marginBottom:'0.25rem', flexWrap:'wrap' }}>
+                {i === 0 && <span style={{ background:'#E5C687', color:'#5C3D0F', padding:'0.1rem 0.5rem', borderRadius:'4px', fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase' }}>💎 Top</span>}
+                <span className="serif" style={{ fontSize:'1.05rem', fontWeight:600, color:'#1A2E35' }}>{sch.name}</span>
+                <TypeBadge type={sch.type} />
+                {sch.hasCalc && <span style={{ fontSize:'0.7rem', color:'#7C9885', fontWeight:600 }}>🧮 Calculator</span>}
+                {r.isGuarantee && <span style={{ fontSize:'0.7rem', color:'#6B8B95', fontWeight:600 }}>🛡 Guarantee</span>}
+                {r.isExport && <span style={{ fontSize:'0.7rem', color:'#5C7A7C', fontWeight:600 }}>🌐 Export</span>}
+                {r.isTax && <span style={{ fontSize:'0.7rem', color:'#A6504E', fontWeight:600 }}>💼 Tax</span>}
+              </div>
+              <div style={{ fontSize:'0.82rem', color:'#5C5040', lineHeight:1.5 }}>{r.reason}</div>
+            </div>
+            <div style={{ textAlign:'right', flexShrink:0 }}>
+              {r.quantum > 0 ? <>
+                <div className="mono" style={{ fontSize:'1.05rem', fontWeight:700, color:sch.color }}>{fmtCr(r.quantum)}</div>
+                {r.ratePct > 0 && <div style={{ fontSize:'0.72rem', color:'#8B7E6B' }}>{r.ratePct.toFixed(0)}% rate</div>}
+              </> : <div style={{ fontSize:'0.82rem', fontWeight:600, color:'#7C9885' }}>Qualified ✓</div>}
+            </div>
+          </div>;
+        })}
+        {eligibleCount === 0 && <div style={{ padding:'2rem', textAlign:'center', color:'#8B7E6B', fontStyle:'italic' }}>No schemes matched. Try adjusting profile — especially Activity Type, Stage, or Unit Size.</div>}
+      </div>
+
+      <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'2rem 1.5rem' }}>
+        <div className="serif" style={{ fontSize:'1.2rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>Want full eligibility audit?</div>
+        <div style={{ fontSize:'0.9rem', color:'#5C5040', marginBottom:'1.3rem', maxWidth:'600px', margin:'0 auto 1.3rem' }}>Top 5 schemes आपके WhatsApp message में auto-fill होंगी। CA Shrikant आपको <strong>scheme-wise priority, application sequence, DPR + filing services</strong> guide करेंगे.</div>
+        <div style={{ display:'flex', gap:'0.7rem', justifyContent:'center', flexWrap:'wrap' }}>
+          <WaButton url={waUrl} label="Discuss My 5 Top Schemes" />
+          <button className="btn-primary" onClick={() => window.print()}><Printer size={16} style={{ marginRight:'0.4rem', display:'inline', verticalAlign:'middle' }} />Print Report</button>
+          <button className="btn-toggle" onClick={() => { setShowResults(false); window.scrollTo(0, 0); }}>← Modify Profile</button>
+        </div>
+      </div>
+    </div>}
+
+    <Footer />
+  </div>;
+}
+
+// ════ APP ROUTER ════
+function App() {
+  const [view, setView] = useState(() => window.location.hash.replace('#', '') || 'home');
+  useEffect(() => {
+    const onHash = () => setView(window.location.hash.replace('#', '') || 'home');
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+  const open = (id) => { window.location.hash = id; window.scrollTo(0, 0); };
+  const back = () => { window.location.hash = ''; window.scrollTo(0, 0); };
+  if (view === 'home' || !view) return <><Landing onOpen={open} onWizard={() => { window.location.hash = 'wizard'; window.scrollTo(0, 0); }} /><FloatingWa /></>;
+  if (view === 'wizard') return <><EligibilityWizard onBack={back} onOpen={open} /><FloatingWa /></>;
+  const scheme = SCHEMES.find(s => s.id === view);
+  if (!scheme) return <><Landing onOpen={open} onWizard={() => { window.location.hash = 'wizard'; window.scrollTo(0, 0); }} /><FloatingWa /></>;
+  let Component;
+  if (scheme.id === 'miisp-2025') Component = MIISPCalc;
+  else if (scheme.id === 'pmegp' || scheme.id === 'cmegp') Component = MarginCalc;
+  else if (scheme.id === 'clcss') Component = CLCSSCalc;
+  else if (scheme.id === 'pm-fme') Component = PMFMECalc;
+  else Component = InfoCardView;
+  return <><Component scheme={scheme} onBack={back} /><FloatingWa /></>;
+}
+
+// ════ MOUNT ════
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+setTimeout(() => {
+  const loading = document.getElementById('loading');
+  if (loading) { loading.classList.add('fade'); setTimeout(() => loading.remove(), 400); }
+}, 300);
+</script>
 </body>
 </html>
