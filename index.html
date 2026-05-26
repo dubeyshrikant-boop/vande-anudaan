@@ -59,8 +59,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { MapPin, Building2, Briefcase, Zap, Printer, Sparkles, AlertCircle, ArrowRight, ArrowLeft, Search, Factory, Info } from 'lucide-react';
 
-const TOOL_VERSION = "v4.1.0";
-const POLICY_VERSION = "Vande Anudaan Multi-Scheme Portal + Eligibility Wizard";
+const TOOL_VERSION = "v4.2.0";
+const POLICY_VERSION = "Vande Anudaan Portal + Wizard + Execution Roadmap";
 const LAST_VERIFIED = "May 2026";
 const WHATSAPP_PHONE = '919175233969';
 const OFFICE_PHONE = '+91 9403 586 900';
@@ -154,6 +154,83 @@ const SCHEMES = [
   { id:'mh-aerospace-policy', name:'MH Aerospace Policy', fullName:'Maharashtra Aerospace & Defence Policy', type:'MH State', category:'Sectoral', headline:'A&D mfg, MRO, design — premium incentives', color:'#5C7A7C', eligibility:['Aerospace / Defence manufacturers','MRO (Maintenance, Repair, Overhaul) facilities','Component & system suppliers'], benefits:['IPS up to 100% for premier projects','Capital subsidy enhanced rates','Stamp duty + ED full exemption','Special MIDC aerospace parks (Nagpur MIHAN)','Skill development partnerships','Anchor unit incentives'], grRef:'MH Industries Dept', authority:'MIDC · State Aerospace Cell' },
   { id:'mh-it-policy', name:'MH IT Policy 2023', fullName:'Maharashtra IT/ITES Policy 2023', type:'MH State', category:'Sectoral', headline:'IT/ITES — rental, fiscal, employment incentives', color:'#7C9885', eligibility:['IT / ITES / BPO / KPO units','Setting up in MH (Tier-2/3 priority)','Data centers eligible'], benefits:['Rental subsidy: 25-50% in Tier-2/3','Stamp duty + registration full exemption','Electricity duty exemption: 7-10 yrs','Employment generation grant: ₹1 L per EPF employee','Power tariff subsidy','Data center mega-project incentives'], grRef:'MH IT/General Admin', authority:'MahaIT · MIDC' },
 ];
+
+// ════ EXECUTION ROADMAP — per-scheme delivery details for CA engagement ════
+const EXECUTION = {
+  'miisp-2025': { docs:'Udyam Cert · IEM/EM-II · Detailed Project Report · Bank Loan Sanction · Land/Building Sale Deed · EPF Registration · Audited FS (2 yrs) · GST Returns · MSEB Connection · Lab Test Reports', portal:'MAITRI 2.0 — invest.maharashtra.gov.in', office:'DIC (District Industries Centre) + MIDC Regional Office', timeline:'EC issued: 60-90 days · 1st SGST disbursement: 6-9 months · Stamp Duty refund: 12 months · Continues 9-10 yrs', scope:'EC filing · Annual SGST claim filing · Stamp Duty refund · ED waiver setup with MSEB · EPF reimbursement · Capital Subsidy DPR · Annual MAITRI compliance · Bank liaison', fee:'5% of total realized subsidy (success-fee model) — OR ₹3-5L upfront + 3% on disbursement (hybrid)' },
+  'cmegp': { docs:'Aadhaar · PAN · Caste Cert (special cat.) · 8th class pass · DPR · Bank Account · 2 Photos · Domicile Cert · NOC from Bank (if existing) · EDP Training Cert (post-sanction)', portal:'cmegp.maharashtra.gov.in', office:'DIC + KVIB Maharashtra + Sponsoring Bank', timeline:'Application: 30 days · DIC scrutiny: 15 days · Bank sanction: 30 days · EDP: 10 days · Disbursement: 90-120 days', scope:'Online application · Bankable DPR · DIC liaison · EDP coordination · Bank facilitation · Subsidy claim filing', fee:'8-10% of margin money (min ₹25,000) — covers DPR + filing + bank liaison' },
+  'pmegp': { docs:'Aadhaar · PAN · Caste Cert (special) · 8th class pass · DPR · Bank A/c · 2 Photos · Family Income Cert · No-existing-beneficiary affidavit · EDP Training Cert (post-sanction)', portal:'kviconline.gov.in', office:'KVIC / KVIB / DIC + Sponsoring Bank', timeline:'Application: 30 days · Task Force scrutiny: 30 days · Bank appraisal: 60 days · EDP: 10 days · Disbursement: 90-150 days', scope:'Online filing · Bankable DPR · KVIC/DIC liaison · EDP coordination · Bank documentation · Margin Money claim · Capital subsidy release', fee:'8-10% of margin money (min ₹25,000)' },
+  'clcss': { docs:'Udyam Cert · Bank Sanction Letter · P&M Invoices (new only) · Sub-sector approval certificate · CA certificate of P&M (Form-9) · IT Returns (2 yrs) · Audited FS · No-PMEGP-beneficiary cert', portal:'clcss.gov.in (via Nodal Bank/PLI)', office:'Nodal Bank → SIDBI → MoMSME', timeline:'Bank submission: 15 days · SIDBI review: 30 days · MoMSME approval: 60 days · Disbursement: 60-120 days from P&M installation', scope:'Eligibility check (51 sub-sectors) · Form-9 CA certificate · Bank documentation · SIDBI/MoMSME follow-up · Disbursement tracking', fee:'10% of subsidy realized (min ₹25,000)' },
+  'pm-fme': { docs:'Aadhaar · PAN · DPR · FSSAI License (or applied) · ODOP product cert (if applicable) · Bank A/c · Land/Lease deed · 2 Photos · Caste Cert (if applicable) · Group registration (if SHG/FPO/Coop)', portal:'pmfme.mofpi.gov.in', office:'State Nodal Agency (MSAMB for MH) + Sponsoring Bank', timeline:'Application: 30 days · SNA scrutiny: 45 days · Bank sanction: 60 days · Disbursement: 120-180 days', scope:'ODOP eligibility · Bankable DPR · SNA filing · Bank liaison · Subsidy claim · FSSAI assistance', fee:'10% of subsidy realized (min ₹25,000)' },
+  'sclcss': { docs:'Same as CLCSS PLUS · SC/ST Caste Certificate · 100% SC/ST ownership proof (Affidavit + Bank statement) · Udyam with SC/ST flag', portal:'NSIC + National SC-ST Hub portal (via Nodal Bank)', office:'NSIC + MoMSME + Nodal Bank', timeline:'Same as CLCSS (60-120 days from P&M installation)', scope:'Caste verification · NSIC registration · CLCSS process + SC-ST Hub benefits · Disbursement tracking', fee:'8-10% of subsidy (preferential pricing for SC/ST entrepreneurs)' },
+  'tequp': { docs:'Udyam · Energy Audit Report (BEE-accredited) · EE Equipment invoices · CA certificate of installation · Bank Sanction', portal:'Via Nodal Bank or SIDBI', office:'BEE + MoMSME + SIDBI', timeline:'Energy audit: 30 days · Application: 30 days · Disbursement: 90-120 days post-installation', scope:'Energy audit coordination · BEE-approved equipment selection · Application · Bank coordination · Claim filing', fee:'10% of subsidy (min ₹25,000)' },
+  'aif': { docs:'PAN · Aadhaar · DPR · Land documents · Bank Sanction Letter · Project layout drawing · Capacity certificate · Promoter contribution proof', portal:'agriinfra.dac.gov.in', office:'NABARD + Scheduled Commercial Bank', timeline:'Application: 30 days · Bank sanction: 60 days · Interest subvention: quarterly (ongoing 7 yrs)', scope:'Bankable DPR · NABARD documentation · Bank liaison · Quarterly subvention tracking · CGTMSE coverage', fee:'5% of total subvention OR ₹50K upfront + ₹15K annual retainer' },
+  'isec': { docs:'KVIC Registration Certificate · Bank Sanction Letter · Production capacity proof · Audited FS', portal:'KVIC Direct (via Nodal Bank)', office:'KVIC + Nodal Bank', timeline:'ISEC issued: 30-60 days · Interest subvention automatic on disbursement', scope:'KVIC application · Bank coordination · ISEC certificate · Annual renewal', fee:'Fixed ₹25-50K (one-time setup)' },
+  'mudra': { docs:'Aadhaar · PAN · Business proof · Bank A/c · 2 Photos · ITR (if existing) · Business plan · Quotations (for P&M)', portal:'jansamarth.in or udyamimitra.in (or directly any Bank/NBFC/MFI)', office:'Any Bank / RRB / NBFC / MFI', timeline:'Sanction: 7-15 days (Shishu/Kishor) · 30 days (Tarun/Tarun-Plus)', scope:'Loan documentation · Bank liaison · Business plan preparation · Sanction follow-up', fee:'Fixed ₹15-50K based on loan size (Shishu ₹15K · Kishor ₹25K · Tarun ₹50K)' },
+  'stand-up-india': { docs:'Aadhaar · PAN · Caste/Gender Certificate · DPR · Project Report · Bank A/c · Land/Lease docs · Promoter contribution proof (25% equity)', portal:'standupmitra.in', office:'Lead District Manager (LDM) + Scheduled Commercial Bank', timeline:'Application: 30 days · Sanction: 60-90 days · Disbursement: 30 days post-sanction', scope:'Bankable DPR · Online application · LDM liaison · Bank documentation · CGFSI coverage · Project monitoring', fee:'5-7% of loan (min ₹50,000)' },
+  'cgtmse': { docs:'Loan documentation (per bank) · CGTMSE coverage fee receipt · Udyam Certificate (MSE)', portal:'cgtmse.in (via Member Lending Institution)', office:'CGTMSE Trust + Bank', timeline:'Cover issued at loan disbursement · Guarantee active throughout loan tenure (typ. 5-7 yrs)', scope:'CGTMSE coverage processing with bank · Annual fee tracking · Claim filing (if loan defaults)', fee:'Fixed ₹15-25K (one-time setup)' },
+  'cgss': { docs:'DPIIT Recognition Certificate · Audited FS · Bank Sanction Letter · Promoter info · Business pitch deck · Use-of-funds statement', portal:'NCGTC via lender (Bank/NBFC/AIF)', office:'NCGTC (National Credit Guarantee Trustee Co.) + Lender', timeline:'Application: 60 days · NCGTC approval: 90 days', scope:'DPIIT documentation · NCGTC filing · Lender liaison · Compliance reporting', fee:'₹50K-1L (depending on loan size)' },
+  'pm-vishwakarma': { docs:'Aadhaar · PAN · Caste/Trade Certificate · Skill proof · Bank A/c · Photographs · Identity proof of 18 trades', portal:'pmvishwakarma.gov.in', office:'CSC Common Service Centre + MoMSME', timeline:'Enrollment: 15 days · Skill training: 5-7 days basic + 15 days advanced · Toolkit: 30 days post-training · Loan: 60 days', scope:'Enrollment · Skill training coordination · Toolkit claim · Loan facilitation · Digital transaction setup', fee:'₹15-25K (one-time)' },
+  'ahidf': { docs:'PAN · Aadhaar · DPR · Land documents · Bank Sanction Letter · Project layout · Capacity certificate · Vet doctor cert (for dairy/poultry)', portal:'ahidf.udyamimitra.in', office:'DAHD + NDDB / NABARD + Scheduled Bank', timeline:'Application: 30 days · Bank sanction: 60-90 days · Interest subvention: quarterly (ongoing 8 yrs)', scope:'Bankable DPR · DAHD documentation · Bank liaison · Quarterly subvention tracking · Credit guarantee', fee:'5% of total subvention OR ₹1-2L upfront + ₹25K annual' },
+  'nlm': { docs:'PAN · Aadhaar · DPR · Land docs · Bank Sanction · Activity-specific permits · Promoter contribution proof', portal:'nlm.udyamimitra.in', office:'Dept of Animal Husbandry (State) + DAHD Central', timeline:'Application: 30 days · State scrutiny: 60 days · Subsidy release: 2 installments over 12-18 months', scope:'Bankable DPR · State + Central documentation · Bank liaison · Subsidy claim in 2 installments', fee:'10% of subsidy realized (min ₹50K)' },
+  'tufs': { docs:'IEM/Udyam · DPR · Machinery invoices (new only) · CA certificate of installation · Bank Sanction · Textile Commissioner registration', portal:'txcindia.gov.in (Office of Textile Commissioner)', office:'Textile Commissioner + Ministry of Textiles', timeline:'JIT (Joint Inspection): 60 days · Subsidy release: 6-12 months in 2 installments', scope:'Application · Textile Commissioner liaison · Joint Inspection · Claim filing · Disbursement tracking', fee:'8-10% of subsidy (min ₹50K)' },
+  'sfurti': { docs:'NGO/SPV registration · Cluster artisan list · DPR · Land/Lease docs · Audit reports (if existing) · Implementation plan', portal:'sfurti.msme.gov.in', office:'KVIC / Coir Board + MoMSME + Implementing Agency', timeline:'Cluster recognition: 90 days · Grant approval: 6 months · Implementation: 18-24 months', scope:'SPV formation · Bankable cluster DPR · Implementing Agency coordination · Grant claims', fee:'5-7% of grant (₹2-5L based on cluster size)' },
+  'mse-cdp': { docs:'SPV registration (Society/Trust/Sec 8) · 20+ MSE member list · Detailed Cluster DPR · Land/Lease · State govt NOC · Implementation plan', portal:'msecdp.dcmsme.gov.in', office:'MoMSME + State Industries Dept', timeline:'In-Principle Approval: 6 months · Final Approval: 12 months · Implementation: 24-36 months', scope:'SPV setup · Cluster DPR · State + Central documentation · Construction monitoring · Claim filing', fee:'5-7% of grant (₹3-10L based on project size)' },
+  'aspire': { docs:'Institution registration · LBI/TBI proposal · Land/Building proof · Financial viability report · Industry tie-ups', portal:'aspire.msme.gov.in', office:'MoMSME + KVIC + NSIC', timeline:'Approval: 6-9 months · Grant disbursement: 12 months (in installments)', scope:'LBI/TBI proposal · Institutional documentation · MoMSME liaison · Grant claims', fee:'5% of grant (min ₹1L)' },
+  'pli-schemes': { docs:'IEM · DPR · Audited FS · Investment proof · Production commitment · Incremental sales tracking · Sector-specific compliance', portal:'Sector-specific (e.g., ifcip.in for Food Processing, ifci.com for various)', office:'Sector Ministry (Pharma/Electronics/Textile/Food/Auto/etc.)', timeline:'Application: 60 days · Approval: 90-180 days · Quarterly/Annual claims for 4-6 yrs', scope:'Eligibility analysis · Investment + sales tracking · Quarterly claim filing · Ministry liaison', fee:'2-3% of incentive (₹5-25L based on sector)' },
+  'zed-cert': { docs:'Udyam Cert · MSME profile · Self-assessment · Documentation as per assessment level', portal:'zed.msme.gov.in', office:'MoMSME + Quality Council of India (QCI)', timeline:'Bronze: 30-60 days · Silver: 90-120 days · Gold: 180 days', scope:'Self-assessment guidance · Documentation · Assessor coordination · Certification', fee:'₹15-25K (Bronze) · ₹40K (Silver) · ₹60K (Gold)' },
+  'startup-india': { docs:'Certificate of Incorporation · PAN · Innovation/IP proof · Pitch deck · Audited FS · Board resolution · MoA/AoA', portal:'startupindia.gov.in + CBDT (Form 1 for 80-IAC)', office:'DPIIT + Income Tax Dept (Inter-Ministerial Board)', timeline:'DPIIT cert: 30 days · 80-IAC approval: 60-90 days (one-time, valid 10 yrs)', scope:'DPIIT recognition · 80-IAC application · Angel tax exemption filing · IT compliance · Patent fee rebate', fee:'₹25-50K (DPIIT) + ₹50K-1L (80-IAC) + ongoing retainer' },
+  'sez': { docs:'SEZ Letter of Approval · Custom Bond · IT registration as SEZ unit · NFE calculation worksheet · Land/Lease docs', portal:'sezindia.gov.in via Development Commissioner', office:'SEZ Development Commissioner + Customs', timeline:'LoA: 30 days · Operationalization: 60-90 days · Tax benefits: from commercial production (yearly)', scope:'SEZ unit setup · NFE compliance · Customs liaison · Tax filings · Annual SEZ returns · Renewal', fee:'₹2-5L (setup) + ₹50K-1L annual retainer' },
+  'rodtep': { docs:'IEC · GST Registration · Export invoices · Shipping bills · Bank Realization Certificate (BRC)', portal:'icegate.gov.in', office:'Customs + DGFT', timeline:'E-script credit: 30-60 days post-shipping', scope:'IEC verification · Shipping bill review · RoDTEP scrip claim · Transfer facilitation', fee:'3-5% of scrip value' },
+  'epcg': { docs:'IEC · DPR · Capital goods invoice · Export performance proof · Bank Guarantee · Annual EO tracking', portal:'dgft.gov.in', office:'DGFT Regional Authority + Customs', timeline:'License: 30-45 days · Customs clearance: ongoing · Export obligation: 6 years', scope:'EPCG application · Bank Guarantee · Customs clearance · Annual export tracking · Closure filing', fee:'₹50K-1L (one-time) + ₹25K annual' },
+  'ecgc': { docs:'IEC · Buyer credit limits · Shipment invoices · Bank docs · Application form', portal:'ecgc.in (via bank)', office:'ECGC Branch + Bank', timeline:'Policy issued: 15-30 days · Premium: per shipment', scope:'Policy selection · Premium calculation · Documentation · Claim filing (if buyer defaults)', fee:'Fixed ₹15-25K (setup) + per-claim assistance' },
+  'dgft': { docs:'PAN · Aadhaar · Bank A/c · Business proof · Cancelled cheque · Class-3 DSC', portal:'dgft.gov.in', office:'DGFT Regional Authority', timeline:'IEC: 24-48 hrs (online) · Star House: based on export performance', scope:'IEC issuance · Advance Auth · Star House upgrades · DFIA · FTP benefit claims', fee:'₹10-25K per service' },
+  'annasaheb-patil': { docs:'Maratha Caste Certificate · Income Cert (< ₹8L) · Aadhaar · PAN · DPR · Bank A/c · Project proof · Domicile', portal:'udyog.mahaswayam.gov.in', office:'Annasaheb Patil Mahamandal (Pune HQ + District offices)', timeline:'Application: 30 days · Mahamandal approval: 60 days · Bank sanction: 60-90 days · Subvention release: quarterly', scope:'Caste cert verification · Bankable DPR · Mahamandal liaison · Bank coordination · Quarterly subvention claims', fee:'₹25-50K (one-time setup) + 5% of subvention' },
+  'sarthi': { docs:'Maratha Caste Cert · Educational/research credentials · Income Cert · Aadhaar · Project/Course proof', portal:'sarthi-maharashtragov.in', office:'SARTHI Pune', timeline:'Fellowship: 60-90 days · Course funding: 30 days', scope:'Application · Documentation · SARTHI liaison · Disbursement tracking', fee:'₹15-25K (one-time)' },
+  'mahajyoti': { docs:'OBC/VJNT/SBC Caste Cert · Educational credentials · Income Cert · Aadhaar · Project proof', portal:'mahajyoti.org.in', office:'MAHAJYOTI Nagpur', timeline:'60-90 days from application', scope:'Application · Documentation · MAHAJYOTI liaison · Disbursement tracking', fee:'₹15-25K (one-time)' },
+  'barti': { docs:'SC Caste Cert · Educational credentials · Income Cert · Aadhaar · Project proof', portal:'barti.in', office:'BARTI Pune', timeline:'60-90 days from application', scope:'Application · Documentation · BARTI liaison · Disbursement tracking', fee:'₹15-25K (one-time)' },
+  'mavim': { docs:'Aadhaar · PAN · Domicile · DPR (for individual) or SHG registration · Bank A/c · 2 Photos', portal:'mavim-india.org', office:'MAVIM HQ Mumbai + CMRC District offices', timeline:'SHG credit: 60 days · Individual loan + subvention: 90 days', scope:'SHG formation guidance · Bankable DPR · CMRC liaison · Bank coordination · Subvention claims', fee:'₹15-25K (individual) · ₹50K-1L (SHG cluster)' },
+  'mh-tech-upgrade': { docs:'Udyam Cert · Tech upgradation invoices · CA cert of installation · MIISP registration · Audited FS', portal:'MAITRI 2.0', office:'DIC + MIDC', timeline:'Application: 30 days · Disbursement: 90-120 days', scope:'Eligibility check · Documentation · MAITRI filing · DIC liaison · Claim disbursement', fee:'10-15% of subsidy (min ₹25K)' },
+  'mh-energy-audit': { docs:'Udyam · Energy/Water Audit Report (BEE/approved agency) · Audit invoice · Application form', portal:'MAITRI 2.0', office:'DIC + State Industries Dept', timeline:'Application: 30 days · Disbursement: 60-90 days', scope:'Audit agency coordination · Application · MAITRI filing · Claim', fee:'10-15% of subsidy (min ₹15K)' },
+  'mh-energy-eff': { docs:'Udyam · EE Equipment invoices (BEE 4-5 star) · Installation cert · MAITRI registration', portal:'MAITRI 2.0', office:'DIC + State Industries Dept', timeline:'Application: 30 days · Disbursement: 90-120 days', scope:'Equipment selection · Documentation · MAITRI filing · DIC liaison · Disbursement tracking', fee:'10-15% of subsidy (min ₹15K)' },
+  'mh-quality-cert': { docs:'Udyam · Certification (GMP/Hallmark/Patent/GI/ISO etc.) · Invoice of cert agency · Application form', portal:'MAITRI 2.0', office:'DIC + State Industries Dept', timeline:'Application: 30 days · Disbursement: 60-90 days', scope:'Cert verification · Documentation · MAITRI filing · DIC liaison · Disbursement', fee:'10-15% of subsidy (min ₹15K)' },
+  'mh-zed-cert': { docs:'Udyam · ZED Certificate (Bronze/Silver/Gold) · Fee invoice · Application form', portal:'MAITRI 2.0', office:'DIC + State Industries Dept', timeline:'Application: 30 days · Disbursement: 60-90 days (stacks with Central ZED)', scope:'ZED documentation · MAITRI filing · DIC liaison · Central + State claim coordination', fee:'10-15% of subsidy (min ₹10K)' },
+  'mh-sme-listing': { docs:'Udyam · MH HQ proof · BSE-SME/NSE-Emerge listing approval · Merchant banker/RTA/Legal invoices · Audited FS', portal:'MAITRI 2.0', office:'DIC + MahaIT', timeline:'Application: 30 days · Disbursement: 90-120 days post-listing', scope:'Listing cost documentation · MAITRI filing · DIC + MahaIT liaison · Claim disbursement', fee:'5-7% of subsidy (min ₹50K)' },
+  'mh-ev-policy': { docs:'Udyam · EV Mfg/Charging unit registration · DPR · Land/Lease · MIISP registration · Sector-specific approvals', portal:'MAITRI 2.0 + MahaPreit', office:'MIDC + MahaPreit + DIC', timeline:'Application: 60 days · Disbursement: 6-12 months (in installments)', scope:'Full MIISP filing + EV-specific incentives · MahaPreit coordination · Charging station approvals', fee:'5-7% of total benefits + ₹2-3L upfront' },
+  'mh-textile-policy': { docs:'Udyam · IEM · DPR · Machinery invoices · CA cert · Bank Sanction · Textile registration', portal:'MAITRI 2.0 + Textile Commissioner', office:'MIDC + Textile Dept + DIC', timeline:'Application: 60 days · Disbursement: 6-12 months', scope:'Bankable DPR · Textile dept liaison · MAITRI filing · Power tariff subsidy · Interest subvention · Claim filing', fee:'5-7% of total benefits + ₹2-3L upfront' },
+  'mh-logistics-policy': { docs:'Udyam · IEM · Logistics park DPR · Land/Lease · Multi-modal connectivity proof · MIDC allotment (if applicable)', portal:'MAITRI 2.0', office:'MIDC + DIC + MAITRI', timeline:'Application: 60 days · Disbursement: 12-18 months', scope:'Bankable DPR · Multi-agency coordination · MIDC allotment · MAITRI filing · Land subsidy · Claim tracking', fee:'5-7% of benefits + ₹2-3L upfront' },
+  'mh-aerospace-policy': { docs:'Udyam · IEM · A&D Mfg license · DPR · MIHAN allotment (if applicable) · Defence MoD clearance (if applicable)', portal:'MAITRI 2.0', office:'MIDC + State Aerospace Cell + MIHAN Authority', timeline:'Application: 90 days · Disbursement: 12-24 months', scope:'Bankable DPR · Defence/Aerospace dept coordination · MIHAN allotment · Anchor unit benefits · Multi-year claim tracking', fee:'5-7% of benefits + ₹3-5L upfront' },
+  'mh-it-policy': { docs:'Udyam · IT/ITES registration · DPR · Lease deed (rental subsidy) · EPF Registration · Audited FS', portal:'MAITRI 2.0 + MahaIT', office:'MahaIT + DIC + MAITRI', timeline:'Application: 60 days · Rental subsidy: quarterly · Employment grant: annual', scope:'IT/ITES registration · Rental subsidy claims · EPF employment grant · MAITRI filing · MahaIT liaison', fee:'5-7% of total benefits + ₹1-2L upfront' },
+};
+
+// ════ EXECUTION ROADMAP COMPONENT — shared by InfoCardView and Calculators ════
+function ExecRow({ icon, label, value }) {
+  return <div style={{ display:'flex', gap:'0.8rem', padding:'0.8rem 0', borderBottom:'1px dashed #EDE3CF', alignItems:'flex-start' }}>
+    <div style={{ fontSize:'1.2rem', flexShrink:0, marginTop:'2px' }}>{icon}</div>
+    <div style={{ flex:1 }}>
+      <div style={{ fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:'#7C9885', marginBottom:'0.2rem' }}>{label}</div>
+      <div style={{ fontSize:'0.88rem', color:'#3A4A52', lineHeight:1.55 }}>{value}</div>
+    </div>
+  </div>;
+}
+
+function ExecutionCard({ schemeId, color = '#2D5F5D' }) {
+  const ex = EXECUTION[schemeId];
+  if (!ex) return null;
+  return <div className="card" style={{ marginBottom:'1.5rem', borderTop:`4px solid ${color}` }}>
+    <div style={{ marginBottom:'0.8rem' }}>
+      <div style={{ display:'inline-block', background:color, color:'#fff', padding:'0.2rem 0.7rem', borderRadius:'999px', fontSize:'0.68rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'0.5rem' }}>🛠 Execution Roadmap</div>
+      <h3 className="serif" style={{ fontSize:'1.25rem', fontWeight:600, color:'#1A2E35', margin:0 }}>How to Get This Subsidy</h3>
+      <div style={{ fontSize:'0.82rem', color:'#8B7E6B', marginTop:'0.2rem', fontStyle:'italic' }}>Documents · Portal · Timeline · CA Service Scope · Fees</div>
+    </div>
+    <ExecRow icon="📋" label="Documents Required (client to provide)" value={ex.docs} />
+    <ExecRow icon="🏛️" label="Apply at — Portal" value={ex.portal} />
+    <ExecRow icon="🏢" label="Implementing Office" value={ex.office} />
+    <ExecRow icon="⏱️" label="Timeline (application → disbursement)" value={ex.timeline} />
+    <ExecRow icon="💼" label="CA Service Scope (what we deliver)" value={ex.scope} />
+    <ExecRow icon="💰" label="Suggested CA Fee Structure" value={ex.fee} />
+  </div>;
+}
 
 // ════ HELPERS ════
 const fmtCr = (n) => {
@@ -334,7 +411,7 @@ function Landing({ onOpen, onWizard }) {
       <div style={{ fontSize:'0.72rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#7C9885', marginBottom:'0.7rem', fontWeight:600 }}>CA Shrikant Dubey & Co. · Nagpur</div>
       <h1 className="serif" style={{ fontSize:'clamp(2.4rem, 5vw, 3.8rem)', fontWeight:600, lineHeight:1.05, marginBottom:'0.7rem', letterSpacing:'-0.02em', color:'#1A2E35' }}>Vande Anudaan</h1>
       <div className="serif" style={{ fontSize:'1.2rem', fontStyle:'italic', color:'#6B5D4F', marginBottom:'0.7rem' }}>Central + Maharashtra Subsidy Portal</div>
-      <div style={{ fontSize:'0.92rem', color:'#5C5040', maxWidth:'720px', margin:'0 auto 1rem' }}>एक ही जगह — सरकारी subsidies की complete जानकारी। MIISP 2025, PMEGP, CMEGP, CLCSS, PM-FME calculators + 38 more schemes with detailed eligibility & benefits.</div>
+      <div style={{ fontSize:'0.92rem', color:'#5C5040', maxWidth:'720px', margin:'0 auto 1rem' }}>एक ही जगह — सरकारी subsidies की complete जानकारी। MIISP 2025, PMEGP, CMEGP, CLCSS, PM-FME calculators + 39 more schemes with detailed eligibility & benefits.</div>
       <div style={{ display:'flex', justifyContent:'center', alignItems:'center', gap:'2rem', flexWrap:'wrap', marginTop:'1.3rem' }}>
         <div style={{ textAlign:'center' }}><div className="serif" style={{ fontSize:'2rem', fontWeight:600, color:'#2D5F5D', lineHeight:1 }}>{SCHEMES.length}</div><div style={{ fontSize:'0.7rem', color:'#8B7E6B', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:'0.2rem' }}>Total Schemes</div></div>
         <div style={{ width:'1px', height:'40px', background:'#E5DCC9' }}></div>
@@ -350,7 +427,7 @@ function Landing({ onOpen, onWizard }) {
       <div style={{ flex:1, minWidth:'250px' }}>
         <div style={{ display:'inline-block', background:'rgba(229, 198, 135, 0.2)', color:'#E5C687', padding:'0.2rem 0.6rem', borderRadius:'999px', fontSize:'0.68rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'0.6rem' }}>🎯 New · Smart Matcher</div>
         <div className="serif" style={{ fontSize:'1.5rem', fontWeight:600, lineHeight:1.2, marginBottom:'0.3rem' }}>आपण कोणत्या योजनांसाठी पात्र आहात?</div>
-        <div style={{ fontSize:'0.92rem', color:'#A8C5B5', marginBottom:'0.1rem' }}>10 simple questions भरा → सर्व 43 schemes मधून <strong style={{ color:'#E5C687' }}>आपल्या business साठी eligible</strong> असलेल्या सर्व योजना instantly check करा.</div>
+        <div style={{ fontSize:'0.92rem', color:'#A8C5B5', marginBottom:'0.1rem' }}>10 simple questions भरा → सर्व 44 schemes मधून <strong style={{ color:'#E5C687' }}>आपल्या business साठी eligible</strong> असलेल्या सर्व योजना instantly check करा.</div>
         <div style={{ fontSize:'0.82rem', color:'#A8C5B5', fontStyle:'italic', marginTop:'0.3rem' }}>With quantum (₹ amount) + rate (%) + reason — ranked by benefit size.</div>
       </div>
       <div style={{ background:'#E5C687', color:'#1A2E35', padding:'0.95rem 1.6rem', borderRadius:'8px', fontWeight:700, fontSize:'1rem', display:'inline-flex', alignItems:'center', gap:'0.5rem', whiteSpace:'nowrap', flexShrink:0 }}>
@@ -419,6 +496,7 @@ function InfoCardView({ scheme, onBack }) {
         </div>
       </div>
     </div>
+    <ExecutionCard schemeId={scheme.id} color={scheme.color} />
     <div className="card no-print" style={{ background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'2rem 1.5rem' }}>
       <div className="serif" style={{ fontSize:'1.2rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>Get Expert Help for {scheme.name}</div>
       <div style={{ fontSize:'0.9rem', color:'#5C5040', marginBottom:'1.3rem', maxWidth:'500px', margin:'0 auto 1.3rem' }}>हमारे CA team के साथ <strong>full eligibility audit + DPR + filing + claim recovery</strong> service। End-to-end handling।</div>
@@ -546,6 +624,8 @@ function MIISPCalc({ scheme, onBack }) {
         {result.capApplied && (<div style={{ marginTop:'1rem', padding:'0.85rem 1rem', background:'#FFF8E6', border:'1px solid #E5C687', borderRadius:'6px', fontSize:'0.85rem', color:'#5C5040' }}><strong>⚠ Overall Cap Applied:</strong> Raw {fmtCr(result.raw)} capped at {(result.overallCap === result.fci ? '100' : '120')}% of FCI = {fmtCr(result.overallCap)}.</div>)}
       </div>
 
+      <ExecutionCard schemeId="miisp-2025" color="#2D5F5D" />
+
       <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
         <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>Ready to claim?</div>
         <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>EC file कर के <strong>commercial production शुरू करने से पहले</strong> apply करें। हम end-to-end handle करते हैं।</div>
@@ -613,6 +693,8 @@ function MarginCalc({ scheme, onBack }) {
           <div className="serif mono" style={{ fontSize:'1.4rem', fontWeight:700, color:'#2D5F5D' }}>{fmtCr(result.cost)}</div>
         </div>
       </div>
+      <ExecutionCard schemeId={scheme.id} color={scheme.color} />
+
       <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
         <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>DPR + Filing Help</div>
         <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>{scheme.name} application: <strong>Bankable DPR + EDP Training + Bank Liaison + Subsidy Filing</strong>. End-to-end handle करते हैं।</div>
@@ -661,6 +743,8 @@ function CLCSSCalc({ scheme, onBack }) {
         <BreakdownRow label="Capital Subsidy @ 15%" detail="Credit-linked, via bank" amount={result.subsidy} primary />
         {result.capApplied && <div style={{ marginTop:'0.8rem', padding:'0.7rem 1rem', background:'#FFF8E6', borderRadius:'6px', fontSize:'0.82rem', color:'#5C5040', borderLeft:'3px solid #E5C687' }}>⚠ P&M cost exceeds ₹1 Cr — subsidy capped at max ₹15 L.</div>}
       </div>
+      <ExecutionCard schemeId="clcss" color="#B8956A" />
+
       <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
         <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>CLCSS Claim Filing</div>
         <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>Bank → SIDBI → MoMSME portal. Sub-sector verify + technology approval + claim filing — हम help करते हैं।</div>
@@ -712,6 +796,8 @@ function PMFMECalc({ scheme, onBack }) {
           <div className="serif mono" style={{ fontSize:'1.4rem', fontWeight:700, color:'#2D5F5D' }}>{fmtCr(result.cost)}</div>
         </div>
       </div>
+      <ExecutionCard schemeId="pm-fme" color="#9C7C4A" />
+
       <div className="card no-print" style={{ marginBottom:'1.5rem', background:'linear-gradient(135deg, #FFFCF5 0%, #F5EFE0 100%)', textAlign:'center', padding:'1.8rem' }}>
         <div className="serif" style={{ fontSize:'1.15rem', fontWeight:600, marginBottom:'0.5rem', color:'#1A2E35' }}>ODOP + DPR Help</div>
         <div style={{ fontSize:'0.88rem', color:'#5C5040', marginBottom:'1.2rem' }}>आपके district का ODOP product confirm + Bankable DPR + state nodal agency filing — हम handle करते हैं।</div>
@@ -722,7 +808,7 @@ function PMFMECalc({ scheme, onBack }) {
   </div>;
 }
 
-// ════ ELIGIBILITY ENGINE — evaluates profile against all 43 schemes ════
+// ════ ELIGIBILITY ENGINE — evaluates profile against all 44 schemes ════
 function evaluateSchemes(p) {
   const fci = (parseFloat(p.projectCost) || 0) * 100000;
   const pm = (parseFloat(p.plantMachinery) || 0) * 100000;
